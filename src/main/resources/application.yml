@@ -26,7 +26,7 @@ spring:
       max-open-prepared-statements: 100
 
 mybatis-plus:
-  type-aliases-package: cn.com.ly.springboot.demo.*.entity
+  type-aliases-package: com.cn.ecig.demo.*.entity
   global-config:
     db-config:
       id-type: auto
