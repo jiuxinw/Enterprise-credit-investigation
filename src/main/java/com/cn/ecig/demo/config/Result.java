@@ -29,15 +29,25 @@ public class Result<T> {
     //返回信息
     private String msg;
     //数据是正常请求
-    private  boolean success;
+    private  String success;
     //具体返回的数据
-    private  T datail;
+    private  T data;
+    //返回代码
+    private int code;
 
-    public boolean isSuccess() {
+    public int getCode() {
+        return code;
+    }
+
+    public void setCode(int code) {
+        this.code = code;
+    }
+
+    public String isSuccess() {
         return success;
     }
 
-    public void setSuccess(boolean success) {
+    public void setSuccess(String success) {
         this.success = success;
     }
 
@@ -49,11 +59,11 @@ public class Result<T> {
         this.msg = msg;
     }
 
-    public T getDatail() {
-        return datail;
+    public T getData() {
+        return data;
     }
 
-    public void setDatail(T datail) {
-        this.datail = datail;
+    public void setData(T data) {
+        this.data = data;
     }
 }
