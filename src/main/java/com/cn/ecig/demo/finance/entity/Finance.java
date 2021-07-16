@@ -20,6 +20,31 @@ import lombok.experimental.Accessors;
 public class Finance implements Serializable {
 
     private static final long serialVersionUID = 1L;
+    /**
+     * 序号
+     */
+    private String id;
+
+    public String getYear() {
+        return year;
+    }
+
+    public void setYear(String year) {
+        this.year = year;
+    }
+
+    /**
+     * 年份
+     */
+    private String year;
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
 
     /**
      * 公司代码

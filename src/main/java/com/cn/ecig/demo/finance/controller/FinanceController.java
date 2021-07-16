@@ -48,6 +48,10 @@ public class FinanceController {
              result.setSuccess("200");
              result.setCode(1);
              result.setMsg("获取企业财务信息成功");
+             if(financeService.getFinanceInfoByCode(code).size()==0){
+                 result.setCode(0);
+                 result.setMsg("获取企业财务信息失败");
+             }
          }catch (Exception e){
              result.setMsg(e.getMessage());
              e.printStackTrace();

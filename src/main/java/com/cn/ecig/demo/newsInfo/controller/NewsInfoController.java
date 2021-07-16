@@ -55,6 +55,10 @@ public class NewsInfoController {
             result.setData(newsInfoService.getNewsListByNum(num));
             result.setSuccess("200");
             result.setMsg("获取信息成功");
+            if(newsInfoService.getNewsListByNum(num).size()==0){
+                result.setCode(0);
+                result.setMsg("获取信息失败");
+            }
         } catch (Exception e) {
             result.setMsg(e.getMessage());
             e.printStackTrace();

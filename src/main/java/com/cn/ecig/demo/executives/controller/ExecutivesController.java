@@ -48,6 +48,10 @@ public class ExecutivesController {
                 result.setSuccess("200");
                 result.setCode(1);
                 result.setMsg("获取高管信息成功");
+                if (executivesService.queryExecLsitByCode(code).size()==0) {
+                    result.setCode(0);
+                    result.setMsg("获取高管信息失败");
+                }
             }catch (Exception e){
                 result.setMsg(e.getMessage());
                 e.printStackTrace();

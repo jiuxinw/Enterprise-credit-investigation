@@ -48,6 +48,10 @@ public class TopTenHoldersController {
             result.setData(topTenHoldersService.getShareHoldeInfoByCode(code));
             result.setSuccess("200");
             result.setMsg("获取信息成功");
+            if(topTenHoldersService.getShareHoldeInfoByCode(code).size()==0) {
+                result.setMsg("获取股东信息失败");
+                result.setCode(0);
+            }
         }catch (Exception e){
             result.setMsg(e.getMessage());
             e.printStackTrace();

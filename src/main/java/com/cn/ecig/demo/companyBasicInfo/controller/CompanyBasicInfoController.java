@@ -91,10 +91,15 @@ private ICompanyBasicInfoService companyBasicInfoService;
                 result.setMsg("企业代码不能为空");
             }
             else {
+                if(code.length()<6){
+                    result.setCode(-2);
+                    result.setMsg("企业代码应为6位");
+                }else{
                 result.setMsg("行业查询成功");
                 result.setData(companyBasicInfoService.getInfoByCode(code));
                 result.setSuccess("200");
-            }}catch (Exception e){
+            }}
+        }catch (Exception e){
             result.setMsg(e.getMessage());
             e.printStackTrace();
         }
@@ -127,9 +132,19 @@ private ICompanyBasicInfoService companyBasicInfoService;
         result.setCode(0);
         result.setMsg("行业查询失败");
         try {
+//            if (industry.isEmpty()&&area.isEmpty()&&transferMode.isEmpty()){
+//                result.setData(null);
+//                result.setCode(0);
+//                result.setMsg("行业查询失败");
+//            }else{
             result.setMsg("行业查询成功");
             result.setData(companyBasicInfoService.getInfoByLabel(industry, area, transferMode));
             result.setCode(1);
+            if (companyBasicInfoService.getInfoByLabel(industry, area, transferMode).size()==0){
+                result.setCode(0);
+                result.setMsg("行业查询失败");
+            }
+       // }
         }catch (Exception e){
             result.setMsg(e.getMessage());
             e.printStackTrace();

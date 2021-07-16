@@ -9,6 +9,9 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * <p>
  *  服务实现类
@@ -22,10 +25,11 @@ public class FinanceServiceImpl extends ServiceImpl<FinanceMapper, Finance> impl
 @Autowired
 private FinanceMapper financeMapper;
     @Override
-    public Finance getFinanceInfoByCode(String code) {
+    public List<Finance> getFinanceInfoByCode(String code) {
+        List<Finance> result=new ArrayList<>();
         QueryWrapper wrapper=new QueryWrapper();
         wrapper.eq("code",code);
-      Finance result=financeMapper.selectOne(wrapper);
+       result=financeMapper.selectList(wrapper);
       return result;
     }
 }
