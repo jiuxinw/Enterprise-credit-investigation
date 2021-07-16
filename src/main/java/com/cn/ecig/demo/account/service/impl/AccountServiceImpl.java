@@ -7,6 +7,7 @@ import com.cn.ecig.demo.account.service.IAccountService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.cn.ecig.demo.config.Result;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
 
 /**
@@ -21,6 +22,8 @@ import org.springframework.stereotype.Service;
 public class AccountServiceImpl extends ServiceImpl<AccountMapper, Account> implements IAccountService {
     @Autowired
     AccountMapper accountMapper;
+    @Autowired
+    private StringRedisTemplate stringRedisTemplate;
 
     @Override
     public Result regist(Long phoneNumber, String userName, String password) {

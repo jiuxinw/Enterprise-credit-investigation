@@ -9,7 +9,7 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  * </p>
  *
  * @author liguang
- * @since 2021-07-15
+ * @since 2021-07-16
  */
 public interface CompanyEvaluationMapper extends BaseMapper<CompanyEvaluation> {
 

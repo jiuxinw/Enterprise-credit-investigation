@@ -5,6 +5,7 @@ import com.cn.ecig.demo.companyEvaluation.entity.CompanyEvaluation;
 import com.cn.ecig.demo.companyEvaluation.mapper.CompanyEvaluationMapper;
 import com.cn.ecig.demo.companyEvaluation.service.ICompanyEvaluationService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import org.mapstruct.AfterMapping;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,19 +15,19 @@ import org.springframework.stereotype.Service;
  * </p>
  *
  * @author liguang
- * @since 2021-07-15
+ * @since 2021-07-16
  */
 @Service
 public class CompanyEvaluationServiceImpl extends ServiceImpl<CompanyEvaluationMapper, CompanyEvaluation> implements ICompanyEvaluationService {
 
     @Autowired
-    private CompanyEvaluationMapper companyEvaluationMapper;
+    private  CompanyEvaluationMapper companyEvaluationMapper;
     @Override
-    public CompanyEvaluation getCeByCode(String code) {
+    public CompanyEvaluation getCompantEvByCode(String code) {
         CompanyEvaluation companyEvaluation=new CompanyEvaluation();
         QueryWrapper wrapper=new QueryWrapper();
         wrapper.eq("code",code);
-        companyEvaluation=companyEvaluationMapper.selectOne(wrapper);
+        companyEvaluation = companyEvaluationMapper.selectOne(wrapper);
         return companyEvaluation;
     }
 }

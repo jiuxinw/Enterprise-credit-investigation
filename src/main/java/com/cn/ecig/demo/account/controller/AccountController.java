@@ -4,6 +4,8 @@ package com.cn.ecig.demo.account.controller;
 import com.cn.ecig.demo.account.service.IAccountService;
 import com.cn.ecig.demo.config.Result;
 import io.swagger.annotations.*;
+import org.mybatis.logging.Logger;
+import org.mybatis.logging.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -22,6 +24,9 @@ import org.springframework.web.bind.annotation.*;
 public class AccountController {
     @Autowired
     private IAccountService accountService;
+    Logger logger= LoggerFactory.getLogger(AccountController.class);
+//    @Autowired
+//    private Md5TokenGenerator tokenGenerator
 
 //    @RequestMapping(value = "/reg",method = RequestMethod.POST)
 //    public String userReg(String phone,String name,String pwd){

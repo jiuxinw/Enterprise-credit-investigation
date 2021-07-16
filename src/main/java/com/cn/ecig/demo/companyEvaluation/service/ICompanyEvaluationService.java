@@ -9,10 +9,10 @@ import com.baomidou.mybatisplus.extension.service.IService;
  * </p>
  *
  * @author liguang
- * @since 2021-07-15
+ * @since 2021-07-16
  */
 public interface ICompanyEvaluationService extends IService<CompanyEvaluation> {
 
-    //请求某企业总和评价信息
-    CompanyEvaluation getCeByCode(String code);
+    //获取某企业综合评价信息
+    CompanyEvaluation getCompantEvByCode(String code);
 }

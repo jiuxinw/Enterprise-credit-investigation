@@ -13,7 +13,7 @@ import lombok.experimental.Accessors;
  * </p>
  *
  * @author liguang
- * @since 2021-07-15
+ * @since 2021-07-16
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
@@ -34,14 +34,9 @@ public class CompanyEvaluation implements Serializable {
     private Double score;
 
     /**
-     * 信息完整度
+     * 信用等级
      */
-    private Double complete;
-
-    /**
-     * 行业内排名
-     */
-    private Integer rank;
+    private String level;
 
     /**
      * 行政许可信息
