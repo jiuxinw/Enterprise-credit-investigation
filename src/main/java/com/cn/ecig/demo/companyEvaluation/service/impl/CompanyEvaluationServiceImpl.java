@@ -9,6 +9,9 @@ import org.mapstruct.AfterMapping;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * <p>
  *  服务实现类
@@ -29,5 +32,16 @@ public class CompanyEvaluationServiceImpl extends ServiceImpl<CompanyEvaluationM
         wrapper.eq("code",code);
         companyEvaluation = companyEvaluationMapper.selectOne(wrapper);
         return companyEvaluation;
+    }
+
+    @Override
+    public List<CompanyEvaluation> getGoodRankByNum(int num) {
+        List<CompanyEvaluation> res=new ArrayList<>();
+        QueryWrapper wrapper=new QueryWrapper();
+        wrapper.select("code").orderByDesc("score");
+String sql="limit"+Integer.toString(num);
+wrapper.last(sql);
+res=companyEvaluationMapper.selectList(wrapper);
+return  res;
     }
 }

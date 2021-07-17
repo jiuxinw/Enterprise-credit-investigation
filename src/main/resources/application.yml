@@ -24,7 +24,10 @@ spring:
       time-between-eviction-runs-millis: 30000
       pool-prepared-statements: true
       max-open-prepared-statements: 100
-
+  redis:
+    host: 127.0.0.1
+    port: 6379
+    password: 123456
 mybatis-plus:
   type-aliases-package: com.cn.ecig.demo.*.entity
   global-config:

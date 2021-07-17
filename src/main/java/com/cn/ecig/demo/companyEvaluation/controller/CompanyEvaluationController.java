@@ -59,4 +59,35 @@ public class CompanyEvaluationController {
         return  result;
     }
 
+    @ApiOperation("获取诚信企业排名信息")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "num",value = "请求数",required = true,dataType = "int")
+    })
+    @ApiResponses({
+            @ApiResponse(code = 1, message = "请求成功"),
+            @ApiResponse(code = 0, message = "获取诚信企业排名信息失败")
+    })
+    @ResponseBody
+    @RequestMapping(value = "/goodRankInfo",method = RequestMethod.POST)
+    public Result getGoodRankByNum(int num){
+        Result result=new Result();
+        result.setSuccess("-1");
+        result.setData(null);
+        result.setCode(0);
+        result.setMsg("获取诚信企业排名信息失败");
+        try {
+            result.setData(companyEvaluationService.getGoodRankByNum(num));
+            result.setSuccess("200");
+            result.setCode(1);
+            result.setMsg("获取诚信企业排名信息成功");
+            if(companyEvaluationService.getGoodRankByNum(num).size()==0){
+                result.setCode(0);
+                result.setMsg("获取诚信企业排名信息失败");
+            }
+        }catch (Exception e){
+            result.setMsg(e.getMessage());
+            e.printStackTrace();
+        }
+        return  result;
+    }
 }
