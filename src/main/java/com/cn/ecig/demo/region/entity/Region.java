@@ -106,5 +106,46 @@ public class Region implements Serializable {
     @TableField("aveCleanAssets")
     private String aveCleanAssets;
 
+    public String getScore() {
+        return score;
+    }
 
+    public void setScore(String score) {
+        this.score = score;
+    }
+
+    public String getGoodNum() {
+        return goodNum;
+    }
+
+    public void setGoodNum(String goodNum) {
+        this.goodNum = goodNum;
+    }
+
+    public String getBadNum() {
+        return badNum;
+    }
+
+    public void setBadNum(String badNum) {
+        this.badNum = badNum;
+    }
+
+    public String getNum() {
+        return num;
+    }
+
+    public void setNum(String num) {
+        this.num = num;
+    }
+
+    public Region() {
+    }
+
+    public Region(String name, String num, String goodNum, String badNum, String score) {
+        this.name = name;
+        this.num = num;
+        this.goodNum = goodNum;
+        this.badNum = badNum;
+        this.score = score;
+    }
 }

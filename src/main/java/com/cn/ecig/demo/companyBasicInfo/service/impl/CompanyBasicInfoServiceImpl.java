@@ -57,4 +57,13 @@ result=companyBasicInfoMapper.selectList(queryWrapper);
 return result;
     }
 
+    @Override
+    public CompanyBasicInfo getessentialInfoByCode(String code) {
+        CompanyBasicInfo companyBasicInfo=new CompanyBasicInfo();
+        QueryWrapper queryWrapper=new QueryWrapper<>();
+        queryWrapper.eq("code",code);
+        companyBasicInfo=companyBasicInfoMapper.selectOne(queryWrapper);
+        return companyBasicInfo;
+    }
+
 }

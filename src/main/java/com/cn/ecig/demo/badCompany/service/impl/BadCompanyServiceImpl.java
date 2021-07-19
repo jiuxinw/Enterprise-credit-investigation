@@ -6,6 +6,7 @@ import com.cn.ecig.demo.badCompany.mapper.BadCompanyMapper;
 import com.cn.ecig.demo.badCompany.service.IBadCompanyService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.querydsl.QuerydslUtils;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -31,5 +32,14 @@ public class BadCompanyServiceImpl extends ServiceImpl<BadCompanyMapper, BadComp
         wrapper.between("caseId",1,num);
         result=badCompanyMapper.selectList(wrapper);
         return result;
+    }
+
+    @Override
+    public List<BadCompany> getbadManByNum(int num) {
+        List<BadCompany> res=new ArrayList<>();
+        QueryWrapper wrapper=new QueryWrapper();
+        wrapper.between("caseId",1,num);
+        res=badCompanyMapper.selectList(wrapper);
+        return  res;
     }
 }

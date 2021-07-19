@@ -1,5 +1,6 @@
 package com.cn.ecig.demo.companyBasicInfo.entity;
 
+import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.baomidou.mybatisplus.annotation.TableField;
 import java.io.Serializable;
@@ -26,6 +27,7 @@ public class CompanyBasicInfo implements Serializable {
     /**
      * 公司代码
      */
+    @TableId("code")
     private String code;
 
     /**

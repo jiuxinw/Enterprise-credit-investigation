@@ -17,4 +17,6 @@ public interface IRegionService extends IService<Region> {
 
     //获取地区平均利润和平均营收信息
     List<Region> getRegionList();
+    //按区域查询
+    Region getRegionByName(String name);
 }

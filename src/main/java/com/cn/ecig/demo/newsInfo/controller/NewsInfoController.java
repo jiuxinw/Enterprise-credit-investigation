@@ -65,4 +65,37 @@ public class NewsInfoController {
         }
         return result;
     }
+
+    @ApiOperation("获取获取各地动态信息")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "num", value = "新闻数量", required = true, dataType = "String"),
+            @ApiImplicitParam(name = "area", value = "搜索区域", required = true, dataType = "String")
+    })
+    @ApiResponses({
+            @ApiResponse(code = 1, message = "请求成功"),
+            @ApiResponse(code = 0, message = "获取各地动态信息失败")
+    })
+    @ResponseBody
+    @RequestMapping(value = "/localNews", method = RequestMethod.POST)
+    public Result getlocalNewsByNum(int num,String area) {
+        Result result = new Result();
+        result.setSuccess("-1");
+        result.setData(null);
+        result.setCode(0);
+        result.setMsg("获取各地动态信息失败");
+        try {
+            result.setCode(1);
+            result.setData(newsInfoService.getlocalNewsByNum(num, area));
+            result.setSuccess("200");
+            result.setMsg("获取各地动态信息成功");
+            if(newsInfoService.getlocalNewsByNum(num, area).size()==0){
+                result.setCode(0);
+                result.setMsg("获取各地动态信息失败");
+            }
+        } catch (Exception e) {
+            result.setMsg(e.getMessage());
+            e.printStackTrace();
+        }
+        return result;
+    }
 }

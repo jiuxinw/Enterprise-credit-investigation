@@ -55,6 +55,30 @@ public class BadCompany implements Serializable {
     @TableField("caseDate")
     private String caseDate;
 
+    public String getCaseURL() {
+        return caseURL;
+    }
+
+    public void setCaseURL(String caseURL) {
+        this.caseURL = caseURL;
+    }
+
+    public String getCaseName() {
+        return caseName;
+    }
+
+    public String getCompanyName() {
+        return companyName;
+    }
+
+    public void setCompanyName(String companyName) {
+        this.companyName = companyName;
+    }
+
+    public void setCaseName(String caseName) {
+        this.caseName = caseName;
+    }
+
     /**
      * 信用评分
      */

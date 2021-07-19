@@ -25,11 +25,21 @@ public class FinanceServiceImpl extends ServiceImpl<FinanceMapper, Finance> impl
 @Autowired
 private FinanceMapper financeMapper;
     @Override
-    public List<Finance> getFinanceInfoByCode(String code) {
+    public Finance getFinanceInfoByCode(String code) {
+        Finance result=new Finance();
+        QueryWrapper wrapper=new QueryWrapper();
+        wrapper.eq("code",code);
+        wrapper.eq("year",2022);
+       result=financeMapper.selectOne(wrapper);
+      return result;
+    }
+
+    @Override
+    public List<Finance> gethistoricalDataByCode(String code) {
         List<Finance> result=new ArrayList<>();
         QueryWrapper wrapper=new QueryWrapper();
         wrapper.eq("code",code);
-       result=financeMapper.selectList(wrapper);
-      return result;
+        result=financeMapper.selectList(wrapper);
+        return result;
     }
 }

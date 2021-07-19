@@ -48,7 +48,7 @@ public class FinanceController {
              result.setSuccess("200");
              result.setCode(1);
              result.setMsg("获取企业财务信息成功");
-             if(financeService.getFinanceInfoByCode(code).size()==0){
+             if(financeService.getFinanceInfoByCode(code)==null){
                  result.setCode(0);
                  result.setMsg("获取企业财务信息失败");
              }
@@ -58,4 +58,36 @@ public class FinanceController {
          }
          return  result;
      }
+
+    @ApiOperation("获取企业历史数据")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "code",value = "公司代码",required = true,dataType = "String")
+    })
+    @ApiResponses({
+            @ApiResponse(code = 1, message = "请求成功"),
+            @ApiResponse(code = 0, message = "获取企业历史数据失败")
+    })
+    @ResponseBody
+    @RequestMapping(value = "/historicalData",method = RequestMethod.POST)
+    public Result gethistoricalDataByCode(String code){
+        Result result=new Result();
+        result.setSuccess("-1");
+        result.setData(null);
+        result.setCode(0);
+        result.setMsg("获取企业历史数据失败");
+        try {
+            result.setData(financeService.gethistoricalDataByCode(code));
+            result.setSuccess("200");
+            result.setCode(1);
+            result.setMsg("获取企业历史数据成功");
+            if(financeService.gethistoricalDataByCode(code).size()==0){
+                result.setCode(0);
+                result.setMsg("获取企业历史数据失败");
+            }
+        }catch (Exception e){
+            result.setMsg(e.getMessage());
+            e.printStackTrace();
+        }
+        return  result;
+    }
  }

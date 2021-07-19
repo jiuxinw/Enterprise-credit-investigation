@@ -28,7 +28,6 @@ import java.util.Map;
  * @since 2021-07-16
  */
 @Controller
-@RequestMapping("/info")
 @Api(value = "获取企业财务信息",tags = "获取企业具体信息模块")
 public class RegionController {
     @Autowired
@@ -40,7 +39,7 @@ public class RegionController {
             @ApiResponse(code = 0, message = "获取企业财务信息失败")
     })
     @ResponseBody
-    @RequestMapping(value = "/regionProfit",method = RequestMethod.POST)
+    @RequestMapping(value = "/info/regionProfit",method = RequestMethod.POST)
     public String getregionProfit(){
 //        Result result=new Result();
 //        result.setSuccess("-1");
@@ -81,4 +80,42 @@ public class RegionController {
         return  JSON.toJSONString(result);
     }
 
+    @ApiOperation("按区域查询")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "name",value = "查询区域",required = true,dataType = "String")
+    })
+    @ApiResponses({
+            @ApiResponse(code = 1, message = "请求成功"),
+            @ApiResponse(code = 0, message = "按区域查询失败")
+    })
+    @ResponseBody
+    @RequestMapping(value = "/search/area",method = RequestMethod.POST)
+    public Result getFyearIndustryRegionByTwo(String name){
+        Result result=new Result();
+        result.setSuccess("-1");
+        result.setData(null);
+        result.setCode(0);
+        result.setMsg("按区域查询失败");
+        Region regions=regionService.getRegionByName(name);
+        HashMap<String,String> re=new HashMap<>();
+        try {
+            re.put("name",regions.getName());
+            re.put("num",regions.getNum());
+            re.put("goodNum",regions.getGoodNum());
+            re.put("badNum",regions.getBadNum());
+            re.put("score",regions.getScore());
+            result.setData(re);
+            result.setSuccess("200");
+            result.setCode(1);
+            result.setMsg("按区域查询成功");
+            if(regionService.getRegionByName(name)==null){
+                result.setCode(0);
+                result.setMsg("按区域查询失败");
+            }
+        }catch (Exception e){
+            result.setMsg(e.getMessage());
+            e.printStackTrace();
+        }
+        return  result;
+    }
 }

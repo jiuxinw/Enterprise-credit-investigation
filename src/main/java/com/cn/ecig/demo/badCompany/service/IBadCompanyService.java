@@ -16,4 +16,7 @@ import java.util.List;
 public interface IBadCompanyService extends IService<BadCompany> {
     //获取失信企业排名信息
     List<BadCompany> getBadRankInfoByNum(int num);
+
+    //获取法院强制执行人信息（
+    List<BadCompany> getbadManByNum(int num);
 }

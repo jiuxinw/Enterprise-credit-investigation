@@ -35,4 +35,15 @@ public class NewsInfoServiceImpl extends ServiceImpl<NewsInfoMapper, NewsInfo> i
         result=newsInfoMapper.selectList(wrapper);
         return result;
     }
+
+    @Override
+    public List<NewsInfo> getlocalNewsByNum(int num, String area) {
+        List<NewsInfo>result=new ArrayList<>();
+        QueryWrapper wrapper=new QueryWrapper();
+        wrapper.like("title",area);
+        String sql="limit "+num;
+        wrapper.last(sql);
+        result=newsInfoMapper.selectList(wrapper);
+        return result;
+    }
 }

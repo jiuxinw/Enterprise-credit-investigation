@@ -16,4 +16,7 @@ import java.util.List;
 public interface INewsInfoService extends IService<NewsInfo> {
     //获取热点新闻
     List<NewsInfo> getNewsListByNum(int num);
+
+    //获取各地动态信息
+    List<NewsInfo> getlocalNewsByNum(int num,String area);
 }

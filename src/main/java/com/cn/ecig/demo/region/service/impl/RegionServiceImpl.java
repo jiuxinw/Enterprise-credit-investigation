@@ -33,4 +33,14 @@ wrapper.last("limit 5");
 res=regionMapper.selectList(wrapper);
         return  res;
     }
+
+    @Override
+    public Region getRegionByName(String name) {
+        Region region=new Region();
+    QueryWrapper wrapper=new QueryWrapper();
+    wrapper.select("name","num","goodnum","badnum","score").eq("name",name);
+    wrapper.last("limit 1");
+    region=regionMapper.selectOne(wrapper);
+    return region;
+    }
 }
