@@ -1,10 +1,12 @@
 package com.cn.ecig.demo.companyBasicInfo.controller;
 
 
+import com.alibaba.fastjson.JSON;
 import com.cn.ecig.demo.companyBasicInfo.entity.Company;
 import com.cn.ecig.demo.companyBasicInfo.entity.CompanyBasicInfo;
 import com.cn.ecig.demo.companyBasicInfo.service.ICompanyBasicInfoService;
 import com.cn.ecig.demo.config.Result;
+import com.cn.ecig.demo.newsInfo.service.INewsInfoService;
 import io.swagger.annotations.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -12,7 +14,9 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.print.DocFlavor;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * <p>
@@ -29,6 +33,8 @@ import java.util.List;
 public class CompanyBasicInfoController {
 @Autowired
 private ICompanyBasicInfoService companyBasicInfoService;
+@Autowired
+private INewsInfoService newsInfoService;
 
     @ApiOperation("按关键字模糊查询企业或新闻")
     @ApiImplicitParams({
@@ -47,6 +53,7 @@ private ICompanyBasicInfoService companyBasicInfoService;
         result.setData(null);
         result.setCode(0);
         result.setMsg("查询失败");
+        Map<String,Object> map=new HashMap<>();
         try {
             if(key.isEmpty()){
             result.setCode(-1);
@@ -54,8 +61,11 @@ private ICompanyBasicInfoService companyBasicInfoService;
             }
         else{
             result.setMsg("行业查询成功");
-            result.setData(companyBasicInfoService.getInfoByKey(key));
-            result.setSuccess("200");
+
+//            result.setData(newsInfoService.getNewsLsitByKey(key));
+                map.put("企业",companyBasicInfoService.getInfoByKey(key));
+                map.put("新闻",newsInfoService.getNewsLsitByKey(key));
+                result.setData(map);
             result.setCode(1);}
         }catch (Exception e){
             result.setMsg(e.getMessage());

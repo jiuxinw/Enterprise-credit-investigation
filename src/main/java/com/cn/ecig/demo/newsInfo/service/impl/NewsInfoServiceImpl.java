@@ -46,4 +46,13 @@ public class NewsInfoServiceImpl extends ServiceImpl<NewsInfoMapper, NewsInfo> i
         result=newsInfoMapper.selectList(wrapper);
         return result;
     }
+
+    @Override
+    public List<NewsInfo> getNewsLsitByKey(String key) {
+        List<NewsInfo>result=new ArrayList<>();
+        QueryWrapper wrapper=new QueryWrapper();
+        wrapper.like("title",key);
+        result=newsInfoMapper.selectList(wrapper);
+        return result;
+    }
 }

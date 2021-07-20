@@ -19,4 +19,7 @@ public interface INewsInfoService extends IService<NewsInfo> {
 
     //获取各地动态信息
     List<NewsInfo> getlocalNewsByNum(int num,String area);
+
+    //查找新闻
+    List<NewsInfo> getNewsLsitByKey(String  key);
 }
