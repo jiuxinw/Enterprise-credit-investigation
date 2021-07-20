@@ -20,6 +20,5 @@ public interface ICompanyEvaluationService extends IService<CompanyEvaluation> {
     CompanyEvaluation getCompantEvByCode(String code);
 
     //获取诚信企业排名信息
-    @Select("select * from companyEvalution left join companyBasicInfo on companyEvalution.code =companyBasicInfo.code")
-    List<CompanyEvaluation> getGoodRankByNum(int num);
+    List<String> getGoodRankByNum(int num);
 }

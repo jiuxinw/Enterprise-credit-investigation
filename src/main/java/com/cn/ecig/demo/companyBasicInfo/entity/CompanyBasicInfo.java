@@ -22,6 +22,9 @@ import lombok.experimental.Accessors;
 @TableName("companyBasicInfo")
 public class CompanyBasicInfo implements Serializable {
 
+
+
+
     private static final long serialVersionUID = 1L;
 
     /**
@@ -126,7 +129,52 @@ public class CompanyBasicInfo implements Serializable {
      */
     @TableField("ISIN")
     private String isin;
+    public String getTransferMode() {
+        return transferMode;
+    }
 
+    public void setTransferMode(String transferMode) {
+        this.transferMode = transferMode;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getLegalRepresentative() {
+        return legalRepresentative;
+    }
+
+    public void setLegalRepresentative(String legalRepresentative) {
+        this.legalRepresentative = legalRepresentative;
+    }
+    public String getIndustry() {
+        return industry;
+    }
+
+    public void setIndustry(String industry) {
+        this.industry = industry;
+    }
+
+    public String getArea() {
+        return area;
+    }
+
+    public void setArea(String area) {
+        this.area = area;
+    }
+
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
+    }
     /**
      * 交易方式
      */

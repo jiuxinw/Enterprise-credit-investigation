@@ -7,11 +7,7 @@ import io.swagger.annotations.*;
 import org.apache.ibatis.annotations.ResultMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * <p>
@@ -23,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @Controller
 @RequestMapping("/info")
+@CrossOrigin
 @Api(value = "获取企业具体信息模块",tags = "获取企业具体信息模块")
 public class AnnouncmenetInfoController {
     

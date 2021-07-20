@@ -1,18 +1,18 @@
 package com.cn.ecig.demo.companyBasicInfo.controller;
 
 
+import com.cn.ecig.demo.companyBasicInfo.entity.Company;
+import com.cn.ecig.demo.companyBasicInfo.entity.CompanyBasicInfo;
 import com.cn.ecig.demo.companyBasicInfo.service.ICompanyBasicInfoService;
 import com.cn.ecig.demo.config.Result;
 import io.swagger.annotations.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.print.DocFlavor;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * <p>
@@ -24,6 +24,7 @@ import javax.print.DocFlavor;
  */
 @Controller
 @RequestMapping("/search")
+@CrossOrigin
 @Api(value = "查询模块",tags = "查询")
 public class CompanyBasicInfoController {
 @Autowired
@@ -189,4 +190,6 @@ private ICompanyBasicInfoService companyBasicInfoService;
         }
         return result;
     }
+
+
 }

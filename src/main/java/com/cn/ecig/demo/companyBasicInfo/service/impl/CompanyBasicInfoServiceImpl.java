@@ -1,6 +1,7 @@
 package com.cn.ecig.demo.companyBasicInfo.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.cn.ecig.demo.companyBasicInfo.entity.Company;
 import com.cn.ecig.demo.companyBasicInfo.entity.CompanyBasicInfo;
 import com.cn.ecig.demo.companyBasicInfo.mapper.CompanyBasicInfoMapper;
 import com.cn.ecig.demo.companyBasicInfo.service.ICompanyBasicInfoService;
@@ -64,6 +65,16 @@ return result;
         queryWrapper.eq("code",code);
         companyBasicInfo=companyBasicInfoMapper.selectOne(queryWrapper);
         return companyBasicInfo;
+    }
+
+    @Override
+    public List<CompanyBasicInfo> gethotEnterprise() {
+        List<CompanyBasicInfo> companyBasicInfoList=new ArrayList<>();
+        QueryWrapper queryWrapper=new QueryWrapper();
+        queryWrapper.orderByDesc("totalStockEquity");
+        queryWrapper.last("limit 5");
+        companyBasicInfoList=companyBasicInfoMapper.selectList(queryWrapper);
+        return  companyBasicInfoList;
     }
 
 }

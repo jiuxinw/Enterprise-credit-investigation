@@ -38,17 +38,22 @@ public class CompanyEvaluationServiceImpl extends ServiceImpl<CompanyEvaluationM
     }
 
     @Override
-    public List<CompanyEvaluation> getGoodRankByNum(int num) {
-        List<CompanyEvaluation> res=new ArrayList<>();
+    public List<String> getGoodRankByNum(int num) {
+        List<String> res=new ArrayList<>();
+        List<String> res2=new ArrayList<>();
 //        MultipleSelect multipleSelect= MultipleSelect.newInstance("${companyBasicInfo}",new CompanyEvaluation(),new CompanyBasicInfo());
 //        multipleSelect.where("{companyEvalution}")
-//                .eq("level","excellent");
-        QueryWrapper wrapper=new QueryWrapper();
-        wrapper.select("code").orderByDesc("score");
-String sql="limit "+Integer.toString(num);
-wrapper.last(sql);
-res=companyEvaluationMapper.selectList(wrapper);
+////                .eq("level","excellent");
+//        QueryWrapper wrapper=new QueryWrapper();
+//        wrapper.select("code").orderByDesc("score");
+//String sql="limit "+Integer.toString(num);
+//wrapper.last(sql);
+res=companyEvaluationMapper.getGoodRankByNum(num);
+        for (int i = 0; i < num; i++) {
+            res2.add(res.get(i));
+        }
+
 //      res=  multipleService.mulSelect(multipleSelect);
-return  res;
+return  res2;
     }
 }

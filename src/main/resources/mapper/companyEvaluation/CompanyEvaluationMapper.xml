@@ -2,4 +2,11 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.cn.ecig.demo.companyEvaluation.mapper.CompanyEvaluationMapper">
 
+    <select id="getGoodRankByNum" resultType="java.lang.String">
+SELECT `name`
+FROM `companyEvaluation`
+left join companyBasicInfo
+on companyBasicInfo.`code`=companyEvaluation.`code`
+ORDER BY score DESC
+    </select>
 </mapper>

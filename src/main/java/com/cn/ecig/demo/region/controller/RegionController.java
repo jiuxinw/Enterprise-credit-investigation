@@ -8,11 +8,7 @@ import com.cn.ecig.demo.region.service.IRegionService;
 import io.swagger.annotations.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -28,6 +24,7 @@ import java.util.Map;
  * @since 2021-07-16
  */
 @Controller
+@CrossOrigin
 @Api(value = "获取企业财务信息",tags = "获取企业具体信息模块")
 public class RegionController {
     @Autowired

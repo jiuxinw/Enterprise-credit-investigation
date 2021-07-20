@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.*;
  */
 @Controller
 @RequestMapping("/user")
+@CrossOrigin
 @Api(value="注册登录api",tags = "用户登陆注册")
 public class AccountController {
     @Autowired

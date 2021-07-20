@@ -2,6 +2,9 @@ package com.cn.ecig.demo.district.controller;
 
 
 import com.alibaba.fastjson.JSON;
+import com.cn.ecig.demo.companyBasicInfo.entity.Company;
+import com.cn.ecig.demo.companyBasicInfo.entity.CompanyBasicInfo;
+import com.cn.ecig.demo.companyBasicInfo.service.ICompanyBasicInfoService;
 import com.cn.ecig.demo.config.Result;
 import com.cn.ecig.demo.district.entity.District;
 import com.cn.ecig.demo.district.service.IDistrictService;
@@ -12,11 +15,7 @@ import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -33,9 +32,11 @@ import java.util.Map;
  */
 @Controller
 @RequestMapping("/info")
+@CrossOrigin
 @Api(value = "获取企业财务信息",tags = "获取企业具体信息模块")
 public class DistrictController {
-
+     @Autowired
+private  ICompanyBasicInfoService companyBasicInfoService;
     @Autowired
     private IDistrictService districtService;
 
@@ -82,5 +83,41 @@ public class DistrictController {
             e.printStackTrace();
         }
         return  JSON.toJSONString(result);
+    }
+
+
+    /**
+     *
+     * @param
+     * @return
+     */
+    @ApiOperation("获取热搜企业信息")
+    @ApiResponses({
+            @ApiResponse(code = 1, message = "请求成功"),
+            @ApiResponse(code = 0, message = "代码查询失败"),
+    })
+    @ResponseBody
+    @RequestMapping(value = "/hotEnterprise",method = RequestMethod.POST)
+    public Result getHotEnterprise(){
+        Result result=new Result();
+        result.setData(null);
+        result.setCode(0);
+        result.setMsg("获取热搜企业信息失败");
+
+        List<CompanyBasicInfo> companyBasicInfoList=companyBasicInfoService.gethotEnterprise();
+        List<Company> companyist=new ArrayList<>();
+        try {
+            for (int i = 0; i <5 ; i++) {
+                companyist.add(new Company(companyBasicInfoList.get(i)));
+            }
+            result.setMsg("获取热搜企业信息成功");
+            result.setData(companyist);
+            result.setCode(1);
+
+        }catch (Exception e){
+            result.setMsg(e.getMessage());
+            e.printStackTrace();
+        }
+        return result;
     }
 }
