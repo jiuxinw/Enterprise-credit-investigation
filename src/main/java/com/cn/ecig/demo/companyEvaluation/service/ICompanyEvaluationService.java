@@ -1,5 +1,6 @@
 package com.cn.ecig.demo.companyEvaluation.service;
 
+import com.cn.ecig.demo.companyEvaluation.entity.Comp_three;
 import com.cn.ecig.demo.companyEvaluation.entity.CompanyEvaluation;
 import com.baomidou.mybatisplus.extension.service.IService;
 import org.apache.ibatis.annotations.Select;
@@ -20,5 +21,5 @@ public interface ICompanyEvaluationService extends IService<CompanyEvaluation> {
     CompanyEvaluation getCompantEvByCode(String code);
 
     //获取诚信企业排名信息
-    List<String> getGoodRankByNum(int num);
+    List<Comp_three> getGoodRankByNum(int num);
 }

@@ -1,5 +1,6 @@
 package com.cn.ecig.demo.companyEvaluation.mapper;
 
+import com.cn.ecig.demo.companyEvaluation.entity.Comp_three;
 import com.cn.ecig.demo.companyEvaluation.entity.CompanyEvaluation;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
@@ -14,5 +15,5 @@ import java.util.List;
  * @since 2021-07-16
  */
 public interface CompanyEvaluationMapper extends BaseMapper<CompanyEvaluation> {
-    List<String> getGoodRankByNum(int num);
+    List<Comp_three> getGoodRankByNum(int num);
 }

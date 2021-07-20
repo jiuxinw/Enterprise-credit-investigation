@@ -2,6 +2,7 @@ package com.cn.ecig.demo.companyEvaluation.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.cn.ecig.demo.companyBasicInfo.entity.CompanyBasicInfo;
+import com.cn.ecig.demo.companyEvaluation.entity.Comp_three;
 import com.cn.ecig.demo.companyEvaluation.entity.CompanyEvaluation;
 import com.cn.ecig.demo.companyEvaluation.mapper.CompanyEvaluationMapper;
 import com.cn.ecig.demo.companyEvaluation.service.ICompanyEvaluationService;
@@ -38,9 +39,9 @@ public class CompanyEvaluationServiceImpl extends ServiceImpl<CompanyEvaluationM
     }
 
     @Override
-    public List<String> getGoodRankByNum(int num) {
-        List<String> res=new ArrayList<>();
-        List<String> res2=new ArrayList<>();
+    public List<Comp_three> getGoodRankByNum(int num) {
+//        List<String> res=new ArrayList<>();
+//        List<String> res2=new ArrayList<>();
 //        MultipleSelect multipleSelect= MultipleSelect.newInstance("${companyBasicInfo}",new CompanyEvaluation(),new CompanyBasicInfo());
 //        multipleSelect.where("{companyEvalution}")
 ////                .eq("level","excellent");
@@ -48,12 +49,17 @@ public class CompanyEvaluationServiceImpl extends ServiceImpl<CompanyEvaluationM
 //        wrapper.select("code").orderByDesc("score");
 //String sql="limit "+Integer.toString(num);
 //wrapper.last(sql);
-res=companyEvaluationMapper.getGoodRankByNum(num);
-        for (int i = 0; i < num; i++) {
-            res2.add(res.get(i));
-        }
+//res=companyEvaluationMapper.getGoodRankByNum(num);
+//        for (int i = 0; i < num; i++) {
+//            res2.add(res.get(i));
+//        }
+        List<Comp_three> list=companyEvaluationMapper.getGoodRankByNum(num);
+        List<Comp_three> list2=list.subList(0,num);
+
+        return  list2;
+
 
 //      res=  multipleService.mulSelect(multipleSelect);
-return  res2;
+//return  res2;
     }
 }

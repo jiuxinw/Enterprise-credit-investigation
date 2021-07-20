@@ -2,8 +2,8 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.cn.ecig.demo.companyEvaluation.mapper.CompanyEvaluationMapper">
 
-    <select id="getGoodRankByNum" resultType="java.lang.String">
-SELECT `name`
+    <select id="getGoodRankByNum" resultType="com.cn.ecig.demo.companyEvaluation.entity.Comp_three">
+SELECT `name`,shortName,companyEvaluation.`code`
 FROM `companyEvaluation`
 left join companyBasicInfo
 on companyBasicInfo.`code`=companyEvaluation.`code`
