@@ -9,4 +9,14 @@ left join companyBasicInfo
 on companyBasicInfo.`code`=companyEvaluation.`code`
 ORDER BY score DESC
     </select>
+    <select id="getBasicByCode" resultType="com.cn.ecig.demo.companyEvaluation.entity.Comp_three">
+SELECT `name`,companyEvaluation.`code`
+FROM `companyEvaluation`
+left join companyBasicInfo
+on companyBasicInfo.`code`=companyEvaluation.`code`
+where companyEvaluation.code = #{code}
+    </select>
+    <select id="getFollows" resultType="com.cn.ecig.demo.companyEvaluation.entity.Comp_three">
+
+    </select>
 </mapper>

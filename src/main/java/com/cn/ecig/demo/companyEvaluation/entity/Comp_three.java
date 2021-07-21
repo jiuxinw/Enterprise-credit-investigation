@@ -35,6 +35,9 @@ public class Comp_three {
     @TableId("shortName")
     private String shortName;
 
+    public Comp_three(){
+    }
+
     public String getShortName() {
         return shortName;
     }

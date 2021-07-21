@@ -28,7 +28,7 @@ public class NewsInfoServiceImpl extends ServiceImpl<NewsInfoMapper, NewsInfo> i
     @Override
     public List<NewsInfo> getNewsListByNum(int num) {
         Random ra=new Random();
-        int rs=ra.nextInt(200);
+        int rs=ra.nextInt(600);
         List<NewsInfo>result=new ArrayList<>();
         QueryWrapper wrapper=new QueryWrapper();
         wrapper.between("id",106363+ rs,106363+rs+num*20);

@@ -2,6 +2,7 @@ package com.cn.ecig.demo.account.controller;
 
 
 import com.cn.ecig.demo.account.service.IAccountService;
+import com.cn.ecig.demo.companyEvaluation.service.ICompanyEvaluationService;
 import com.cn.ecig.demo.config.Result;
 import io.swagger.annotations.*;
 import org.mybatis.logging.Logger;
@@ -25,6 +26,8 @@ import org.springframework.web.bind.annotation.*;
 public class AccountController {
     @Autowired
     private IAccountService accountService;
+    @Autowired
+    private ICompanyEvaluationService companyEvaluationService;
     Logger logger= LoggerFactory.getLogger(AccountController.class);
 //    @Autowired
 //    private Md5TokenGenerator tokenGenerator
@@ -95,4 +98,8 @@ public class AccountController {
         return accountService.login(name, pwd);
 
     }
+
+
+
+
 }

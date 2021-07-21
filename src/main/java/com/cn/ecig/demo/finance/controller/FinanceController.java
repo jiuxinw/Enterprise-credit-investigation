@@ -8,9 +8,12 @@ import com.cn.ecig.demo.config.Result;
 import com.cn.ecig.demo.finance.service.IFinanceService;
 import io.swagger.annotations.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -107,28 +110,31 @@ public class FinanceController {
             @ApiResponse(code = 0, message = "获取地区-行业排名信息")
     })
     @ResponseBody
+    @Async("taskExecutor")
     @RequestMapping(value = "/financeRank",method = RequestMethod.POST)
     public Result getfinanceRankByCode(String code){
         Result result=new Result();
         result.setData(null);
         result.setCode(0);
         result.setMsg("获取地区-行业排名信息失败");
-        String s=companyBasicInfoService.getInfoByCode(code).getIndustry();
-        String s2=companyBasicInfoService.getInfoByCode(code).getArea();
+        Thread thread=new Thread();
+       CompanyBasicInfo companyBasicInfo= companyBasicInfoService.getInfoByCode(code);
+        String s=companyBasicInfo.getIndustry();
+        String s2=companyBasicInfo.getArea();
         Map<String,Object> stringObjectMap=new HashMap<>();
-        stringObjectMap.put("regCapRank",20+Math.random()*10);
-        stringObjectMap.put("regDateRank",30+Math.random()*10);
-        stringObjectMap.put("profitRank",50+Math.random()*10);
-        stringObjectMap.put("allCapRank",80+Math.random()*10);
+        stringObjectMap.put("regCapRank",format1(20+Math.random()*10));
+        stringObjectMap.put("regDateRank",format1(30+Math.random()*10));
+        stringObjectMap.put("profitRank",format1(50+Math.random()*10));
+        stringObjectMap.put("allCapRank",format1(80+Math.random()*10));
         Map<String,Object> stringObjectMap2=new HashMap<>();
-        stringObjectMap2.put("regCapRank",20+Math.random()*10);
-        stringObjectMap2.put("regDateRank",30+Math.random()*10);
-        stringObjectMap2.put("profitRank",50+Math.random()*10);
-        stringObjectMap2.put("allCapRank",80+Math.random()*10);
+        stringObjectMap2.put("regCapRank",format1(20+Math.random()*10));
+        stringObjectMap2.put("regDateRank",format1(30+Math.random()*10));
+        stringObjectMap2.put("profitRank",format1(50+Math.random()*10));
+        stringObjectMap2.put("allCapRank",format1(80+Math.random()*10));
         List<Company>companies= new ArrayList<>();
         List<Company>companies2= new ArrayList<>();
-                List<CompanyBasicInfo>com=companyBasicInfoService.getInfoByLabel(s,null,null);
-                List<CompanyBasicInfo>com2=companyBasicInfoService.getInfoByLabel(null,s2,null);
+        List<CompanyBasicInfo>com=companyBasicInfoService.getInfoByLabel(s,null,null);
+        List<CompanyBasicInfo>com2=companyBasicInfoService.getInfoByLabel(null,s2,null);
         for (int i = 0; i < 5; i++) {
             companies.add(new Company(com.get(i)));
         }
@@ -140,8 +146,8 @@ public class FinanceController {
 
         try {
             List<Map<String,Object>> list=new ArrayList<>();
-list.add(stringObjectMap);
-list.add(stringObjectMap2);
+            list.add(stringObjectMap);
+            list.add(stringObjectMap2);
             result.setData(list);
             result.setCode(1);
             result.setMsg("获取地区-行业排名信息成功");
@@ -154,6 +160,12 @@ list.add(stringObjectMap2);
             e.printStackTrace();
         }
         return  result;
+    }
+    public static String format1(double value) {
+
+        BigDecimal bd = new BigDecimal(value);
+        bd = bd.setScale(2, RoundingMode.HALF_UP);
+        return bd.toString();
     }
 
  }

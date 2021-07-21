@@ -62,4 +62,15 @@ public class CompanyEvaluationServiceImpl extends ServiceImpl<CompanyEvaluationM
 //      res=  multipleService.mulSelect(multipleSelect);
 //return  res2;
     }
+
+    @Override
+    public List<Comp_three> getFollows(String userNumber) {
+        return null;
+    }
+
+    @Override
+    public Comp_three getCommnetByCode(String code) {
+Comp_three comp_three=companyEvaluationMapper.getBasicByCode(code);
+return comp_three;
+    }
 }

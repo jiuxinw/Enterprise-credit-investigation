@@ -16,4 +16,7 @@ import java.util.List;
  */
 public interface CompanyEvaluationMapper extends BaseMapper<CompanyEvaluation> {
     List<Comp_three> getGoodRankByNum(int num);
+
+    Comp_three getBasicByCode(String code);
+    List<Comp_three> getFollows(String userName);
 }
