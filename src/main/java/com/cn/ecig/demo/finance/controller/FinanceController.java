@@ -161,8 +161,13 @@ public class FinanceController {
         }
         return  result;
     }
-    public static String format1(double value) {
 
+    /**
+     * 保留两位小数点
+     * @param value
+     * @return
+     */
+    public static String format1(double value) {
         BigDecimal bd = new BigDecimal(value);
         bd = bd.setScale(2, RoundingMode.HALF_UP);
         return bd.toString();
