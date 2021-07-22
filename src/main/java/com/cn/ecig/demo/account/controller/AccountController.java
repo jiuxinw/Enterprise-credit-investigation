@@ -11,6 +11,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 /**
  * <p>
  *  前端控制器
@@ -21,13 +24,20 @@ import org.springframework.web.bind.annotation.*;
  */
 @Controller
 @RequestMapping("/user")
-@CrossOrigin
+@CrossOrigin(origins = {"","null"},allowCredentials = "true")
 @Api(value="注册登录api",tags = "用户模块")
 public class AccountController {
     @Autowired
     private IAccountService accountService;
     @Autowired
     private ICompanyEvaluationService companyEvaluationService;
+
+    @RequestMapping(value = "/s",method = RequestMethod.GET)
+    @ResponseBody
+    public String getSessionId(HttpServletRequest request){
+        HttpSession session= request.getSession();
+        return session.getId();
+    }
     Logger logger= LoggerFactory.getLogger(AccountController.class);
 //    @Autowired
 //    private Md5TokenGenerator tokenGenerator

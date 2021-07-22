@@ -25,11 +25,13 @@ public class CommentServiceImpl extends ServiceImpl<CommentMapper, Comment> impl
     private  CommentMapper commentMapper;
 
     @Override
-    public void insertComment(String rate, String context,String name) {
+    public void insertComment(String rate, String context,String name,String companyCode,String status) {
         Comment comment=new Comment();
         comment.setContext(context);
         comment.setRate(rate);
         comment.setUserName(name);
+        comment.setStatus(status);
+        comment.setCompanyCode(companyCode);
         commentMapper.insert(comment);
     }
 
@@ -39,6 +41,16 @@ public class CommentServiceImpl extends ServiceImpl<CommentMapper, Comment> impl
         QueryWrapper wrapper=new QueryWrapper();
         wrapper.eq("userName",name);
         comments=commentMapper.selectList(wrapper);
+        return comments;
+    }
+
+    @Override
+    public List<Comment> getUserCommnetByCode(String name, String code) {
+        List<Comment> comments=new ArrayList<>();
+        QueryWrapper<Comment> Uwrapper=new QueryWrapper();
+     Uwrapper.eq("userName",name);
+     Uwrapper.eq("companyCode",code);
+        comments=commentMapper.selectList(Uwrapper);
         return comments;
     }
 }

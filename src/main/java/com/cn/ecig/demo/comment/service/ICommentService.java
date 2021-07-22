@@ -15,8 +15,11 @@ import java.util.List;
  */
 public interface ICommentService extends IService<Comment> {
     //用户反馈
-    void insertComment(String rate,String context,String name);
+    void insertComment(String rate,String context,String name,String companyCode,String status);
 
     //获取用户反馈列表
    List<Comment> getUserComment(String name);
+
+   //根据companycode获取对应的用户反馈列表
+    List<Comment> getUserCommnetByCode(String name,String code);
 }
