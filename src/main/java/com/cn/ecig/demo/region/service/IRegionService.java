@@ -19,4 +19,6 @@ public interface IRegionService extends IService<Region> {
     List<Region> getRegionList();
     //按区域查询
     Region getRegionByName(String name);
+    //获取省份热力图
+    Region getdistribution(String province);
 }

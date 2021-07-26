@@ -43,4 +43,14 @@ res=regionMapper.selectList(wrapper);
     region=regionMapper.selectOne(wrapper);
     return region;
     }
+
+    @Override
+    public Region getdistribution(String province) {
+        Region regions=new Region();
+        QueryWrapper wrapper=new QueryWrapper();
+        wrapper.select("num","aveProfit","totalScore").eq("name",province);
+        wrapper.eq("year",2022);
+        regions=regionMapper.selectOne(wrapper);
+        return regions;
+    }
 }
