@@ -29,4 +29,5 @@ public interface IFinanceService extends IService<Finance> {
     //获取总资产企业排行
     List<Comp_two>getBigAssetsList(String province);
 
+
 }

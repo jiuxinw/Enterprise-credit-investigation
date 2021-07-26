@@ -92,7 +92,7 @@ public class AccountController {
     })
     @ResponseBody
     @RequestMapping(value = "/reg",method = RequestMethod.POST)
-    public Result regist(@RequestParam(value = "phoneNumber",required = false) Long phone,
+    public Result regist(@RequestParam(value = "phoneNumber",required = false) String phone,
                          @RequestParam(value = "userName",required = false) String name,
                          @RequestParam(value = "password",required = false) String pwd){
         return accountService.regist(phone,name,pwd);
@@ -101,20 +101,21 @@ public class AccountController {
     @ApiOperation("登录")
     @ApiImplicitParams(
             {
-                    @ApiImplicitParam(name = "name",required = true,dataType = "String"),
+                    @ApiImplicitParam(name = "phoneNumber",required = true,dataType = "String"),
                     @ApiImplicitParam(name = "pwd",required = true,dataType = "String")
             }
     )
     @ApiResponses({
-            @ApiResponse(code = 0,message = "successful log"),
-            @ApiResponse(code = 300002,message = "用户名或者密码错误")
+            @ApiResponse(code = 200,message = "successful log"),
+            @ApiResponse(code = -1,message = "密码错误"),
+            @ApiResponse(code = -2,message = "用户名不存在"),
     })
     @ResponseBody
     @RequestMapping(value = "/login",method = RequestMethod.POST)
-    public Result login(String name,String pwd){
-        Token token=tokenManager.createToken(name);
+    public Result login(String phoneNumber,String pwd){
+        Token token=tokenManager.createToken(phoneNumber);
         System.out.println(token);
-        return accountService.login(name, pwd);
+        return accountService.login(phoneNumber, pwd);
 
     }
 

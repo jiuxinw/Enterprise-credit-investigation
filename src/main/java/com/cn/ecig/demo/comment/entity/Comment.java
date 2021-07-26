@@ -32,13 +32,13 @@ public class Comment implements Serializable {
     /**
      * 用户名
      */
-    @TableField("userName")
-    private String userName;
+    @TableField("phoneNumber")
+    private String phoneNumber;
 
     /**
      * 打分（0-5）
      */
-    private String rate;
+    private int rate;
 
     /**
      * 内容
@@ -72,19 +72,20 @@ public class Comment implements Serializable {
         this.status = status;
     }
 
-    public String getUserName() {
-        return userName;
+
+    public String getPhoneNumber() {
+        return phoneNumber;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
     }
 
-    public String getRate() {
+    public int getRate() {
         return rate;
     }
 
-    public void setRate(String rate) {
+    public void setRate(int rate) {
         this.rate = rate;
     }
 

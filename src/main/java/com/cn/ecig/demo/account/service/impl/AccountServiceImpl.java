@@ -27,7 +27,7 @@ public class AccountServiceImpl extends ServiceImpl<AccountMapper, Account> impl
 
     public String N;
     @Override
-    public Result regist(Long phoneNumber, String userName, String password) {
+    public Result regist(String phoneNumber, String userName, String password) {
         Account account=new Account(phoneNumber, userName, password);
         Result result=new Result();
         result.setSuccess("注册失败");
@@ -60,22 +60,28 @@ public class AccountServiceImpl extends ServiceImpl<AccountMapper, Account> impl
      * @return Result
      */
     @Override
-    public Result login(String useName,String password) {
+    public Result login(String phoneNumber,String password) {
         Result result=new Result();
         result.setSuccess("-1");
         result.setData(null);
         result.setCode(30002);
         try {
             QueryWrapper wrapper = new QueryWrapper();
-            wrapper.eq("userName", useName);
+            wrapper.eq("phoneNumber", phoneNumber);
             Account targetaccount = accountMapper.selectOne(wrapper);
+            if(targetaccount!=null){
             if (password.equals(targetaccount.getPassword())){
                 result.setMsg("登录成功");
-                result.setSuccess("200");
-                result.setData("userName："+useName+","+"password:"+password);
-                result.setCode(0);
+                result.setData("phoneNumber："+phoneNumber+","+"password:"+password);
+                result.setCode(200);
             }else {
-                result.setMsg("用户名或密码错误");
+                result.setCode(-1);
+                result.setMsg("密码错误");
+            }
+            }
+            else {
+                result.setCode(-2);
+                result.setMsg("用户不存在");
             }
         }catch (Exception e){
             result.setMsg(e.getMessage());

@@ -132,7 +132,7 @@ private INewsInfoService newsInfoService;
      * @param transferMode
      * @return
      */
-    @Operation("按照标签查询企业")
+//    @Operation("按照标签查询企业")
     @ApiOperation("按照标签查询")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "industry",value = "行业",required = false,dataType = "String"),
@@ -172,6 +172,49 @@ private INewsInfoService newsInfoService;
         return result;
     }
 
+
+  @ApiOperation("二代按照标签查询")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "industry",value = "行业",required = false,dataType = "String"),
+            @ApiImplicitParam(name = "area",value = "地区",required = false,dataType = "String"),
+            @ApiImplicitParam(name = "transferMode",value = "交易方式",required = false,dataType = "String")
+    })
+    @ApiResponses({
+            @ApiResponse(code = 1, message = "请求成功"),
+            @ApiResponse(code = 0, message = "行业查询失败")
+    })
+    @ResponseBody
+    @RequestMapping(value = "/label2",method = RequestMethod.POST)
+    public Result queryByLabel2 (String industry,String area,String transferMode){
+        Result result=new Result();
+        result.setSuccess("-1");
+        result.setData(null);
+        result.setCode(0);
+      String[] in=industry.split("\\s+");;
+      String[] ar=area.split("\\s+");;
+      String[] tr=transferMode.split("\\s+");;
+        result.setMsg("行业查询失败");
+        try {
+//            if (industry.isEmpty()&&area.isEmpty()&&transferMode.isEmpty()){
+//                result.setData(null);
+//                result.setCode(0);
+//                result.setMsg("行业查询失败");
+//            }else{
+            result.setMsg("行业查询成功");
+
+            result.setData(companyBasicInfoService.getInfoByLabel2(in, ar, tr));
+            result.setCode(1);
+            if (companyBasicInfoService.getInfoByLabel2(in, ar, tr).size()==0){
+                result.setCode(0);
+                result.setMsg("行业查询失败");
+            }
+            // }
+        }catch (Exception e){
+            result.setMsg(e.getMessage());
+            e.printStackTrace();
+        }
+        return result;
+    }
     @ApiOperation("通过公司代码请求企业基本信息")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "code",value = "企业代码",required = true,dataType = "String")
@@ -216,5 +259,9 @@ private INewsInfoService newsInfoService;
         return result;
     }
 
+    public static String[]  con(String args) {
+        String[] split = args.split("\\s+");
+      return split;
+    }
 
 }

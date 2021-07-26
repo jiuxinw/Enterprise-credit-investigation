@@ -2,4 +2,10 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.cn.ecig.demo.follows.mapper.FollowsMapper">
 
+    <select id="getBykey" resultType="com.cn.ecig.demo.companyBasicInfo.entity.Co">
+        SELECT companyBasicInfo.`name` ,companyBasicInfo.`code`,legalRepresentative
+FROM companyBasicInfo LEFT JOIN follows
+ON companyBasicInfo.`code`= follows.`code`
+where follows.phoneNumber= #{phone} AND follows.`name` LIKE CONCAT('%',#{key},'%') ;
+    </select>
 </mapper>

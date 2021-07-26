@@ -46,14 +46,14 @@ public interface IAccountService extends IService<Account> {
      *      * @param user 参数封装
      *      * @return Result
      */
-    Result regist(Long phoneNumber, String useName, String password);
+    Result regist(String phoneNumber, String useName, String password);
 
     /**
      * 登录
      *      * @param user 用户名和密码
      *      * @return Result
      */
-    Result login(String useName,String password);
+    Result login(String phoneNumber,String password);
 
     Account getAccountById(int id);
 }

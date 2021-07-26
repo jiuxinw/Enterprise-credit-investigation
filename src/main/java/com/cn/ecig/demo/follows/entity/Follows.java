@@ -28,10 +28,18 @@ public class Follows implements Serializable {
      */
     private int aaid;
 
-    public Follows(Comp_three comp_three,String  userName) {
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    public Follows(Comp_three comp_three, String  phoneNumber) {
     this.name=comp_three.getName();
     this.code= comp_three.getCode();
-    this.userName=userName;
+    this.phoneNumber=phoneNumber;
     }
     public Follows(){
 
@@ -40,16 +48,16 @@ public class Follows implements Serializable {
     /**
      * 用户
      */
-    @TableField("userName")
-    private String userName;
+    @TableField("phoneNumber")
+    private String phoneNumber;
 
-    public String getUserName() {
-        return userName;
-    }
-
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
+//    public String getUserName() {
+//        return phoneNumber;
+//    }
+//
+//    public void setUserName(String phoneNumber) {
+//        this.phoneNumber = phoneNumber;
+//    }
 
     public String getName() {
         return name;

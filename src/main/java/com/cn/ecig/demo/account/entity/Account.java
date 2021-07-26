@@ -29,7 +29,7 @@ public class Account implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    public Account(Long phoneNumber, String userName, String password) {
+    public Account(String phoneNumber, String userName, String password) {
         this.phoneNumber = phoneNumber;
         this.userName = userName;
         this.password = password;
@@ -42,7 +42,7 @@ public class Account implements Serializable {
      */
     @TableField("phoneNumber")
     @ApiModelProperty("手机号")
-    private Long phoneNumber;
+    private String phoneNumber;
 
     /**
      * 用户昵称
@@ -70,11 +70,11 @@ public class Account implements Serializable {
         this.userName = userName;
     }
 
-    public Long getPhoneNumber() {
+    public String getPhoneNumber() {
         return phoneNumber;
     }
 
-    public void setPhoneNumber(Long phoneNumber) {
+    public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
 

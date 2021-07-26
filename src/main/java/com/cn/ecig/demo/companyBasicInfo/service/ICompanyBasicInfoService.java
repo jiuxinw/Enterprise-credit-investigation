@@ -21,6 +21,8 @@ public interface ICompanyBasicInfoService extends IService<CompanyBasicInfo> {
     CompanyBasicInfo getInfoByCode(String  code);
     //按标签查询企业:用户选择的标签（行业、地区、交易方式、市场分层）
     List<CompanyBasicInfo> getInfoByLabel(String industry,String area,String transferMode);
+    //查询字符数组
+    List<CompanyBasicInfo> getInfoByLabel2(String[] industry,String[] area,String[] transferMode);
     //按区域查找
 
     //获取某企业基本信息

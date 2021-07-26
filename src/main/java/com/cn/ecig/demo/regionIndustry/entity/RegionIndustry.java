@@ -1,5 +1,6 @@
-package com.cn.ecig.demo.district.entity;
+package com.cn.ecig.demo.regionIndustry.entity;
 
+import com.baomidou.mybatisplus.annotation.TableName;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableField;
 import java.io.Serializable;
@@ -13,48 +14,46 @@ import lombok.experimental.Accessors;
  * </p>
  *
  * @author liguang
- * @since 2021-07-17
+ * @since 2021-07-26
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-public class District implements Serializable {
+@TableName("regionIndustry")
+public class RegionIndustry implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
     /**
-     * 地区名字
+     * 区域×行业
      */
-    @TableField("districtName")
-    private String districtName;
+    @TableId("region_industry_ID")
+    private String regionIndustryId;
 
-    public String getAveDebts() {
-        return aveDebts;
+    private String year;
+
+    private String regionIndustryName;
+
+    private String regionName;
+
+    private String industryName;
+
+    public String getAveProfit() {
+        return aveProfit;
     }
 
-    public void setAveDebts(String aveDebts) {
-        this.aveDebts = aveDebts;
+    public String getAveScore() {
+        return aveScore;
     }
 
-    public String getAveCleanAssets() {
-        return aveCleanAssets;
+    public void setAveScore(String aveScore) {
+        this.aveScore = aveScore;
     }
 
-    public void setAveCleanAssets(String aveCleanAssets) {
-        this.aveCleanAssets = aveCleanAssets;
+    public void setAveProfit(String aveProfit) {
+        this.aveProfit = aveProfit;
     }
 
-    public String getAveAssets() {
-        return aveAssets;
-    }
-
-    public void setAveAssets(String aveAssets) {
-        this.aveAssets = aveAssets;
-    }
-
-    /**
-     * 公司数量
-     */
     @TableField("companyNum")
     private String companyNum;
 
@@ -64,6 +63,9 @@ public class District implements Serializable {
     @TableField("badNum")
     private String badNum;
 
+    @TableField("aveScore")
+    private String aveScore;
+
     /**
      * 平均利润
      */
@@ -71,7 +73,7 @@ public class District implements Serializable {
     private String aveProfit;
 
     /**
-     * 平均收入
+     * 平均营收
      */
     @TableField("aveIncome")
     private String aveIncome;
@@ -93,12 +95,6 @@ public class District implements Serializable {
      */
     @TableField("aveCleanAssets")
     private String aveCleanAssets;
-
-    @TableId("districtId")
-    private String districtId;
-//
-//    @TableField("aveScore")
-//    private String aveScore;
 
 
 }

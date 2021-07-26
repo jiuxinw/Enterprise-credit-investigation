@@ -124,7 +124,7 @@ public class IndustryController {
          Industry in_6=iIndustryService.getInfoByIndustry("房地产业");
          Industry[]in_i={in_1,in_2,in_3,in_4,in_5,in_6};
          String[] strings={"economy","IT","education","agriculture","manufacturing","estate"};
-         for (int i = 0; i < 5; i++) {
+         for (int i = 0; i < 6; i++) {
              map.put(strings[i],industyto(in_i[i]));
          }
             result.setData(map);

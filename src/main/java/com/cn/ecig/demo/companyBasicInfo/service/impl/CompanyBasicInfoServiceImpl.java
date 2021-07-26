@@ -1,5 +1,6 @@
 package com.cn.ecig.demo.companyBasicInfo.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.cn.ecig.demo.companyBasicInfo.entity.Company;
 import com.cn.ecig.demo.companyBasicInfo.entity.CompanyBasicInfo;
@@ -57,6 +58,34 @@ public class CompanyBasicInfoServiceImpl extends ServiceImpl<CompanyBasicInfoMap
 result=companyBasicInfoMapper.selectList(queryWrapper);
 return result;
     }
+
+    @Override
+    public List<CompanyBasicInfo> getInfoByLabel2(String[] industry, String[] area, String[] transferMode) {
+        List<CompanyBasicInfo> res = new ArrayList<>();
+        QueryWrapper<CompanyBasicInfo> queryWrapper = new QueryWrapper<>();
+//        int len_in = industry.length;
+//        int len_area = area.length;
+//        int len_tra = transferMode.length;
+        for (int i=0;i<industry.length;i++) {
+            for (int j=0;j< industry.length;j++) {
+                for (int k=0;k<transferMode.length;k++) {
+                    int finalI = i;
+                    int finalJ = j;
+                    int finalK = k;
+                    queryWrapper.and(
+                            Wrapper ->
+                                    Wrapper.like("industry", industry[finalI])
+                                            .or()
+                                            .like("area", area[finalJ]).or().like("transferMode", transferMode[finalK]));
+                }
+            }
+        }
+        res=companyBasicInfoMapper.selectList(queryWrapper);
+        return res;
+    }
+
+
+
 
     @Override
     public CompanyBasicInfo getessentialInfoByCode(String code) {
