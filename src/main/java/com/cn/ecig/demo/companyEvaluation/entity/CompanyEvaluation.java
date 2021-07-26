@@ -31,6 +31,22 @@ public class CompanyEvaluation implements Serializable {
     @TableId("code")
     private String code;
 
+    public String getLevel() {
+        return level;
+    }
+
+    public void setLevel(String level) {
+        this.level = level;
+    }
+
+    public Double getScore() {
+        return score;
+    }
+
+    public void setScore(Double score) {
+        this.score = score;
+    }
+
     /**
      * 综合信用评分
      */

@@ -1,6 +1,7 @@
 package com.cn.ecig.demo.finance.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.cn.ecig.demo.companyEvaluation.entity.Comp_two;
 import com.cn.ecig.demo.config.Result;
 import com.cn.ecig.demo.finance.entity.Finance;
 import com.cn.ecig.demo.finance.mapper.FinanceMapper;
@@ -41,5 +42,25 @@ private FinanceMapper financeMapper;
         wrapper.eq("code",code);
         result=financeMapper.selectList(wrapper);
         return result;
+    }
+
+    @Override
+    public String getBigest(String province) {
+        return financeMapper.getBigest(province);
+    }
+
+    @Override
+    public String getBestIndustry(String province) {
+return  financeMapper.getBestIndustry(province);
+    }
+
+    @Override
+    public List<Comp_two> getGood(String province) {
+        return  financeMapper.getGood(province);
+    }
+
+    @Override
+    public List<Comp_two> getBigAssetsList(String province) {
+        return  financeMapper.getBigAssetsList(province);
     }
 }

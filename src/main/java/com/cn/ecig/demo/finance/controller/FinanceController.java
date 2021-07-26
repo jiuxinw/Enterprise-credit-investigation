@@ -6,6 +6,7 @@ import com.cn.ecig.demo.companyBasicInfo.entity.CompanyBasicInfo;
 import com.cn.ecig.demo.companyBasicInfo.service.ICompanyBasicInfoService;
 import com.cn.ecig.demo.config.Result;
 import com.cn.ecig.demo.finance.service.IFinanceService;
+import com.cn.ecig.demo.top100Company.service.ITop100CompanyService;
 import io.swagger.annotations.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Async;
@@ -30,13 +31,14 @@ import java.util.Map;
 @Controller
 @RequestMapping("/info")
 @CrossOrigin
-@Api(value = "获取企业财务信息",tags = "获取企业具体信息模块")
+@Api(value = "获取企业个体模块",tags = "获取企业个体信息模块通过公司代码")
 public class FinanceController {
     @Autowired
     private ICompanyBasicInfoService companyBasicInfoService;
      @Autowired
     private IFinanceService financeService;
-
+@Autowired
+private ITop100CompanyService top100CompanyService;
     @ApiOperation("获取企业财务信息")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "code",value = "公司代码",required = true,dataType = "String")
@@ -54,14 +56,23 @@ public class FinanceController {
          result.setCode(0);
          result.setMsg("获取企业财务信息失败");
          try {
-             result.setData(financeService.getFinanceInfoByCode(code));
-             result.setSuccess("200");
-             result.setCode(1);
-             result.setMsg("获取企业财务信息成功");
-             if(financeService.getFinanceInfoByCode(code)==null){
-                 result.setCode(0);
-                 result.setMsg("获取企业财务信息失败");
+             if(code.isEmpty()){
+                 result.setCode(-1);
+                 result.setMsg("企业代码不能为空");
              }
+             else {
+                 if(code.length()!=6){
+                     result.setCode(-2);
+                     result.setMsg("企业代码应为6位");
+                 }else{
+                     result.setData(financeService.getFinanceInfoByCode(code));
+                     result.setCode(1);
+                     result.setMsg("获取企业财务信息成功");
+                     if(financeService.getFinanceInfoByCode(code)==null){
+                         result.setCode(0);
+                         result.setMsg("获取企业财务信息失败,数据库无数据");
+                     }
+                 }}
          }catch (Exception e){
              result.setMsg(e.getMessage());
              e.printStackTrace();
@@ -74,8 +85,11 @@ public class FinanceController {
             @ApiImplicitParam(name = "code",value = "公司代码",required = true,dataType = "String")
     })
     @ApiResponses({
-            @ApiResponse(code = 1, message = "请求成功"),
-            @ApiResponse(code = 0, message = "获取企业历史数据失败")
+            @ApiResponse(code = 1, message = "获取企业历史数据成功"),
+            @ApiResponse(code = 0, message = "获取企业历史数据失败"),
+            @ApiResponse(code = 400, message = "获取企业历史数据失败,数据库无数据"),
+            @ApiResponse(code = -1, message = "企业代码不能为空"),
+            @ApiResponse(code = -2, message = "企业代码应为6位")
     })
     @ResponseBody
     @RequestMapping(value = "/historicalData",method = RequestMethod.POST)
@@ -86,14 +100,25 @@ public class FinanceController {
         result.setCode(0);
         result.setMsg("获取企业历史数据失败");
         try {
-            result.setData(financeService.gethistoricalDataByCode(code));
-            result.setSuccess("200");
-            result.setCode(1);
-            result.setMsg("获取企业历史数据成功");
-            if(financeService.gethistoricalDataByCode(code).size()==0){
-                result.setCode(0);
-                result.setMsg("获取企业历史数据失败");
+            if(code.isEmpty()){
+                result.setCode(-1);
+                result.setMsg("企业代码不能为空");
             }
+            else {
+                if(code.length()!=6){
+                    result.setCode(-2);
+                    result.setMsg("企业代码应为6位");
+                }else{
+                    result.setData(financeService.gethistoricalDataByCode(code));
+                    result.setSuccess("200");
+                    result.setCode(1);
+                    result.setMsg("获取企业历史数据成功");
+                    if(financeService.gethistoricalDataByCode(code).size()==0){
+                        result.setCode(400);
+                        result.setMsg("获取企业历史数据失败,数据库无数据");
+                    }
+                }}
+
         }catch (Exception e){
             result.setMsg(e.getMessage());
             e.printStackTrace();
@@ -106,8 +131,11 @@ public class FinanceController {
             @ApiImplicitParam(name = "code",value = "公司代码",required = true,dataType = "String")
     })
     @ApiResponses({
-            @ApiResponse(code = 1, message = "请求成功"),
-            @ApiResponse(code = 0, message = "获取地区-行业排名信息")
+            @ApiResponse(code = 1, message = "获取地区-行业排名信息成功"),
+            @ApiResponse(code = 0, message = "获取地区-行业排名信息失败")  ,
+            @ApiResponse(code = 400, message = "获取地区-行业排名信息失败,数据库无数据"),
+            @ApiResponse(code = -1, message = "企业代码不能为空"),
+            @ApiResponse(code = -2, message = "企业代码应为6位")
     })
     @ResponseBody
     @Async("taskExecutor")
@@ -145,16 +173,26 @@ public class FinanceController {
         stringObjectMap2.put("others",companies2);
 
         try {
-            List<Map<String,Object>> list=new ArrayList<>();
-            list.add(stringObjectMap);
-            list.add(stringObjectMap2);
-            result.setData(list);
-            result.setCode(1);
-            result.setMsg("获取地区-行业排名信息成功");
-            if(list.size()==0){
-                result.setCode(0);
-                result.setMsg("获取地区-行业排名信息失败");
+            if(code.isEmpty()){
+                result.setCode(-1);
+                result.setMsg("企业代码不能为空");
             }
+            else {
+                if(code.length()!=6){
+                    result.setCode(-2);
+                    result.setMsg("企业代码应为6位");
+                }else{
+                    List<Map<String,Object>> list=new ArrayList<>();
+                    list.add(stringObjectMap);
+                    list.add(stringObjectMap2);
+                    result.setData(list);
+                    result.setCode(1);
+                    result.setMsg("获取地区-行业排名信息成功");
+                    if(list.size()==0){
+                        result.setCode(400);
+                        result.setMsg("获取地区-行业排名信息失败,数据库无数据");
+                    }
+                }}
         }catch (Exception e){
             result.setMsg(e.getMessage());
             e.printStackTrace();
@@ -162,6 +200,46 @@ public class FinanceController {
         return  result;
     }
 
+    @ApiOperation("获取省份企业信息")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "province",value = "省份",required = true,dataType = "String")
+    })
+    @ApiResponses({
+            @ApiResponse(code = 1, message = "获取省份企业信息成功"),
+            @ApiResponse(code = -1, message = "获取省份企业信息失败"),
+            @ApiResponse(code = 400, message = "获取企业历史数据失败,数据库无数据"),
+    })
+    @ResponseBody
+    @RequestMapping(value = "/provinceInfo",method = RequestMethod.POST)
+    public Result getprovinceInfoByPro (String province){
+        Result result=new Result();
+        result.setSuccess("-1");
+        result.setData(null);
+        result.setCode(0);
+        result.setMsg("获取省份企业信息");
+        try {
+            Map<String,Object> map=new HashMap<>();
+            map.put("num",companyBasicInfoService.getNumByProvince(province));
+            map.put("companyName",financeService.getBigest(province));
+            map.put("numOfEnterprise",top100CompanyService.getNumByProvince(province));
+            map.put("industry",financeService.getBestIndustry(province));
+            map.put("goodCompany",financeService.getGood(province));
+            map.put("bigCompany",financeService.getBigAssetsList(province));
+                    result.setData(map);
+                    result.setSuccess("200");
+                    result.setCode(1);
+                    result.setMsg("获取省份企业信息成功");
+                    if(financeService.getBigest(province)==null){
+                        result.setCode(400);
+                        result.setMsg("获取省份企业信息成功,数据库无数据");
+                    }
+
+        }catch (Exception e){
+            result.setMsg(e.getMessage());
+            e.printStackTrace();
+        }
+        return  result;
+    }
     /**
      * 保留两位小数点
      * @param value

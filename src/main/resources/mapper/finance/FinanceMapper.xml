@@ -2,4 +2,31 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.cn.ecig.demo.finance.mapper.FinanceMapper">
 
+    <select id="getBigest" resultType="java.lang.String">
+SELECT companyName
+FROM companyBasicInfo LEFT JOIN finance
+ON finance.`code`=companyBasicInfo.`code`
+WHERE companyBasicInfo.area = #{province}
+ORDER BY totalAssets DESC LIMIT 1;
+    </select>
+    <select id="getBestIndustry" resultType="java.lang.String">
+      SELECT industry_name
+FROM regionIndustry
+WHERE region_name = #{province}  AND year = "2021"
+ORDER BY (companyNum+0) DESC LIMIT 1;
+    </select>
+    <select id="getGood" resultType="com.cn.ecig.demo.companyEvaluation.entity.Comp_two">
+SELECT companyEvaluation.`code`,companyBasicInfo.`name`
+FROM companyEvaluation LEFT JOIN companyBasicInfo
+ON companyEvaluation.`code` =companyBasicInfo.`code`
+WHERE companyBasicInfo.area= #{province}
+ORDER BY score DESC LIMIT 5;
+    </select>
+    <select id="getBigAssetsList" resultType="com.cn.ecig.demo.companyEvaluation.entity.Comp_two">
+        SELECT companyEvaluation.`code`,companyBasicInfo.`name`
+FROM companyEvaluation LEFT JOIN companyBasicInfo
+ON companyEvaluation.`code` =companyBasicInfo.`code`
+WHERE companyBasicInfo.area= #{province}
+ORDER BY totalStockEquity DESC LIMIT 5;
+    </select>
 </mapper>

@@ -7,6 +7,7 @@ import com.cn.ecig.demo.companyBasicInfo.entity.CompanyBasicInfo;
 import com.cn.ecig.demo.companyBasicInfo.service.ICompanyBasicInfoService;
 import com.cn.ecig.demo.config.Result;
 import com.cn.ecig.demo.newsInfo.service.INewsInfoService;
+import com.cn.ecig.demo.note.Operation;
 import io.swagger.annotations.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -35,7 +36,7 @@ public class CompanyBasicInfoController {
 private ICompanyBasicInfoService companyBasicInfoService;
 @Autowired
 private INewsInfoService newsInfoService;
-
+    @Operation("按照关键字查询企业")
     @ApiOperation("按关键字模糊查询企业或新闻")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "key",value = "关键字",required = true,dataType = "String")
@@ -79,6 +80,7 @@ private INewsInfoService newsInfoService;
      * @param code
      * @return
      */
+    @Operation("按照企业代码查询企业")
     @ApiOperation("按照企业代码查询企业")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "code",value = "企业代码",required = true,dataType = "String")
@@ -86,6 +88,8 @@ private INewsInfoService newsInfoService;
     @ApiResponses({
             @ApiResponse(code = 1, message = "请求成功"),
             @ApiResponse(code = 0, message = "代码查询失败"),
+            @ApiResponse(code = 200, message = "代码查询成功"),
+            @ApiResponse(code = 400, message = "代码查询失败，数据库无数据"),
             @ApiResponse(code = -1, message = "企业代码不能为空")
     })
     @ResponseBody
@@ -106,9 +110,13 @@ private INewsInfoService newsInfoService;
                     result.setCode(-2);
                     result.setMsg("企业代码应为6位");
                 }else{
-                result.setMsg("行业查询成功");
+                result.setMsg("查询成功");
                 result.setData(companyBasicInfoService.getInfoByCode(code));
-                result.setSuccess("200");
+                    result.setCode(200);
+                if(companyBasicInfoService.getInfoByCode(code)==null){
+                    result.setMsg("代码查询失败，数据库无数据");
+                    result.setCode(400);
+                }
             }}
         }catch (Exception e){
             result.setMsg(e.getMessage());
@@ -124,6 +132,7 @@ private INewsInfoService newsInfoService;
      * @param transferMode
      * @return
      */
+    @Operation("按照标签查询企业")
     @ApiOperation("按照标签查询")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "industry",value = "行业",required = false,dataType = "String"),
@@ -170,7 +179,9 @@ private INewsInfoService newsInfoService;
     @ApiResponses({
             @ApiResponse(code = 1, message = "请求成功"),
             @ApiResponse(code = 0, message = "请求企业基本信息失败"),
-            @ApiResponse(code = -1, message = "企业代码不能为空")
+            @ApiResponse(code = 400, message = "请求企业基本信息失败，数据库无数据"),
+            @ApiResponse(code = -1, message = "企业代码不能为空"),
+            @ApiResponse(code = -2, message = "企业代码应为6位")
     })
     @ResponseBody
     @RequestMapping(value = "/essentialInfo",method = RequestMethod.POST)
@@ -186,13 +197,17 @@ private INewsInfoService newsInfoService;
                 result.setMsg("企业代码不能为空");
             }
             else {
-                if(code.length()<6){
+                if(code.length()!=6){
                     result.setCode(-2);
                     result.setMsg("企业代码应为6位");
                 }else{
                     result.setMsg("请求企业基本信息成功");
                     result.setData(companyBasicInfoService.getessentialInfoByCode(code));
                    result.setCode(200);
+                   if(companyBasicInfoService.getessentialInfoByCode(code)==null){
+                       result.setCode(400);
+                       result.setMsg("请求企业基本信息失败,数据库无数据");
+                   }
                 }}
         }catch (Exception e){
             result.setMsg(e.getMessage());

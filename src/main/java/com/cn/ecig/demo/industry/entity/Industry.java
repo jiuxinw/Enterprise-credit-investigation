@@ -73,6 +73,46 @@ public class Industry implements Serializable {
     @TableField("aveDebts")
     private String aveDebts;
 
+    public String getAveIncome() {
+        return aveIncome;
+    }
+
+    public void setAveIncome(String aveIncome) {
+        this.aveIncome = aveIncome;
+    }
+
+    public String getBadNum() {
+        return badNum;
+    }
+
+    public void setBadNum(String badNum) {
+        this.badNum = badNum;
+    }
+
+    public String getGoodnum() {
+        return goodnum;
+    }
+
+    public void setGoodnum(String goodnum) {
+        this.goodnum = goodnum;
+    }
+
+    public String getNum() {
+        return num;
+    }
+
+    public void setNum(String num) {
+        this.num = num;
+    }
+
+    public String getAveProfit() {
+        return aveProfit;
+    }
+
+    public void setAveProfit(String aveProfit) {
+        this.aveProfit = aveProfit;
+    }
+
     /**
      * 行业平均净资产
      */

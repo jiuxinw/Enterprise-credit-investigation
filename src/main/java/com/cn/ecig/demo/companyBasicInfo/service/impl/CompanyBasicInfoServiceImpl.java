@@ -77,4 +77,12 @@ return result;
         return  companyBasicInfoList;
     }
 
+    @Override
+    public int getNumByProvince(String province) {
+        QueryWrapper wrapper=new QueryWrapper();
+        wrapper.like("area",province);
+        int res=companyBasicInfoMapper.selectCount(wrapper);
+        return res;
+    }
+
 }

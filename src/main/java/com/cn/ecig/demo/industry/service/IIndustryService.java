@@ -16,4 +16,6 @@ import java.util.List;
 public interface IIndustryService extends IService<Industry> {
 //获取指定年份的地区-行业信息
     List<Industry> getByFromAndTo(String from,String to);
+    //获取对应行业的信息
+    Industry getInfoByIndustry(String industry);
 }

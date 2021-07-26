@@ -4,10 +4,13 @@ package com.cn.ecig.demo.account.controller;
 import com.cn.ecig.demo.account.service.IAccountService;
 import com.cn.ecig.demo.companyEvaluation.service.ICompanyEvaluationService;
 import com.cn.ecig.demo.config.Result;
+import com.cn.ecig.demo.config.Token;
+import com.cn.ecig.demo.config.component.TokenManager;
 import io.swagger.annotations.*;
 import org.mybatis.logging.Logger;
 import org.mybatis.logging.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -31,6 +34,10 @@ public class AccountController {
     private IAccountService accountService;
     @Autowired
     private ICompanyEvaluationService companyEvaluationService;
+
+    @Qualifier("redisTokenManager")
+    @Autowired
+    private TokenManager tokenManager;
 
     @RequestMapping(value = "/s",method = RequestMethod.GET)
     @ResponseBody
@@ -105,6 +112,8 @@ public class AccountController {
     @ResponseBody
     @RequestMapping(value = "/login",method = RequestMethod.POST)
     public Result login(String name,String pwd){
+        Token token=tokenManager.createToken(name);
+        System.out.println(token);
         return accountService.login(name, pwd);
 
     }

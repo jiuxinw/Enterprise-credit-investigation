@@ -54,4 +54,6 @@ public interface IAccountService extends IService<Account> {
      *      * @return Result
      */
     Result login(String useName,String password);
+
+    Account getAccountById(int id);
 }

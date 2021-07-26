@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.*;
 @Controller
 @RequestMapping("/info")
 @CrossOrigin
-@Api(value = "获取企业财务信息",tags = "获取企业具体信息模块")
+@Api(value = "获取企业个体模块",tags = "获取企业个体信息模块通过公司代码")
 public class TopTenHoldersController {
     @Autowired
     private ITopTenHoldersService topTenHoldersService;
@@ -29,8 +29,11 @@ public class TopTenHoldersController {
             @ApiImplicitParam(name = "code",value = "公司代码",required = true,dataType = "String")
     })
     @ApiResponses({
-            @ApiResponse(code = 1, message = "请求成功"),
-            @ApiResponse(code = 0, message = "获取股东信息失败")
+            @ApiResponse(code = 1, message = "获取股东信息成功"),
+            @ApiResponse(code = 0, message = "获取股东信息失败"),
+            @ApiResponse(code = 400, message = "获取股东信息失败,数据库无数据"),
+            @ApiResponse(code = -1, message = "企业代码不能为空"),
+            @ApiResponse(code = -2, message = "企业代码应为6位")
     })
     @ResponseBody
     @RequestMapping(value = "/shareholderInfo",method = RequestMethod.POST)
@@ -46,8 +49,8 @@ public class TopTenHoldersController {
             result.setSuccess("200");
             result.setMsg("获取信息成功");
             if(topTenHoldersService.getShareHoldeInfoByCode(code).size()==0) {
-                result.setMsg("获取股东信息失败");
-                result.setCode(0);
+                result.setMsg("获取股东信息失败,数据库无数据");
+                result.setCode(400);
             }
         }catch (Exception e){
             result.setMsg(e.getMessage());

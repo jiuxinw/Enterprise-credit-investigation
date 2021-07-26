@@ -25,6 +25,7 @@ public class AccountServiceImpl extends ServiceImpl<AccountMapper, Account> impl
     @Autowired
     private StringRedisTemplate stringRedisTemplate;
 
+    public String N;
     @Override
     public Result regist(Long phoneNumber, String userName, String password) {
         Account account=new Account(phoneNumber, userName, password);
@@ -43,6 +44,7 @@ public class AccountServiceImpl extends ServiceImpl<AccountMapper, Account> impl
                 accountMapper.insert(account);
                 result.setMsg("注册成功");
                 result.setSuccess("200");
+                N=userName;
                 result.setData(account);
                 result.setCode(0);
             }
@@ -81,6 +83,15 @@ public class AccountServiceImpl extends ServiceImpl<AccountMapper, Account> impl
         }
         return result;
 
+    }
+
+    @Override
+    public Account getAccountById(int id) {
+        QueryWrapper wrapper=new QueryWrapper();
+        Account account=new Account();
+        wrapper.eq("aid",id);
+        account=accountMapper.selectOne(wrapper);
+        return account;
     }
 
 //    @Override

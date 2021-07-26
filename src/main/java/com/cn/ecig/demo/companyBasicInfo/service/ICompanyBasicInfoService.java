@@ -28,4 +28,6 @@ public interface ICompanyBasicInfoService extends IService<CompanyBasicInfo> {
 
     //获取热搜企业信息
     List<CompanyBasicInfo> gethotEnterprise();
+    //获取具体省份的企业数量
+    int getNumByProvince(String province);
 }

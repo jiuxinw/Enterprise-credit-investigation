@@ -33,4 +33,14 @@ public class IndustryServiceImpl extends ServiceImpl<IndustryMapper, Industry> i
         res=industryMapper.selectList(wrapper);
         return res;
     }
+
+    @Override
+    public Industry getInfoByIndustry(String industry) {
+        Industry rew=new Industry();
+        QueryWrapper wrapper=new QueryWrapper();
+        wrapper.eq("name",industry);
+        wrapper.eq("year",2022);
+        rew=industryMapper.selectOne(wrapper);
+        return rew;
+    }
 }

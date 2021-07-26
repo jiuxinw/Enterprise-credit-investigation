@@ -24,37 +24,37 @@ public class CompanyEvaluationController {
 
     @Autowired
     private ICompanyEvaluationService companyEvaluationService;
-    @ApiOperation("获取某企业综合评价信息")
-    @ApiImplicitParams({
-            @ApiImplicitParam(name = "code",value = "公司代码",required = true,dataType = "String")
-    })
-    @ApiResponses({
-            @ApiResponse(code = 1, message = "请求成功"),
-            @ApiResponse(code = 0, message = "获取某企业综合评价信息失败")
-    })
-    @ResponseBody
-    @RequestMapping(value = "/evaluationInfo",method = RequestMethod.POST)
-    public Result getFinanceInfoByCode(String code){
-        Result result=new Result();
-        result.setSuccess("-1");
-        result.setData(null);
-        result.setCode(0);
-        result.setMsg("获取企业综合评价信息失败");
-        try {
-            result.setData(companyEvaluationService.getCompantEvByCode(code));
-            result.setSuccess("200");
-            result.setCode(1);
-            result.setMsg("获取企业综合评价信息成功");
-            if(companyEvaluationService.getCompantEvByCode(code)==null){
-                result.setCode(0);
-                result.setMsg("获取企业综合评价信息失败");
-            }
-        }catch (Exception e){
-            result.setMsg(e.getMessage());
-            e.printStackTrace();
-        }
-        return  result;
-    }
+//    @ApiOperation("获取某企业综合评价信息")
+//    @ApiImplicitParams({
+//            @ApiImplicitParam(name = "code",value = "公司代码",required = true,dataType = "String")
+//    })
+//    @ApiResponses({
+//            @ApiResponse(code = 1, message = "请求成功"),
+//            @ApiResponse(code = 0, message = "获取某企业综合评价信息失败")
+//    })
+//    @ResponseBody
+//    @RequestMapping(value = "/evaluationInfo",method = RequestMethod.POST)
+//    public Result getFinanceInfoByCode(String code){
+//        Result result=new Result();
+//        result.setSuccess("-1");
+//        result.setData(null);
+//        result.setCode(0);
+//        result.setMsg("获取企业综合评价信息失败");
+//        try {
+//            result.setData(companyEvaluationService.getCompantEvByCode(code));
+//            result.setSuccess("200");
+//            result.setCode(1);
+//            result.setMsg("获取企业综合评价信息成功");
+//            if(companyEvaluationService.getCompantEvByCode(code)==null){
+//                result.setCode(0);
+//                result.setMsg("获取企业综合评价信息失败");
+//            }
+//        }catch (Exception e){
+//            result.setMsg(e.getMessage());
+//            e.printStackTrace();
+//        }
+//        return  result;
+//    }
 
     @ApiOperation("获取诚信企业排名信息")
     @ApiImplicitParams({
