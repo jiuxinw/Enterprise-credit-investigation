@@ -66,17 +66,14 @@ return result;
 //        int len_in = industry.length;
 //        int len_area = area.length;
 //        int len_tra = transferMode.length;
-        for (int i=0;i<industry.length;i++) {
-            for (int j=0;j< industry.length;j++) {
-                for (int k=0;k<transferMode.length;k++) {
-                    int finalI = i;
-                    int finalJ = j;
-                    int finalK = k;
+        for (String i:industry) {
+            for (String a:area) {
+                for (String t:transferMode) {
                     queryWrapper.and(
                             Wrapper ->
-                                    Wrapper.like("industry", industry[finalI])
+                                    Wrapper.like("industry", i)
                                             .or()
-                                            .like("area", area[finalJ]).or().like("transferMode", transferMode[finalK]));
+                                            .like("area", a).or().like("transferMode", t));
                 }
             }
         }

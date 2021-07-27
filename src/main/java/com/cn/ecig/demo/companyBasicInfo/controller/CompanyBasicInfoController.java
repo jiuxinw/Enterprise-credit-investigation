@@ -190,18 +190,18 @@ private INewsInfoService newsInfoService;
         result.setSuccess("-1");
         result.setData(null);
         result.setCode(0);
+      try {
       String[] in=industry.split("\\s+");;
       String[] ar=area.split("\\s+");;
       String[] tr=transferMode.split("\\s+");;
+      if(in==null&&ar==null&&tr==null){
         result.setMsg("行业查询失败");
-        try {
 //            if (industry.isEmpty()&&area.isEmpty()&&transferMode.isEmpty()){
 //                result.setData(null);
 //                result.setCode(0);
 //                result.setMsg("行业查询失败");
 //            }else{
-            result.setMsg("行业查询成功");
-
+            result.setMsg("行业查询成功");}
             result.setData(companyBasicInfoService.getInfoByLabel2(in, ar, tr));
             result.setCode(1);
             if (companyBasicInfoService.getInfoByLabel2(in, ar, tr).size()==0){

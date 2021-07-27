@@ -74,7 +74,7 @@ public class Region implements Serializable {
     /**
      * 区域平均信用评分
      */
-    private String score;
+//    private String score;
 
     /**
      * 区域平均利润
@@ -116,13 +116,13 @@ private  String totalScore;
     @TableField("aveCleanAssets")
     private String aveCleanAssets;
 
-    public String getScore() {
-        return score;
-    }
-
-    public void setScore(String score) {
-        this.score = score;
-    }
+//    public String getScore() {
+//        return score;
+//    }
+//
+//    public void setScore(String score) {
+//        this.score = score;
+//    }
 
     public String getGoodNum() {
         return goodNum;
@@ -151,11 +151,11 @@ private  String totalScore;
     public Region() {
     }
 
-    public Region(String name, String num, String goodNum, String badNum, String score) {
+    public Region(String name, String num, String goodNum, String badNum, String totalScorescore) {
         this.name = name;
         this.num = num;
         this.goodNum = goodNum;
         this.badNum = badNum;
-        this.score = score;
+        this.totalScore = totalScorescore;
     }
 }

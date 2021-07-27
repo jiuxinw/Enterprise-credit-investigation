@@ -52,7 +52,7 @@ public class RegionIndustryController {
         BigDecimal ye = num1.subtract(num2);
        String[]years= new String[ye.intValue()];
         for (int i = 0; i < years.length; i++) {
-            years[i]=new BigDecimal(from).subtract(new BigDecimal(1)).toString();
+            years[i]=new BigDecimal(from).add(new BigDecimal(1)).toString();
         }
         HashMap<String,Object> re=new HashMap<>();
 String[]regions={"北京","天津","河北","山西","内蒙古","辽宁","吉林","黑龙江","上海","江苏","浙江","安徽","福建"

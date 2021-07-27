@@ -100,9 +100,8 @@ public class RegionController {
             re.put("num",regions.getNum());
             re.put("goodNum",regions.getGoodNum());
             re.put("badNum",regions.getBadNum());
-            re.put("score",regions.getScore());
+            re.put("score",regions.getTotalScore());
             result.setData(re);
-            result.setSuccess("200");
             result.setCode(1);
             result.setMsg("按区域查询成功");
             if(regionService.getRegionByName(name)==null){

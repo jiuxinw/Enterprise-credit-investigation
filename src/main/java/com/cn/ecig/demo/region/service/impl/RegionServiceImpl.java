@@ -38,7 +38,7 @@ res=regionMapper.selectList(wrapper);
     public Region getRegionByName(String name) {
         Region region=new Region();
     QueryWrapper wrapper=new QueryWrapper();
-    wrapper.select("name","num","goodnum","badnum","score").eq("name",name);
+    wrapper.select("name","num","goodnum","badnum","totalScore").eq("name",name);
     wrapper.last("limit 1");
     region=regionMapper.selectOne(wrapper);
     return region;
