@@ -138,18 +138,17 @@ public class RegionController {
                 "重庆市","陕西省","山西省","宁夏回族自治区","内蒙古自治区","江苏省",
                 "浙江省","广西壮族自治区","四川省","青海省","甘肃省","辽宁省","贵州省",
                 "云南省","江西省","福建省","广东省","湖南省","台湾省","天津市"};
-        String[] pinyin={"beijing.json","shanghai.json","anhui.json","hubei.json"
+        String[] pinyin={"beijing.json","shanghai.json","anhui.json","hubei.json","henan.json","hebei.json"
         ,"xinjiang.json","xizang.json","hainan.json","heilongjiang.json","jilin.json",
                 "shandong.json","chongqing.json","shanxi.json","sanxi.json","ningxia.json",
                 "neimenggu.json", "jiangsu.json","zhejiang.json","guangxi.json","sichuan.json",
                 "qinghai.json","gansu.json","liaoning.json","guizhou.json","yunnan.json",
-                "jiangxi.json","fujian.json","guangdong.json","hunan.json","taiwan.json",
-        "tianjin.json" };
-        for (int i = 0; i < provin.length; i++) {
+                "jiangxi.json","fujian.json","guangdong.json","hunan.json","taiwan.json", "tianjin.json" };
+        for (int i = 0; i <provin.length; i++) {
             Map<String ,Object> map=new HashMap<>();
           Region sregion= regionService.getdistribution(provin[i]);
-         map.put ( "name",sregion.getName());
-         map.put("credit",sregion.getScore());
+         map.put ( "name",provin[i]);
+         map.put("credit",sregion.getTotalScore());
          map.put("profit",sregion.getAveProfit());
          map.put("num",sregion.getNum());
          map.put("json",pinyin[i]);

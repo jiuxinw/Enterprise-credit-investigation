@@ -93,6 +93,16 @@ public class Region implements Serializable {
      */
     @TableField("aveAssets")
     private String aveAssets;
+@TableField("totalScore")
+private  String totalScore;
+
+    public String getTotalScore() {
+        return totalScore;
+    }
+
+    public void setTotalScore(String totalScore) {
+        this.totalScore = totalScore;
+    }
 
     /**
      * 区域平均负债
