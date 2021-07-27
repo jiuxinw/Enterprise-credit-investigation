@@ -63,4 +63,12 @@ private CompanyEvaluationMapper companyEvaluationMapper;
         return  followsMapper.getBykey(key, phone)
                 ;
     }
+
+    @Override
+    public int getCountByCOD(String code) {
+        QueryWrapper wrapper=new QueryWrapper();
+        wrapper.eq("code",code);
+        int r=companyEvaluationMapper.selectCount(wrapper);
+        return r;
+    }
 }

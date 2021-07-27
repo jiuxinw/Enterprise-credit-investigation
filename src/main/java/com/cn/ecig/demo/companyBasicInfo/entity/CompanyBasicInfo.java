@@ -72,6 +72,14 @@ public class CompanyBasicInfo implements Serializable {
     @TableField("legalRepresentative")
     private String legalRepresentative;
 
+    public String getShortName() {
+        return shortName;
+    }
+
+    public void setShortName(String shortName) {
+        this.shortName = shortName;
+    }
+
     /**
      * 公司董秘
      */

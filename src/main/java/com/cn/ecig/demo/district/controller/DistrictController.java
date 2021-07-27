@@ -2,17 +2,17 @@ package com.cn.ecig.demo.district.controller;
 
 
 import com.alibaba.fastjson.JSON;
+import com.cn.ecig.demo.comment.service.ICommentService;
+import com.cn.ecig.demo.companyBasicInfo.entity.C7;
 import com.cn.ecig.demo.companyBasicInfo.entity.Company;
 import com.cn.ecig.demo.companyBasicInfo.entity.CompanyBasicInfo;
 import com.cn.ecig.demo.companyBasicInfo.service.ICompanyBasicInfoService;
 import com.cn.ecig.demo.config.Result;
 import com.cn.ecig.demo.district.entity.District;
 import com.cn.ecig.demo.district.service.IDistrictService;
+import com.cn.ecig.demo.follows.service.IFollowsService;
 import com.cn.ecig.demo.region.entity.Region;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiResponse;
-import io.swagger.annotations.ApiResponses;
+import io.swagger.annotations.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -35,6 +35,10 @@ import java.util.Map;
 @CrossOrigin
 @Api(value = "获取企业财务信息",tags = "获取企业具体信息模块")
 public class DistrictController {
+    @Autowired
+    private ICommentService commentService;
+    @Autowired
+    private IFollowsService followsService;
      @Autowired
 private  ICompanyBasicInfoService companyBasicInfoService;
     @Autowired
@@ -92,23 +96,29 @@ private  ICompanyBasicInfoService companyBasicInfoService;
      * @return
      */
     @ApiOperation("获取热搜企业信息")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "num",value = "请求数",required = true,dataType = "int")
+    })
     @ApiResponses({
             @ApiResponse(code = 1, message = "请求成功"),
             @ApiResponse(code = 0, message = "代码查询失败"),
     })
     @ResponseBody
     @RequestMapping(value = "/hotEnterprise",method = RequestMethod.POST)
-    public Result getHotEnterprise(){
+    public Result getHotEnterprise(int num){
         Result result=new Result();
         result.setData(null);
         result.setCode(0);
         result.setMsg("获取热搜企业信息失败");
 
-        List<CompanyBasicInfo> companyBasicInfoList=companyBasicInfoService.gethotEnterprise();
-        List<Company> companyist=new ArrayList<>();
+        List<CompanyBasicInfo> companyBasicInfoList=companyBasicInfoService.gethotEnterprise(num);
+        List<C7> companyist=new ArrayList<>();
         try {
-            for (int i = 0; i <5 ; i++) {
-                companyist.add(new Company(companyBasicInfoList.get(i)));
+            for (int i = 0; i <num ; i++) {
+                C7 s=new C7(companyBasicInfoList.get(i));
+                s.setCommentNum(commentService.getCountByCode(s.getCode()));
+                s.setFollowsNum(followsService.getCountByCOD(s.getCode()));
+                companyist.add(s);
             }
             result.setMsg("获取热搜企业信息成功");
             result.setData(companyist);

@@ -40,6 +40,14 @@ public class Comp_four {
     public Comp_four(){
     }
 
+    public String getScore() {
+        return score;
+    }
+
+    public void setScore(String score) {
+        this.score = score;
+    }
+
     public String getShortName() {
         return shortName;
     }

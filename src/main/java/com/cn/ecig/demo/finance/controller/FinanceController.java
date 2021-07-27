@@ -159,18 +159,18 @@ private ITop100CompanyService top100CompanyService;
         stringObjectMap2.put("regDateRank",format1(30+Math.random()*10));
         stringObjectMap2.put("profitRank",format1(50+Math.random()*10));
         stringObjectMap2.put("allCapRank",format1(80+Math.random()*10));
-        List<Company>companies= new ArrayList<>();
-        List<Company>companies2= new ArrayList<>();
-        List<CompanyBasicInfo>com=companyBasicInfoService.getInfoByLabel(s,null,null);
-        List<CompanyBasicInfo>com2=companyBasicInfoService.getInfoByLabel(null,s2,null);
-        for (int i = 0; i < 5; i++) {
-            companies.add(new Company(com.get(i)));
-        }
-        for (int i = 0; i < 5; i++) {
-            companies2.add(new Company(com2.get(i)));
-        }
-        stringObjectMap.put("others",companies);
-        stringObjectMap2.put("others",companies2);
+//        List<Company>companies= new ArrayList<>();
+//        List<Company>companies2= new ArrayList<>();
+//        List<CompanyBasicInfo>com=companyBasicInfoService.getInfoByLabel(s,null,null);
+//        List<CompanyBasicInfo>com2=companyBasicInfoService.getInfoByLabel(null,s2,null);
+//        for (int i = 0; i < 5; i++) {
+//            companies.add(new Company(com.get(i)));
+//        }
+//        for (int i = 0; i < 5; i++) {
+//            companies2.add(new Company(com2.get(i)));
+//        }
+//        stringObjectMap.put("others",companies);
+//        stringObjectMap2.put("others",companies2);
 
         try {
             if(code.isEmpty()){

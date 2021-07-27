@@ -2,6 +2,7 @@ package com.cn.ecig.demo.companyEvaluation.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.cn.ecig.demo.companyBasicInfo.entity.CompanyBasicInfo;
+import com.cn.ecig.demo.companyEvaluation.entity.Comp_four;
 import com.cn.ecig.demo.companyEvaluation.entity.Comp_three;
 import com.cn.ecig.demo.companyEvaluation.entity.CompanyEvaluation;
 import com.cn.ecig.demo.companyEvaluation.mapper.CompanyEvaluationMapper;
@@ -39,7 +40,7 @@ public class CompanyEvaluationServiceImpl extends ServiceImpl<CompanyEvaluationM
     }
 
     @Override
-    public List<Comp_three> getGoodRankByNum(int num) {
+    public List<Comp_four> getGoodRankByNum(int num) {
 //        List<String> res=new ArrayList<>();
 //        List<String> res2=new ArrayList<>();
 //        MultipleSelect multipleSelect= MultipleSelect.newInstance("${companyBasicInfo}",new CompanyEvaluation(),new CompanyBasicInfo());
@@ -53,14 +54,27 @@ public class CompanyEvaluationServiceImpl extends ServiceImpl<CompanyEvaluationM
 //        for (int i = 0; i < num; i++) {
 //            res2.add(res.get(i));
 //        }
-        List<Comp_three> list=companyEvaluationMapper.getGoodRankByNum(num);
-        List<Comp_three> list2=list.subList(0,num);
+        List<Comp_four> list=companyEvaluationMapper.getGoodRankByNum(num);
+        List<Comp_four> list2=list.subList(0,num);
 
         return  list2;
-
-
 //      res=  multipleService.mulSelect(multipleSelect);
 //return  res2;
+    }
+
+    @Override
+    public List<Comp_four> getGoodRankByNumArea(int num, String area) {
+        List<Comp_four> list=companyEvaluationMapper.getGoodRankByNumArea(num, area);
+        List<Comp_four> list2=list.subList(0,num);
+
+        return  list2;
+    }
+
+    @Override
+    public List<Comp_four> getGoodRankByNumInd(int num, String industry) {
+        List<Comp_four> list=companyEvaluationMapper.getGoodRankByNumInd(num, industry);
+        List<Comp_four> list2=list.subList(0,num);
+        return  list2;
     }
 
     @Override
@@ -72,5 +86,12 @@ public class CompanyEvaluationServiceImpl extends ServiceImpl<CompanyEvaluationM
     public Comp_three getCommnetByCode(String code) {
 Comp_three comp_three=companyEvaluationMapper.getBasicByCode(code);
 return comp_three;
+    }
+
+    @Override
+    public List<Comp_four> getBadRankByNum(int num) {
+        List<Comp_four> list=companyEvaluationMapper.getBadRankByNum(num);
+        List<Comp_four> list2=list.subList(0,num);
+        return  list2;
     }
 }

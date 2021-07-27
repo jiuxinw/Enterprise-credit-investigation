@@ -100,7 +100,7 @@ public class AnnouncmenetInfoController {
     public Result getFinanceInfoByCode(String code){
         Result result=new Result();
         result.setSuccess("-1");
-        Random r = new Random(1);
+        Random r = new Random();
         result.setData(null);
         result.setCode(0);
         result.setMsg("获取企业综合评价信息失败");
@@ -119,8 +119,8 @@ public class AnnouncmenetInfoController {
                     map.put("score",companyEvaluation.getScore());
                     map.put("complete",r.nextInt(100));
                     map.put("rank",r.nextInt(1000));
+                    map.put("level",companyEvaluation.getLevel());
                     result.setData(map);
-                    result.setSuccess("200");
                     result.setCode(1);
                     result.setMsg("获取企业综合评价信息成功");
                     if(companyEvaluationService.getCompantEvByCode(code)==null){

@@ -35,7 +35,7 @@ public class RegionIndustryController {
 @Autowired
     private IRegionIndustryService regionIndustryService;
 
-    @ApiOperation("获取获取时间-行业信息2")
+    @ApiOperation("新生代的获取时间-行业信息2")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "from",value = "起始年份",required = true,dataType = "String"),
             @ApiImplicitParam(name = "to",value = "截至年份",required = true,dataType = "String")

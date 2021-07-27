@@ -38,7 +38,7 @@ public class BadCompanyController {
      * @param num
      * @return
      */
-    @ApiOperation("获取失信企业排名信息")
+    @ApiOperation("旧的获取失信企业排名信息222")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "num",value = "请求数",required = true,dataType = "int")
     })
@@ -47,8 +47,8 @@ public class BadCompanyController {
             @ApiResponse(code = 0, message = "请求失败")
     })
     @ResponseBody
-    @RequestMapping(value = "/badRankInfo",method = RequestMethod.POST)
-    public Result getBadRankInfoByNum(int num){
+    @RequestMapping(value = "/badRankInfo2",method = RequestMethod.POST)
+    public Result getBadRankInfoByNum2(int num){
         Result result=new Result();
         result.setSuccess("-1");
         result.setData(null);

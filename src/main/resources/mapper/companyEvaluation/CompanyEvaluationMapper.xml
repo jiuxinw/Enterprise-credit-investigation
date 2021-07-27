@@ -2,8 +2,8 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.cn.ecig.demo.companyEvaluation.mapper.CompanyEvaluationMapper">
 
-    <select id="getGoodRankByNum" resultType="com.cn.ecig.demo.companyEvaluation.entity.Comp_three">
-SELECT `name`,shortName,companyEvaluation.`code`
+    <select id="getGoodRankByNum" resultType="com.cn.ecig.demo.companyEvaluation.entity.Comp_four">
+SELECT `name`,shortName,companyEvaluation.`code`,score
 FROM `companyEvaluation`
 left join companyBasicInfo
 on companyBasicInfo.`code`=companyEvaluation.`code`
@@ -18,5 +18,28 @@ where companyEvaluation.code = #{code}
     </select>
     <select id="getFollows" resultType="com.cn.ecig.demo.companyEvaluation.entity.Comp_three">
 
+    </select>
+    <select id="getBadRankByNum" resultType="com.cn.ecig.demo.companyEvaluation.entity.Comp_four">
+        SELECT `name`,shortName,companyEvaluation.`code`,score
+FROM `companyEvaluation`
+left join companyBasicInfo
+on companyBasicInfo.`code`=companyEvaluation.`code`
+ORDER BY score ASC
+    </select>
+    <select id="getGoodRankByNumArea" resultType="com.cn.ecig.demo.companyEvaluation.entity.Comp_four">
+        SELECT `name`,shortName,companyEvaluation.`code`,score
+FROM `companyEvaluation`
+left join companyBasicInfo
+on companyBasicInfo.`code`=companyEvaluation.`code`
+where area =#{area}
+ORDER BY score DESC
+    </select>
+    <select id="getGoodRankByNumInd" resultType="com.cn.ecig.demo.companyEvaluation.entity.Comp_four">
+               SELECT `name`,shortName,companyEvaluation.`code`,score
+FROM `companyEvaluation`
+left join companyBasicInfo
+on companyBasicInfo.`code`=companyEvaluation.`code`
+where industry =#{industry}
+ORDER BY score DESC
     </select>
 </mapper>

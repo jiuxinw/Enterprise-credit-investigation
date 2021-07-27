@@ -113,8 +113,8 @@ public class AccountController {
     @ResponseBody
     @RequestMapping(value = "/login",method = RequestMethod.POST)
     public Result login(String phoneNumber,String pwd){
-        Token token=tokenManager.createToken(phoneNumber);
-        System.out.println(token);
+//        Token token=tokenManager.createToken(phoneNumber);
+//        System.out.println(token);
         return accountService.login(phoneNumber, pwd);
 
     }

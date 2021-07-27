@@ -26,4 +26,6 @@ public interface IFollowsService extends IService<Follows> {
     void deleteFollows(String phoneNumber,String code);
     //获取用户关注企业
     List<Co> getBykey(String key, String phone);
+    //获取对应公司的关注数
+    int getCountByCOD(String code);
 }

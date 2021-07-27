@@ -29,7 +29,7 @@ public interface ICompanyBasicInfoService extends IService<CompanyBasicInfo> {
     CompanyBasicInfo getessentialInfoByCode(String code);
 
     //获取热搜企业信息
-    List<CompanyBasicInfo> gethotEnterprise();
+    List<CompanyBasicInfo> gethotEnterprise(int num);
     //获取具体省份的企业数量
     int getNumByProvince(String province);
 }

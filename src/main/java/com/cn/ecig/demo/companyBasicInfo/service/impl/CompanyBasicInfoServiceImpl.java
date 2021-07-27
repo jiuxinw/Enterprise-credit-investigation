@@ -94,12 +94,9 @@ return result;
     }
 
     @Override
-    public List<CompanyBasicInfo> gethotEnterprise() {
+    public List<CompanyBasicInfo> gethotEnterprise(int num) {
         List<CompanyBasicInfo> companyBasicInfoList=new ArrayList<>();
-        QueryWrapper queryWrapper=new QueryWrapper();
-        queryWrapper.orderByDesc("totalStockEquity");
-        queryWrapper.last("limit 5");
-        companyBasicInfoList=companyBasicInfoMapper.selectList(queryWrapper);
+     companyBasicInfoList=companyBasicInfoMapper.gethotEnterprise(num);
         return  companyBasicInfoList;
     }
 
