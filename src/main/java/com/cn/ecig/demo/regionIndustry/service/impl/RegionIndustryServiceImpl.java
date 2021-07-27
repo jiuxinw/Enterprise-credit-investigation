@@ -35,6 +35,7 @@ private RegionIndustryMapper regionIndustryMapper;
     @Override
     public String getScoreByThree(String industry, String region, String year) {
         QueryWrapper wrapper=new QueryWrapper();
+        wrapper.select("aveScore");
         wrapper.eq("year",year);
         wrapper.eq("region_name",region);
         wrapper.eq("industry_name",industry);
