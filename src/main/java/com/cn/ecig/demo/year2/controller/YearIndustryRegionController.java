@@ -1,9 +1,9 @@
-package com.cn.ecig.demo.year_industry_region.controller;
+package com.cn.ecig.demo.year2.controller;
 
 
 import com.cn.ecig.demo.config.Result;
-import com.cn.ecig.demo.year_industry_region.entity.YearIndustryRegion;
-import com.cn.ecig.demo.year_industry_region.service.IYearIndustryRegionService;
+import com.cn.ecig.demo.year2.entity.YearIndustryRegion;
+import com.cn.ecig.demo.year2.service.IYearIndustryRegionService;
 import io.swagger.annotations.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -31,9 +31,9 @@ import java.util.Map;
 @RequestMapping("/info")
 @Api(value = "获取企业财务信息",tags = "获取企业具体信息模块")
 public class YearIndustryRegionController {
-    @Autowired
+@Autowired
     private IYearIndustryRegionService yearIndustryRegionService;
-    @ApiOperation("map新生代的获取时间-行业信息3")
+    @ApiOperation("终极新生代的获取时间-行业信息")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "from",value = "起始年份",required = true,dataType = "String"),
             @ApiImplicitParam(name = "to",value = "截至年份",required = true,dataType = "String")
@@ -43,8 +43,8 @@ public class YearIndustryRegionController {
             @ApiResponse(code = 0, message = "获取时间-地区-行业信息失败")
     })
     @ResponseBody
-    @RequestMapping(value = "/yearIndustryRegion8",method = RequestMethod.POST)
-    public Result getyearIndustryRegion8(String from, String to){
+    @RequestMapping(value = "/yearIndustryRegionFinal",method = RequestMethod.POST)
+    public Result getyearIndustryRegionFinal(String from, String to){
         Result result=new Result();
         result.setData(null);
         result.setCode(0);
@@ -57,8 +57,7 @@ public class YearIndustryRegionController {
             for (int i = 0; i < years.length; i++) {
                 years[i]=new BigDecimal(from).add(new BigDecimal(i)).toString();
             }
-            List<Map<String ,Map<String ,Object>>> mapArrayList=new ArrayList<>();
-
+            List<Map<String , Map<String ,Object>>> mapArrayList=new ArrayList<>();
 //            String[]regions={"北京市","天津市","河北省","山西省","内蒙古自治区","辽宁省","吉林省","黑龙江省","上海市","江苏省","浙江省","安徽省","福建省"
 //                    ,"江西省","山东省","河南省","湖北省","湖南省","广东省","广西壮族自治区","海南省","重庆市","四川省","贵州省","云南省","西藏自治区","陕西省","甘肃省","青海省"
 //                    ,"宁夏回族自治区","新疆维吾尔自治区"};
@@ -66,14 +65,14 @@ public class YearIndustryRegionController {
                     "金融业","科学研究和技术服务业","教育","批发和零售业","制造业","房地产业"
             };
             for (int i = 0; i <6 ; i++) {
-                List<YearIndustryRegion>l=yearIndustryRegionService.getByYearAndIndu(from,to,industrys[i]);
+                List<YearIndustryRegion> l=yearIndustryRegionService.getByYearAndIndu(from,to,industrys[i]);
 
                 HashMap<String,Object> re=new HashMap<>();
                 HashMap<String,Map<String,Object>> r=new HashMap<>();
                 for(int j=0;j< ye.intValue()+1;j++){
                     re.put(years[j],l.get(j));
 
-            }
+                }
                 r.put(industrys[i],re);
                 mapArrayList.add(r);
             }
@@ -106,15 +105,16 @@ public class YearIndustryRegionController {
         }
         return  result;
     }
-//    public List<List<String>> convert(List<YearIndustryRegion>){
-//        List<String>list=new ArrayList<>();
-//        List<List<String>> res=new ArrayList<>();
-//        List<YearIndustryRegion> industryRegionList=new ArrayList<>();
-//        for (YearIndustryRegion y:industryRegionList
-//             ) {
-//            list.add()
-//
-//        }
-//
-//    }
+    public List<List<String>> convert(List<YearIndustryRegion> years){
+        List<String>list=new ArrayList<>();
+        List<List<String>> res=new ArrayList<>();
+        List<YearIndustryRegion> industryRegionList=new ArrayList<>();
+        for (YearIndustryRegion y:industryRegionList
+             ) {
+            list.add()
+
+        }
+
+    }
+
 }

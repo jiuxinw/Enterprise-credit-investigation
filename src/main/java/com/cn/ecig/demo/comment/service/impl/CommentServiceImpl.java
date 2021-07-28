@@ -38,7 +38,7 @@ public class CommentServiceImpl extends ServiceImpl<CommentMapper, Comment> impl
         comment.setStatus(status);
         comment.setCompanyCode(companyCode);
         Date currentTime = new Date();
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         String dateString = formatter.format(currentTime);
         comment.setUdate(dateString);
         commentMapper.insert(comment);
@@ -85,7 +85,7 @@ public class CommentServiceImpl extends ServiceImpl<CommentMapper, Comment> impl
         Date current=new Date();
         Calendar c = Calendar.getInstance();
         c.setTime(current);
-        SimpleDateFormat format =new SimpleDateFormat("yyyy-MM-dd");
+        SimpleDateFormat format =new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         wrapper.eq("phoneNumber",phoneNumber);
         wrapper.between("udate",getDATE(current)[3],format.format(current));
         List<Comment> list=commentMapper.selectList(wrapper);
@@ -98,7 +98,7 @@ public class CommentServiceImpl extends ServiceImpl<CommentMapper, Comment> impl
         Date current=new Date();
         Calendar c = Calendar.getInstance();
         c.setTime(current);
-        SimpleDateFormat format =new SimpleDateFormat("yyyy-MM-dd");
+        SimpleDateFormat format =new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         wrapper.eq("phoneNumber",phoneNumber);
         wrapper.between("udate",getDATE(current)[1],format.format(current));
         List<Comment> list=commentMapper.selectList(wrapper);
@@ -111,7 +111,7 @@ public class CommentServiceImpl extends ServiceImpl<CommentMapper, Comment> impl
         Date current=new Date();
         Calendar c = Calendar.getInstance();
         c.setTime(current);
-        SimpleDateFormat format =new SimpleDateFormat("yyyy-MM-dd");
+        SimpleDateFormat format =new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         wrapper.eq("phoneNumber",phoneNumber);
         wrapper.between("udate",getDATE(current)[0],format.format(current));
         List<Comment> list=commentMapper.selectList(wrapper);
