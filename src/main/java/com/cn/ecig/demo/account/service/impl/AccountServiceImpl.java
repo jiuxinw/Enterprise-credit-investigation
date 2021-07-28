@@ -6,6 +6,9 @@ import com.cn.ecig.demo.account.mapper.AccountMapper;
 import com.cn.ecig.demo.account.service.IAccountService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.cn.ecig.demo.config.Result;
+import com.cn.ecig.demo.personal.entity.Personal;
+import com.cn.ecig.demo.personal.mapper.PersonalMapper;
+import com.cn.ecig.demo.personal.service.IPersonalService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
@@ -21,7 +24,9 @@ import org.springframework.stereotype.Service;
 @Service
 public class AccountServiceImpl extends ServiceImpl<AccountMapper, Account> implements IAccountService {
     @Autowired
-    AccountMapper accountMapper;
+  private   AccountMapper accountMapper;
+    @Autowired
+    private IPersonalService personalService;
     @Autowired
     private StringRedisTemplate stringRedisTemplate;
 
@@ -42,6 +47,7 @@ public class AccountServiceImpl extends ServiceImpl<AccountMapper, Account> impl
                 result.setData("用户名已经存在");
             }else {
                 accountMapper.insert(account);
+                personalService.insertPersonByPhone(phoneNumber);
                 result.setMsg("注册成功");
                 result.setSuccess("200");
                 N=userName;
@@ -69,10 +75,12 @@ public class AccountServiceImpl extends ServiceImpl<AccountMapper, Account> impl
             QueryWrapper wrapper = new QueryWrapper();
             wrapper.eq("phoneNumber", phoneNumber);
             Account targetaccount = accountMapper.selectOne(wrapper);
+
             if(targetaccount!=null){
             if (password.equals(targetaccount.getPassword())){
+                String url=personalService.getUrlByphone(phoneNumber);
                 result.setMsg("登录成功");
-                result.setData("phoneNumber："+phoneNumber+","+"password:"+password);
+                result.setData("phoneNumber："+phoneNumber+","+"password:"+password+","+"headUrl:"+url);
                 result.setCode(200);
             }else {
                 result.setCode(-1);

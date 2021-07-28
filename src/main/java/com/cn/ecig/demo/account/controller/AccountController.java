@@ -81,7 +81,7 @@ public class AccountController {
     @ApiOperation("注册")
     @ApiImplicitParams(
             {
-                    @ApiImplicitParam(name = "phoneNumber",required = true,dataType = "Long"),
+                    @ApiImplicitParam(name = "phoneNumber",required = true,dataType = "String"),
                     @ApiImplicitParam(name = "userName",required = true,dataType = "String"),
                     @ApiImplicitParam(name = "password",required = true,dataType = "String")
             }
