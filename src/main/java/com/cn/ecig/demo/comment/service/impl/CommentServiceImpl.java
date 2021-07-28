@@ -38,10 +38,9 @@ public class CommentServiceImpl extends ServiceImpl<CommentMapper, Comment> impl
         comment.setStatus(status);
         comment.setCompanyCode(companyCode);
         Date currentTime = new Date();
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
         String dateString = formatter.format(currentTime);
         comment.setUdate(dateString);
-
         commentMapper.insert(comment);
     }
 
@@ -73,10 +72,10 @@ public class CommentServiceImpl extends ServiceImpl<CommentMapper, Comment> impl
     }
 
     @Override
-    public void deleteComment(String phoneNumber, String context) {
+    public void deleteComment(String phoneNumber, String date) {
         Map<String,Object> map=new HashMap<>();
         map.put("phoneNumber",phoneNumber);
-        map.put("context",context);
+        map.put("udate",date);
         commentMapper.deleteByMap(map);
     }
 
@@ -87,7 +86,8 @@ public class CommentServiceImpl extends ServiceImpl<CommentMapper, Comment> impl
         Calendar c = Calendar.getInstance();
         c.setTime(current);
         SimpleDateFormat format =new SimpleDateFormat("yyyy-MM-dd");
-        wrapper.between("udate",format.format(current),getDATE(current)[3]);
+        wrapper.eq("phoneNumber",phoneNumber);
+        wrapper.between("udate",getDATE(current)[3],format.format(current));
         List<Comment> list=commentMapper.selectList(wrapper);
         return list;
     }
@@ -99,7 +99,8 @@ public class CommentServiceImpl extends ServiceImpl<CommentMapper, Comment> impl
         Calendar c = Calendar.getInstance();
         c.setTime(current);
         SimpleDateFormat format =new SimpleDateFormat("yyyy-MM-dd");
-        wrapper.between("udate",format.format(current),getDATE(current)[1]);
+        wrapper.eq("phoneNumber",phoneNumber);
+        wrapper.between("udate",getDATE(current)[1],format.format(current));
         List<Comment> list=commentMapper.selectList(wrapper);
         return list;
     }
@@ -111,16 +112,15 @@ public class CommentServiceImpl extends ServiceImpl<CommentMapper, Comment> impl
         Calendar c = Calendar.getInstance();
         c.setTime(current);
         SimpleDateFormat format =new SimpleDateFormat("yyyy-MM-dd");
-        wrapper.between("udate",format.format(current),getDATE(current)[0]);
+        wrapper.eq("phoneNumber",phoneNumber);
+        wrapper.between("udate",getDATE(current)[0],format.format(current));
         List<Comment> list=commentMapper.selectList(wrapper);
         return list;
     }
 
     @Override
     public List<Comment> getfeedbackunsolved(String phoneNumber) {
-     QueryWrapper wrapper=new QueryWrapper();
-     wrapper.eq("status","未处理");
-     List<Comment> list= commentMapper.selectList(wrapper);
-     return list;
+
+     return commentMapper.getfeedbackunsolved(phoneNumber);
     }
 }

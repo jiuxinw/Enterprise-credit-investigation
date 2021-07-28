@@ -141,7 +141,7 @@ public class CommentController {
     @ApiOperation("删除用户反馈信息")
     @ApiImplicitParams(
             {@ApiImplicitParam(name = "phoneNumber",required = true,dataType = "String"),
-                    @ApiImplicitParam(name = "context",required = true,dataType = "String")
+                    @ApiImplicitParam(name = "date",required = true,dataType = "String")
             }
     )
     @ApiResponses({
@@ -152,13 +152,14 @@ public class CommentController {
     @RequestMapping(value = "/deletefeedback",method = RequestMethod.POST)
     public Result deletefeedback(
             @RequestParam(value = "phoneNumber",required = true)String phoneNumber,
-            @RequestParam(value = "context",required = true) String context
+            @RequestParam(value = "date",required = true) String date
     ){
         Result result=new Result();
         result.setData(null);
         result.setCode(0);
         result.setMsg("删除用户反馈信息失败");
         try {
+            commentService.deleteComment(phoneNumber, date);
             result.setCode(1);
             result.setMsg("删除用户反馈信息成功");
         }catch (Exception e){
@@ -243,7 +244,7 @@ public class CommentController {
         result.setCode(0);
         result.setMsg("获取用户近一周反馈信息失败");
         try {
-            result.setData(commentService.getfeedbackyear(phoneNumber));
+            result.setData(commentService.getfeedbackweek(phoneNumber));
             result.setSuccess("200");
             result.setCode(1);
             result.setMsg("获取用户近一周反馈信息成功");

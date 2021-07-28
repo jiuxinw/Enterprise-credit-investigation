@@ -2,4 +2,9 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.cn.ecig.demo.comment.mapper.CommentMapper">
 
+    <select id="getfeedbackunsolved" resultType="com.cn.ecig.demo.comment.entity.Comment">
+        select *
+        from comment
+        where phoneNumber =#{phoneNumber} and status ="未处理";
+    </select>
 </mapper>

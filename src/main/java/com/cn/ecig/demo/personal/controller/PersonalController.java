@@ -64,4 +64,37 @@ public class PersonalController {
         }
         return  result;
     }
+
+    @ApiOperation("获取用户个人信息")
+    @ApiImplicitParams(
+            {
+                    @ApiImplicitParam(name = "phoneNumber",required = true,dataType = "String")
+            }
+    )
+    @ApiResponses({
+            @ApiResponse(code = 0,message = "获取用户个人信息成功"),
+            @ApiResponse(code = 200001,message = "获取用户个人信息失败")
+    })
+    @ResponseBody
+    @RequestMapping(value = "/getPersonalInfo",method = RequestMethod.POST)
+    public Result updatePer(@RequestParam(value = "phoneNumber",required = true) String phone
+                          ){
+        Result result=new Result();
+        result.setData(null);
+        result.setCode(0);
+        result.setMsg("获取用户个人信息失败");
+        try {
+            result.setData(personalService.getperonalByPhone(phone));
+            result.setCode(1);
+            result.setMsg("获取用户个人信息成功");
+            if(personalService.getperonalByPhone(phone)==null){
+                result.setCode(0);
+                result.setMsg("获取用户个人信息失败");
+            }
+        }catch (Exception e){
+            result.setMsg(e.getMessage());
+            e.printStackTrace();
+        }
+        return  result;
+    }
 }

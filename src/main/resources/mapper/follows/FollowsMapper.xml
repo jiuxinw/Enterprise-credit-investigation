@@ -8,4 +8,10 @@ FROM companyBasicInfo LEFT JOIN follows
 ON companyBasicInfo.`code`= follows.`code`
 where follows.phoneNumber= #{phone} AND follows.`name` LIKE CONCAT('%',#{key},'%') ;
     </select>
+    <select id="getByCode" resultType="java.lang.String">
+        select  code
+        from follows
+        where phoneNumber=#{phoneNumber} and code = #{code}
+       	LIMIT 1;
+    </select>
 </mapper>

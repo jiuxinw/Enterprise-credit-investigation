@@ -5,6 +5,7 @@ import com.cn.ecig.demo.companyBasicInfo.entity.Company;
 import com.cn.ecig.demo.companyBasicInfo.entity.CompanyBasicInfo;
 import com.cn.ecig.demo.companyBasicInfo.service.ICompanyBasicInfoService;
 import com.cn.ecig.demo.config.Result;
+import com.cn.ecig.demo.follows.entity.Follows;
 import com.cn.ecig.demo.follows.service.IFollowsService;
 import io.swagger.annotations.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,7 +39,8 @@ private ICompanyBasicInfoService companyBasicInfoService;
     })
     @ApiResponses({
             @ApiResponse(code = 1, message = "请求成功"),
-            @ApiResponse(code = 0, message = "用户点击关注失败")
+            @ApiResponse(code = 0, message = "用户点击关注失败"),
+            @ApiResponse(code = -1, message = "您已经关注了，请勿多点"),
     })
     @ResponseBody
     @RequestMapping(value = "/follow",method = RequestMethod.POST)
@@ -48,12 +50,23 @@ private ICompanyBasicInfoService companyBasicInfoService;
         result.setCode(0);
         result.setMsg("用户点击关注失败");
         try {
+           List<Follows>list=followsService.getComm(phoneNumber);
+           List<String> strings=new ArrayList<>();
+            for (Follows f:list
+                 ) {
+                strings.add(f.getCode());
+            }
+            if (strings.contains(followsService.getByCode(code, phoneNumber))){
+                result.setMsg("您已经关注了，请勿多点");
+                result.setCode(-1);
+            }else{
             result.setData(followsService.insetOne(code,phoneNumber));
             result.setCode(1);
             result.setMsg("用户点击关注成功");
-            if(followsService.insetOne(code,phoneNumber)==null){
-                result.setCode(0);
-                result.setMsg("用户点击关注失败");
+//            if(followsService.insetOne(code,phoneNumber)==null){
+//                result.setCode(0);
+//                result.setMsg("用户点击关注失败");
+//            }
             }
         }catch (Exception e){
             result.setMsg(e.getMessage());
@@ -95,8 +108,8 @@ private ICompanyBasicInfoService companyBasicInfoService;
 
     @ApiOperation("删除用户关注企业")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "code",value = "公司代码",required = true,dataType = "String"),
-            @ApiImplicitParam(name = "phoneNumber",value = "用户手机号",required = true,dataType = "String")
+            @ApiImplicitParam(name = "phoneNumber",value = "用户手机号",required = true,dataType = "String"),
+            @ApiImplicitParam(name = "code",value = "公司代码",required = true,dataType = "String")
     })
     @ApiResponses({
             @ApiResponse(code = 1, message = "删除用户关注企业成功"),
@@ -104,15 +117,14 @@ private ICompanyBasicInfoService companyBasicInfoService;
     })
     @ResponseBody
     @RequestMapping(value = "/followdelete",method = RequestMethod.POST)
-    public Result followdelete( String code, String phoneNumber){
+    public Result followdelete( String phoneNumber,String code){
         Result result=new Result();
         result.setData(null);
         result.setCode(0);
         result.setMsg("删除用户关注企业失败");
         try {
-            followsService.deleteFollows(code,phoneNumber);
             result.setCode(1);
-            result.setMsg("删除用户关注企业成功");
+            result.setMsg("删除用户关注企业成功,您删除了"+followsService.deleteFollows(phoneNumber,code)+"条");
         }catch (Exception e){
             result.setMsg(e.getMessage());
             e.printStackTrace();

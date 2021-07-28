@@ -19,11 +19,12 @@ import java.util.List;
 public interface IFollowsService extends IService<Follows> {
     //添加用户关注
     Follows insetOne(String code,String phoneNumber);
-
+    //获取用户code
+    String getByCode(String code,String phoneNumber);
     //获取用户关注列表
     List<Follows> getComm(String phoneNumber);
     //删除用户关注
-    void deleteFollows(String phoneNumber,String code);
+    int deleteFollows(String phoneNumber,String code);
     //获取用户关注企业
     List<Co> getBykey(String key, String phone);
     //获取对应公司的关注数

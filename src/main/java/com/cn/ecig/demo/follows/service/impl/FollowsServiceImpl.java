@@ -1,5 +1,6 @@
 package com.cn.ecig.demo.follows.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.cn.ecig.demo.companyBasicInfo.entity.Co;
 import com.cn.ecig.demo.companyBasicInfo.entity.Company;
@@ -41,20 +42,28 @@ private CompanyEvaluationMapper companyEvaluationMapper;
     }
 
     @Override
+    public String getByCode(String code, String phoneNumber) {
+return followsMapper.getByCode(code,phoneNumber);
+
+
+    }
+
+    @Override
     public List<Follows> getComm(String phoneNumber) {
         QueryWrapper wrapper=new QueryWrapper();
         List<Follows> followsList=new ArrayList<>();
-        wrapper.eq("phoneNumber",phoneNumber);
+        wrapper.select("distinct code,name").eq("phoneNumber",phoneNumber);
         followsList=followsMapper.selectList(wrapper);
         return followsList;
     }
 
     @Override
-    public void deleteFollows(String phoneNumber, String code) {
+    public int deleteFollows(String phoneNumber, String code) {
         Map<String,Object> map=new HashMap<>();
         map.put("phoneNumber",phoneNumber);
       map.put("code",code);
-      followsMapper.deleteByMap(map);
+   int res= followsMapper.deleteByMap(map);
+   return res;
     }
 
     @Override

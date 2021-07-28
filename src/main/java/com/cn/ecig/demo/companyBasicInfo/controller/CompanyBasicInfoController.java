@@ -201,7 +201,8 @@ private INewsInfoService newsInfoService;
 //                result.setCode(0);
 //                result.setMsg("行业查询失败");
 //            }else{
-            result.setMsg("行业查询成功");}
+           }
+          result.setMsg("行业查询成功");
             result.setData(companyBasicInfoService.getInfoByLabel2(in, ar, tr));
             result.setCode(1);
             if (companyBasicInfoService.getInfoByLabel2(in, ar, tr).size()==0){

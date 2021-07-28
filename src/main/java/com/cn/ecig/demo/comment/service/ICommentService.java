@@ -26,7 +26,7 @@ public interface ICommentService extends IService<Comment> {
    //根据companycode获取对应的用户反馈列表
     List<Comment> getUserCommnetByCode(String phoneNumber,String code);
     //删除反馈
-    void deleteComment(String phoneNumber,String context);
+    void deleteComment(String phoneNumber,String date);
     //获取获取用户近一年反馈信息
     List<Comment> getfeedbackyear (String phoneNumber) throws ParseException;
     //获取获取用户近一月 反馈信息

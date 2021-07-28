@@ -21,4 +21,5 @@ public interface IPersonalService extends IService<Personal> {
     void insertPersonByPhone(String phoneNumber);
     //修改
     Personal updateInfo(String phoneNumber,String age,String headUrl ,String address ,String email);
+
 }

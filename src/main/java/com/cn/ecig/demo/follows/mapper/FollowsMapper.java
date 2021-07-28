@@ -18,4 +18,6 @@ import java.util.List;
 public interface FollowsMapper extends BaseMapper<Follows> {
     //获取用户关注企业
     List<Co> getBykey(String key, String phone);
+    //获取用户code
+    String getByCode(String code,String phoneNumber);
 }
