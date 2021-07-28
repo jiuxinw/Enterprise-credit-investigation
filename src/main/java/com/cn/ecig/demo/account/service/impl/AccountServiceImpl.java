@@ -80,7 +80,7 @@ public class AccountServiceImpl extends ServiceImpl<AccountMapper, Account> impl
             if (password.equals(targetaccount.getPassword())){
                 String url=personalService.getUrlByphone(phoneNumber);
                 result.setMsg("登录成功");
-                result.setData("phoneNumber："+phoneNumber+","+"password:"+password+","+"headUrl:"+url);
+                result.setData(targetaccount);
                 result.setCode(200);
             }else {
                 result.setCode(-1);

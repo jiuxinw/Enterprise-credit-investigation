@@ -105,16 +105,16 @@ public class YearIndustryRegionController {
         }
         return  result;
     }
-    public List<List<String>> convert(List<YearIndustryRegion> years){
-        List<String>list=new ArrayList<>();
-        List<List<String>> res=new ArrayList<>();
-        List<YearIndustryRegion> industryRegionList=new ArrayList<>();
-        for (YearIndustryRegion y:industryRegionList
-             ) {
-            list.add()
-
-        }
-
-    }
+//    public List<List<String>> convert(List<YearIndustryRegion> years){
+//        List<String>list=new ArrayList<>();
+//        List<List<String>> res=new ArrayList<>();
+//        List<YearIndustryRegion> industryRegionList=new ArrayList<>();
+//        for (YearIndustryRegion y:industryRegionList
+//             ) {
+//            list.add()
+//
+//        }
+//
+//    }
 
 }
