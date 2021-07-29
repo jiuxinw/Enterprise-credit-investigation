@@ -1,6 +1,7 @@
 package com.cn.ecig.demo.account.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.cn.ecig.demo.account.entity.Account;
 import com.cn.ecig.demo.account.mapper.AccountMapper;
 import com.cn.ecig.demo.account.service.IAccountService;
@@ -63,6 +64,17 @@ public class AccountServiceImpl extends ServiceImpl<AccountMapper, Account> impl
         }
         return  result;
     }
+
+    @Override
+    public int updateUserName(String phoneNumber, String useName) {
+        Account account=new Account();
+        account.setUserName(useName);
+        UpdateWrapper wrapper=new UpdateWrapper();
+        wrapper.eq("phoneNumber" ,phoneNumber);
+        int res=accountMapper.update(account,wrapper);
+        return res;
+    }
+
     /**
      * 登录
      * @param //用户名和密码

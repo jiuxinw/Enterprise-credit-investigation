@@ -20,6 +20,6 @@ public interface IPersonalService extends IService<Personal> {
     //增加用户
     void insertPersonByPhone(String phoneNumber);
     //修改
-    Personal updateInfo(String phoneNumber,String age,String headUrl ,String address ,String email);
+    Personal updateInfo(String userName,String phoneNumber,String gender,String headUrl ,String address ,String email);
 
 }

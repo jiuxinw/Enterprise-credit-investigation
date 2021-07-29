@@ -120,6 +120,7 @@ public class AnnouncmenetInfoController {
                     map.put("complete",r.nextInt(100));
                     map.put("rank",r.nextInt(1000));
                     map.put("level",companyEvaluation.getLevel());
+                    map.put("adviceRatio",companyEvaluation.getAdviceRatio());
                     result.setData(map);
                     result.setCode(1);
                     result.setMsg("获取企业综合评价信息成功");

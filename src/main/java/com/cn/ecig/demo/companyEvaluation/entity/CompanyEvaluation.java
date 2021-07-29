@@ -30,7 +30,8 @@ public class CompanyEvaluation implements Serializable {
      */
     @TableId("code")
     private String code;
-
+    @TableField("adviceRatio")
+private String adviceRatio;
     public String getLevel() {
         return level;
     }
@@ -56,6 +57,14 @@ public class CompanyEvaluation implements Serializable {
      * 信用等级
      */
     private String level;
+
+    public String getAdviceRatio() {
+        return adviceRatio;
+    }
+
+    public void setAdviceRatio(String adviceRatio) {
+        this.adviceRatio = adviceRatio;
+    }
 
     /**
      * 行政许可信息

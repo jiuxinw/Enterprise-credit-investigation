@@ -2,6 +2,7 @@ package com.cn.ecig.demo.personal.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
+import com.cn.ecig.demo.account.service.IAccountService;
 import com.cn.ecig.demo.personal.entity.Personal;
 import com.cn.ecig.demo.personal.mapper.PersonalMapper;
 import com.cn.ecig.demo.personal.service.IPersonalService;
@@ -23,6 +24,8 @@ public class PersonalServiceImpl extends ServiceImpl<PersonalMapper, Personal> i
 private PersonalMapper personalMapper;
 @Autowired
 private IPersonalService personalService;
+@Autowired
+private IAccountService accountService;
 
     @Override
     public String getUrlByphone(String phoneNumber) {
@@ -52,14 +55,15 @@ private IPersonalService personalService;
     }
 
     @Override
-    public Personal updateInfo(String phoneNumber, String age, String headUrl, String address, String email) {
+    public Personal updateInfo(String userName,String phoneNumber, String gender, String headUrl, String address, String email) {
         Personal personal=new Personal();
         personal.setAddress(address);
-        personal.setAge(age);
+        personal.setGender(gender);
         personal.setEmail(email);
         personal.setHeadUrl(headUrl);
         UpdateWrapper wrapper=new UpdateWrapper();
         wrapper.eq("phoneNumber" ,phoneNumber);
+        accountService.updateUserName(phoneNumber,userName);
 personalMapper.update(personal,wrapper);
         return personal;
 

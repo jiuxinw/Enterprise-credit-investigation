@@ -48,6 +48,8 @@ public interface IAccountService extends IService<Account> {
      */
     Result regist(String phoneNumber, String useName, String password);
 
+    //修改用户名
+    int updateUserName(String phoneNumber, String useName);
     /**
      * 登录
      *      * @param user 用户名和密码

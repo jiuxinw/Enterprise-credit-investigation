@@ -27,9 +27,9 @@ public class PersonalController {
     private IPersonalService personalService;
     @ApiOperation("更新用户信息")
     @ApiImplicitParams(
-            {
+            {  @ApiImplicitParam(name = "userName",required = false,dataType = "String"),
                     @ApiImplicitParam(name = "phoneNumber",required = true,dataType = "String"),
-                    @ApiImplicitParam(name = "age",required = false,dataType = "String"),
+                    @ApiImplicitParam(name = "gender",required = false,dataType = "String"),
                     @ApiImplicitParam(name = "headUrl",required = false,dataType = "String"),
                     @ApiImplicitParam(name = "address",required = false,dataType = "String"),
                     @ApiImplicitParam(name = "email",required =false,dataType = "String")
@@ -41,20 +41,24 @@ public class PersonalController {
     })
     @ResponseBody
     @RequestMapping(value = "/updateInfo",method = RequestMethod.POST)
-    public Result updatePer(@RequestParam(value = "phoneNumber",required = true) String phone,
-                         @RequestParam(value = "age",required = false) String age,
+    public Result updatePer( @RequestParam(value = "userName",required = false) String userName,
+            @RequestParam(value = "phoneNumber",required = true) String phone,
+                         @RequestParam(value = "gender",required = false) String gender,
                          @RequestParam(value = "headUrl",required = false) String headUrl,
                          @RequestParam(value = "address",required = false) String address,
-                         @RequestParam(value = "email",required = false) String email){
+                         @RequestParam(value = "email",required = false) String email
+
+    ){
         Result result=new Result();
         result.setData(null);
         result.setCode(0);
         result.setMsg("更新用户信息失败");
         try {
-            result.setData(personalService.updateInfo(phone, age, headUrl, address, email));
+
+            result.setData(personalService.updateInfo(userName,phone, gender, headUrl, address, email)+"userName更改为"+userName);
             result.setCode(1);
             result.setMsg("更新用户信息成功");
-            if(personalService.updateInfo(phone, age, headUrl, address, email)==null){
+            if(personalService.updateInfo(userName,phone, gender, headUrl, address, email)==null){
                 result.setCode(0);
                 result.setMsg("更新用户信息失败");
             }

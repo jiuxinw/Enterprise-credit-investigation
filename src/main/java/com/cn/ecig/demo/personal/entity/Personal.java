@@ -30,10 +30,10 @@ public class Personal implements Serializable {
         return phoneNumber;
     }
 
-    public Personal(String phoneNumber, String headUrl, String age, String address, String email) {
+    public Personal(String phoneNumber, String headUrl, String gender, String address, String email) {
         this.phoneNumber = phoneNumber;
         this.headUrl = headUrl;
-        this.age = age;
+        this.gender = gender;
         this.address = address;
         this.email = email;
     }
@@ -65,13 +65,7 @@ public class Personal implements Serializable {
         this.email = email;
     }
 
-    public String getAge() {
-        return age;
-    }
 
-    public void setAge(String age) {
-        this.age = age;
-    }
 
     public String getAddress() {
         return address;
@@ -96,7 +90,15 @@ public class Personal implements Serializable {
     /**
      * 性别
      */
-    private String age;
+    private String gender;
+
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
 
     /**
      * 地址
