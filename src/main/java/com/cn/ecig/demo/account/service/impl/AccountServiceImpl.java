@@ -13,6 +13,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * <p>
  *  服务实现类
@@ -75,12 +78,15 @@ public class AccountServiceImpl extends ServiceImpl<AccountMapper, Account> impl
             QueryWrapper wrapper = new QueryWrapper();
             wrapper.eq("phoneNumber", phoneNumber);
             Account targetaccount = accountMapper.selectOne(wrapper);
+            Map<String,Object>map=new HashMap<>();
 
             if(targetaccount!=null){
             if (password.equals(targetaccount.getPassword())){
                 String url=personalService.getUrlByphone(phoneNumber);
+                map.put("登录信息",targetaccount);
+                map.put("个人信息",personalService.getperonalByPhone(phoneNumber));
                 result.setMsg("登录成功");
-                result.setData(targetaccount);
+                result.setData(map);
                 result.setCode(200);
             }else {
                 result.setCode(-1);

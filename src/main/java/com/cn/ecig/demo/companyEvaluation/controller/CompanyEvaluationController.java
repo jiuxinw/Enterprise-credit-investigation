@@ -5,6 +5,7 @@ import com.cn.ecig.demo.companyEvaluation.service.ICompanyEvaluationService;
 import com.cn.ecig.demo.config.Result;
 import io.swagger.annotations.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -65,6 +66,7 @@ public class CompanyEvaluationController {
             @ApiResponse(code = 0, message = "获取诚信企业排名信息失败")
     })
     @ResponseBody
+    @Cacheable(value = "goodRank")
     @RequestMapping(value = "/goodRankInfo",method = RequestMethod.POST)
     public Result getGoodRankByNum(int num){
         Result result=new Result();
@@ -163,6 +165,7 @@ public class CompanyEvaluationController {
             @ApiResponse(code = 0, message = "获取失信企业排名信息失败")
     })
     @ResponseBody
+    @Cacheable(value = "badRank")
     @RequestMapping(value = "/badRankInfo",method = RequestMethod.POST)
     public Result getBadRankByNum(int num){
         Result result=new Result();

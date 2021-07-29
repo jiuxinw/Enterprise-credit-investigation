@@ -10,6 +10,7 @@ import com.cn.ecig.demo.newsInfo.service.INewsInfoService;
 import com.cn.ecig.demo.note.Operation;
 import io.swagger.annotations.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -172,7 +173,7 @@ private INewsInfoService newsInfoService;
 //        return result;
 //    }
 
-
+    @Cacheable(value = "searchLabel")
   @ApiOperation("按照标签查询")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "industry",value = "行业",required = false,dataType = "String"),
@@ -191,9 +192,9 @@ private INewsInfoService newsInfoService;
         result.setData(null);
         result.setCode(0);
       try {
-      String[] in=industry.split("\\s+");;
-      String[] ar=area.split("\\s+");;
-      String[] tr=transferMode.split("\\s+");;
+      String[] in=industry.split("\\s+");
+      String[] ar=area.split("\\s+");
+      String[] tr=transferMode.split("\\s+");
       if(in==null&&ar==null&&tr==null){
         result.setMsg("行业查询失败");
 //            if (industry.isEmpty()&&area.isEmpty()&&transferMode.isEmpty()){
@@ -216,6 +217,7 @@ private INewsInfoService newsInfoService;
         }
         return result;
     }
+
     @ApiOperation("通过公司代码请求企业基本信息")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "code",value = "企业代码",required = true,dataType = "String")

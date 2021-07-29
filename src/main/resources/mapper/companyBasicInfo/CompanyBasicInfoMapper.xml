@@ -8,4 +8,28 @@ FROM companyBasicInfo
 ORDER BY RAND()
 LIMIT #{num};
     </select>
+    <select id="getInfoByLabel2" resultType="com.cn.ecig.demo.companyBasicInfo.entity.CompanyBasicInfo">
+select *
+from companyBasicInfo
+<where>
+    <if test="industry !=null and industry !=0">
+       and industry in
+       <foreach collection= "industry" open="(" separator="," close=")" item="in">
+            #{in}
+        </foreach>
+    </if>
+    <if test="area !=null and area!=0">
+        and area in
+        <foreach collection="area" open="(" separator="," close=")" item="ar">
+        #{ar}
+    </foreach>
+    </if>
+    <if test="transferMode!=null and transferMode!=0">
+        and transferMode in
+        <foreach collection="transferMode" open="(" separator="," close=")" item="tr">
+            #{tr}
+        </foreach>
+    </if>
+</where>
+    </select>
 </mapper>

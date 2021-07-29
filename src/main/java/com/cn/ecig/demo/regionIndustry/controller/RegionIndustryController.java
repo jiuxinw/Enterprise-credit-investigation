@@ -7,6 +7,7 @@ import com.cn.ecig.demo.regionIndustry.service.IRegionIndustryService;
 import io.swagger.annotations.*;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -45,6 +46,7 @@ public class RegionIndustryController {
             @ApiResponse(code = 0, message = "获取时间-地区-行业信息失败")
     })
     @ResponseBody
+    @Cacheable(value = "regionInd")
     @RequestMapping(value = "/yearIndustryRegion2",method = RequestMethod.POST)
     public Result getyearIndustryRegion2( String from, String to){
         Result result=new Result();

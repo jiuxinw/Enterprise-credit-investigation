@@ -15,4 +15,5 @@ import java.util.List;
  */
 public interface CompanyBasicInfoMapper extends BaseMapper<CompanyBasicInfo> {
     List<CompanyBasicInfo> gethotEnterprise(int num);
+    List<CompanyBasicInfo> getInfoByLabel2(String[] industry,String[] area,String[] transferMode);
 }

@@ -61,24 +61,28 @@ return result;
 
     @Override
     public List<CompanyBasicInfo> getInfoByLabel2(String[] industry, String[] area, String[] transferMode) {
-        List<CompanyBasicInfo> res = new ArrayList<>();
-        QueryWrapper<CompanyBasicInfo> queryWrapper = new QueryWrapper<>();
-//        int len_in = industry.length;
-//        int len_area = area.length;
-//        int len_tra = transferMode.length;
-        for (String i:industry) {
-            for (String a:area) {
-                for (String t:transferMode) {
-                    queryWrapper.and(
-                            Wrapper ->
-                                    Wrapper.like("industry", i)
-                                            .or()
-                                            .like("area", a).or().like("transferMode", t));
-                }
-            }
-        }
-        res=companyBasicInfoMapper.selectList(queryWrapper);
-        return res;
+//        List<CompanyBasicInfo> res = new ArrayList<>();
+//        QueryWrapper<CompanyBasicInfo> queryWrapper = new QueryWrapper<>();
+////        int len_in = industry.length;
+////        int len_area = area.length;
+////        int len_tra = transferMode.length;
+//        for (String i:industry) {
+//            for (String a:area) {
+//                for (String t:transferMode) {
+//                    queryWrapper.and(
+//                            Wrapper ->
+//                                    Wrapper.like("industry", i)
+//                                            .or()
+//                                            .like("area", a)
+//                                            .or().
+//                                            like("transferMode", t));
+//                }
+//            }
+//        }
+//        res=companyBasicInfoMapper.selectList(queryWrapper);
+
+//        return res;
+        return companyBasicInfoMapper.getInfoByLabel2(industry, area, transferMode);
     }
 
 

@@ -3,11 +3,11 @@
 <mapper namespace="com.cn.ecig.demo.finance.mapper.FinanceMapper">
 
     <select id="getBigest" resultType="java.lang.String">
-SELECT companyName
-FROM companyBasicInfo LEFT JOIN finance
-ON finance.`code`=companyBasicInfo.`code`
-WHERE companyBasicInfo.area = #{province}
-ORDER BY totalAssets DESC LIMIT 1;
+SELECT companyBasicInfo.`name`
+FROM companyEvaluation LEFT JOIN companyBasicInfo
+ON companyEvaluation.`code` =companyBasicInfo.`code`
+WHERE companyBasicInfo.area= #{province}
+ORDER BY totalStockEquity DESC LIMIT 1;
     </select>
     <select id="getBestIndustry" resultType="java.lang.String">
       SELECT industry_name
