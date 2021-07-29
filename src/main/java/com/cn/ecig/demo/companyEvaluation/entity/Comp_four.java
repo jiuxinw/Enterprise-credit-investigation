@@ -27,8 +27,13 @@ package com.cn.ecig.demo.companyEvaluation.entity;
 
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
+import lombok.AllArgsConstructor;
+import lombok.Data;
 
-public class Comp_four {
+import java.io.Serializable;
+
+@Data
+public class Comp_four  implements Serializable {
     @TableId("code")
     private String code;
     @TableField("name")
@@ -38,6 +43,13 @@ public class Comp_four {
     @TableField("score")
     private String score;
     public Comp_four(){
+    }
+
+    public Comp_four(String code, String name, String shortName, String score) {
+        this.code = code;
+        this.name = name;
+        this.shortName = shortName;
+        this.score = score;
     }
 
     public String getScore() {

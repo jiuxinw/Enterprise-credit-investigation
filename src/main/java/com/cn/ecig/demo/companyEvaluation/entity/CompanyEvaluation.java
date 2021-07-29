@@ -66,6 +66,9 @@ private String adviceRatio;
         this.adviceRatio = adviceRatio;
     }
 
+    public CompanyEvaluation() {
+    }
+
     /**
      * 行政许可信息
      */

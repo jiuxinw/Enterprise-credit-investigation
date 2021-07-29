@@ -55,9 +55,9 @@ public class CompanyEvaluationServiceImpl extends ServiceImpl<CompanyEvaluationM
 //            res2.add(res.get(i));
 //        }
         List<Comp_four> list=companyEvaluationMapper.getGoodRankByNum(num);
-        List<Comp_four> list2=list.subList(0,num);
-
-        return  list2;
+        return  list;
+//        List<Comp_four> list2= new ArrayList<>(list.subList(0, num));
+//        return  list2;
 //      res=  multipleService.mulSelect(multipleSelect);
 //return  res2;
     }
@@ -65,16 +65,17 @@ public class CompanyEvaluationServiceImpl extends ServiceImpl<CompanyEvaluationM
     @Override
     public List<Comp_four> getGoodRankByNumArea(int num, String area) {
         List<Comp_four> list=companyEvaluationMapper.getGoodRankByNumArea(num, area);
-        List<Comp_four> list2=list.subList(0,num);
-
-        return  list2;
+//        List<Comp_four> list2=new ArrayList<>(list.subList(0, num));
+        return  list;
+//        return  list2;
     }
 
     @Override
     public List<Comp_four> getGoodRankByNumInd(int num, String industry) {
         List<Comp_four> list=companyEvaluationMapper.getGoodRankByNumInd(num, industry);
-        List<Comp_four> list2=list.subList(0,num);
-        return  list2;
+//        List<Comp_four> list2=new ArrayList<>(list.subList(0, num));
+//        return  list2;
+          return  list;
     }
 
     @Override
@@ -91,7 +92,8 @@ return comp_three;
     @Override
     public List<Comp_four> getBadRankByNum(int num) {
         List<Comp_four> list=companyEvaluationMapper.getBadRankByNum(num);
-        List<Comp_four> list2=list.subList(0,num);
-        return  list2;
+//        List<Comp_four> list2=new ArrayList<>(list.subList(0, num));
+//        return  list2;
+        return  list;
     }
 }

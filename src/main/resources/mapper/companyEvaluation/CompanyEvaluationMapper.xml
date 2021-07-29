@@ -8,6 +8,7 @@ FROM `companyEvaluation`
 left join companyBasicInfo
 on companyBasicInfo.`code`=companyEvaluation.`code`
 ORDER BY score DESC
+limit #{num};
     </select>
     <select id="getBasicByCode" resultType="com.cn.ecig.demo.companyEvaluation.entity.Comp_three">
 SELECT `name`,companyEvaluation.`code`
@@ -25,6 +26,7 @@ FROM `companyEvaluation`
 left join companyBasicInfo
 on companyBasicInfo.`code`=companyEvaluation.`code`
 ORDER BY score ASC
+limit #{num};
     </select>
     <select id="getGoodRankByNumArea" resultType="com.cn.ecig.demo.companyEvaluation.entity.Comp_four">
         SELECT `name`,shortName,companyEvaluation.`code`,score
@@ -33,6 +35,7 @@ left join companyBasicInfo
 on companyBasicInfo.`code`=companyEvaluation.`code`
 where area =#{area}
 ORDER BY score DESC
+limit #{num};
     </select>
     <select id="getGoodRankByNumInd" resultType="com.cn.ecig.demo.companyEvaluation.entity.Comp_four">
                SELECT `name`,shortName,companyEvaluation.`code`,score
@@ -41,5 +44,6 @@ left join companyBasicInfo
 on companyBasicInfo.`code`=companyEvaluation.`code`
 where industry =#{industry}
 ORDER BY score DESC
+limit #{num};
     </select>
 </mapper>

@@ -66,7 +66,7 @@ public class CompanyEvaluationController {
             @ApiResponse(code = 0, message = "获取诚信企业排名信息失败")
     })
     @ResponseBody
-    @Cacheable(value = "goodRank")
+//    @Cacheable(value = "goodRank")
     @RequestMapping(value = "/goodRankInfo",method = RequestMethod.POST)
     public Result getGoodRankByNum(int num){
         Result result=new Result();
@@ -165,7 +165,7 @@ public class CompanyEvaluationController {
             @ApiResponse(code = 0, message = "获取失信企业排名信息失败")
     })
     @ResponseBody
-    @Cacheable(value = "badRank")
+//    @Cacheable(value = "badRank")
     @RequestMapping(value = "/badRankInfo",method = RequestMethod.POST)
     public Result getBadRankByNum(int num){
         Result result=new Result();
