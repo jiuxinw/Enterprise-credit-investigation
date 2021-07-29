@@ -13,21 +13,21 @@ select *
 from companyBasicInfo
 <where>
     <if test="industry !=null and industry !=0">
-       and industry in
-       <foreach collection= "industry" open="(" separator="," close=")" item="in">
-            #{in}
+
+       <foreach collection= "list" open="(" separator="," close=")" item="in">
+           and industry =#{in}
         </foreach>
     </if>
     <if test="area !=null and area!=0">
-        and area in
-        <foreach collection="area" open="(" separator="," close=")" item="ar">
-        #{ar}
+
+        <foreach collection="list" open="(" separator="," close=")" item="ar">
+            and area = #{ar}
     </foreach>
     </if>
     <if test="transferMode!=null and transferMode!=0">
-        and transferMode in
-        <foreach collection="transferMode" open="(" separator="," close=")" item="tr">
-            #{tr}
+
+        <foreach collection="list" open="(" separator="," close=")" item="tr">
+            and transferMode =  #{tr}
         </foreach>
     </if>
 </where>

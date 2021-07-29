@@ -15,10 +15,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.print.DocFlavor;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * <p>
@@ -192,9 +189,9 @@ private INewsInfoService newsInfoService;
         result.setData(null);
         result.setCode(0);
       try {
-      String[] in=industry.split("\\s+");
-      String[] ar=area.split("\\s+");
-      String[] tr=transferMode.split("\\s+");
+      List<String> in= Arrays.asList(industry.split("\\s+"));
+     List<String> ar= Arrays.asList(area.split("\\s+"));
+      List<String> tr= Arrays.asList(transferMode.split("\\s+"));
       if(in==null&&ar==null&&tr==null){
         result.setMsg("行业查询失败");
 //            if (industry.isEmpty()&&area.isEmpty()&&transferMode.isEmpty()){

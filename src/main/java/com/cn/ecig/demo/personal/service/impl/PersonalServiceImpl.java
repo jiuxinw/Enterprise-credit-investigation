@@ -63,8 +63,12 @@ private IAccountService accountService;
         personal.setHeadUrl(headUrl);
         UpdateWrapper wrapper=new UpdateWrapper();
         wrapper.eq("phoneNumber" ,phoneNumber);
-        accountService.updateUserName(phoneNumber,userName);
-personalMapper.update(personal,wrapper);
+        personalMapper.update(personal,wrapper);
+        if (userName != null) {
+            accountService.updateUserName(phoneNumber,userName);
+        }
+
+
         return personal;
 
     }

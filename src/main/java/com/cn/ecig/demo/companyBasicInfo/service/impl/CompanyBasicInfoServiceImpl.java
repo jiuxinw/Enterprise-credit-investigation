@@ -60,7 +60,7 @@ return result;
     }
 
     @Override
-    public List<CompanyBasicInfo> getInfoByLabel2(String[] industry, String[] area, String[] transferMode) {
+    public List<CompanyBasicInfo> getInfoByLabel2(List<String> industry,List<String> area,List<String> transferMode) {
 //        List<CompanyBasicInfo> res = new ArrayList<>();
 //        QueryWrapper<CompanyBasicInfo> queryWrapper = new QueryWrapper<>();
 ////        int len_in = industry.length;
