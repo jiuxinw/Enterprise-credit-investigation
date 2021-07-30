@@ -10,12 +10,14 @@ import com.cn.ecig.demo.newsInfo.service.INewsInfoService;
 import com.cn.ecig.demo.note.Operation;
 import io.swagger.annotations.*;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.print.DocFlavor;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * <p>
@@ -131,47 +133,7 @@ private INewsInfoService newsInfoService;
      * @return
      */
 //    @Operation("按照标签查询企业")
-//    @ApiOperation("按照标签查询")
-//    @ApiImplicitParams({
-//            @ApiImplicitParam(name = "industry",value = "行业",required = false,dataType = "String"),
-//            @ApiImplicitParam(name = "area",value = "地区",required = false,dataType = "String"),
-//            @ApiImplicitParam(name = "transferMode",value = "交易方式",required = false,dataType = "String")
-//    })
-//    @ApiResponses({
-//            @ApiResponse(code = 1, message = "请求成功"),
-//            @ApiResponse(code = 0, message = "行业查询失败")
-//    })
-//    @ResponseBody
-//    @RequestMapping(value = "/label",method = RequestMethod.POST)
-//    public Result queryByLabel (String industry,String area,String transferMode){
-//        Result result=new Result();
-//        result.setSuccess("-1");
-//        result.setData(null);
-//        result.setCode(0);
-//        result.setMsg("行业查询失败");
-//        try {
-////            if (industry.isEmpty()&&area.isEmpty()&&transferMode.isEmpty()){
-////                result.setData(null);
-////                result.setCode(0);
-////                result.setMsg("行业查询失败");
-////            }else{
-//            result.setMsg("行业查询成功");
-//            result.setData(companyBasicInfoService.getInfoByLabel(industry, area, transferMode));
-//            result.setCode(1);
-//            if (companyBasicInfoService.getInfoByLabel(industry, area, transferMode).size()==0){
-//                result.setCode(0);
-//                result.setMsg("行业查询失败");
-//            }
-//       // }
-//        }catch (Exception e){
-//            result.setMsg(e.getMessage());
-//            e.printStackTrace();
-//        }
-//        return result;
-//    }
-
-    @Cacheable(value = "searchLabel")
-  @ApiOperation("按照标签查询")
+    @ApiOperation("按照标签查询")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "industry",value = "行业",required = false,dataType = "String"),
             @ApiImplicitParam(name = "area",value = "地区",required = false,dataType = "String"),
@@ -188,19 +150,84 @@ private INewsInfoService newsInfoService;
         result.setSuccess("-1");
         result.setData(null);
         result.setCode(0);
-      try {
-      List<String> in= Arrays.asList(industry.split("\\s+"));
-     List<String> ar= Arrays.asList(area.split("\\s+"));
-      List<String> tr= Arrays.asList(transferMode.split("\\s+"));
-      if(in==null&&ar==null&&tr==null){
         result.setMsg("行业查询失败");
+        try {
 //            if (industry.isEmpty()&&area.isEmpty()&&transferMode.isEmpty()){
 //                result.setData(null);
 //                result.setCode(0);
 //                result.setMsg("行业查询失败");
 //            }else{
-           }
-          result.setMsg("行业查询成功");
+            result.setMsg("行业查询成功");
+            result.setData(companyBasicInfoService.getInfoByLabel(industry, area, transferMode));
+            result.setCode(1);
+            if (companyBasicInfoService.getInfoByLabel(industry, area, transferMode).size()==0){
+                result.setCode(0);
+                result.setMsg("行业查询失败");
+            }
+       // }
+        }catch (Exception e){
+            result.setMsg(e.getMessage());
+            e.printStackTrace();
+        }
+        return result;
+    }
+
+
+  @ApiOperation("二代按照标签查询")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "industry",value = "行业",required = false,dataType = "String"),
+            @ApiImplicitParam(name = "area",value = "地区",required = false,dataType = "String"),
+            @ApiImplicitParam(name = "transferMode",value = "交易方式",required = false,dataType = "String")
+    })
+    @ApiResponses({
+            @ApiResponse(code = 1, message = "请求成功"),
+            @ApiResponse(code = 0, message = "行业查询失败")
+    })
+    @ResponseBody
+    @RequestMapping(value = "/label2",method = RequestMethod.POST)
+    public Result queryByLabel2 (String industry,String area,String transferMode){
+        Result result=new Result();
+        result.setSuccess("-1");
+        result.setData(null);
+        result.setCode(0);
+       String []induss={"农、林、牧、渔业"
+             ," 采矿业" ,"制造业"
+      ,"电力、热力、燃气及水生产和供应业"
+          ,     "建筑业"
+          ,     "交通运输、仓储和邮政业"
+           ,    "信息传输、软件和信息技术服务业"
+            ,   "批发和零售业"
+      ,"住宿和餐饮业"
+              , "金融业"
+               ,"房地产业"
+               ,"租赁和商务服务业"
+               ,"科学研究和技术服务业"
+              , "水利、环境和公共设施管理业"
+              , "居民服务、修理和其他服务业"
+              , "教育"
+              , "卫生和社会工作"
+              , "文化、体育和娱乐业"
+              , "公共管理、社会保障和社会组织"
+              , "国际组织"
+               };
+      String[] provin={"北京市","上海市","安徽省","湖北省","河南省","河北省",
+              "新疆维吾尔自治区","西藏自治区","海南省","黑龙江省","吉林省","山东省",
+              "重庆市","陕西省","山西省","宁夏回族自治区","内蒙古自治区","江苏省",
+              "浙江省","广西壮族自治区","四川省","青海省","甘肃省","辽宁省","贵州省",
+              "云南省","江西省","福建省","广东省","湖南省","台湾省","天津市"};
+      String[]trs={"集合竞价","做市"};
+      String[] in=industry==null?induss:con(industry);
+      String[] tr=transferMode==null?trs:con(transferMode);
+      String[] ar=area==null?provin:con(area);
+        result.setMsg("行业查询失败");
+        try {
+//            if (industry.isEmpty()&&area.isEmpty()&&transferMode.isEmpty()){
+//                result.setData(null);
+//                result.setCode(0);
+//                result.setMsg("行业查询失败");
+//            }else{
+            result.setMsg("行业查询成功");
+
             result.setData(companyBasicInfoService.getInfoByLabel2(in, ar, tr));
             result.setCode(1);
             if (companyBasicInfoService.getInfoByLabel2(in, ar, tr).size()==0){
@@ -214,7 +241,6 @@ private INewsInfoService newsInfoService;
         }
         return result;
     }
-
     @ApiOperation("通过公司代码请求企业基本信息")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "code",value = "企业代码",required = true,dataType = "String")

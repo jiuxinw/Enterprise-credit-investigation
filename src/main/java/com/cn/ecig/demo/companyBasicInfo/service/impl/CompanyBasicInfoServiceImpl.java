@@ -60,15 +60,15 @@ return result;
     }
 
     @Override
-    public List<CompanyBasicInfo> getInfoByLabel2(List<String> industry,List<String> area,List<String> transferMode) {
-//        List<CompanyBasicInfo> res = new ArrayList<>();
-//        QueryWrapper<CompanyBasicInfo> queryWrapper = new QueryWrapper<>();
-////        int len_in = industry.length;
-////        int len_area = area.length;
-////        int len_tra = transferMode.length;
-//        for (String i:industry) {
-//            for (String a:area) {
-//                for (String t:transferMode) {
+    public List<CompanyBasicInfo> getInfoByLabel2(String[] industry, String[] area, String[] transferMode) {
+        List<CompanyBasicInfo> res = new ArrayList<>();
+        QueryWrapper<CompanyBasicInfo> queryWrapper = new QueryWrapper<>();
+//        int len_in = industry.length;
+//        int len_area = area.length;
+//        int len_tra = transferMode.length;
+        for (String i:industry) {
+            for (String a:area) {
+                for (String t:transferMode) {
 //                    queryWrapper.and(
 //                            Wrapper ->
 //                                    Wrapper.like("industry", i)
@@ -77,12 +77,21 @@ return result;
 //                                            .or().
 //                                            like("transferMode", t));
 //                }
-//            }
-//        }
-//        res=companyBasicInfoMapper.selectList(queryWrapper);
-
-//        return res;
-        return companyBasicInfoMapper.getInfoByLabel2(industry, area, transferMode);
+                    queryWrapper.or(
+                            Wrapper ->
+                                    Wrapper.like("industry", i)
+//                                            .and()
+                                            .like("area", a).
+//                                            .and().
+                                            like("transferMode", t));
+                }
+            }
+        }
+        queryWrapper.last("limit 100");
+        res=companyBasicInfoMapper.selectList(queryWrapper);
+        return res;
+//        return companyBasicInfoMapper.getInfoByLabel2(industry, area, transferMode);
+//        return companyBasicInfoMapper.getInfoByLabel2(industry);
     }
 
 

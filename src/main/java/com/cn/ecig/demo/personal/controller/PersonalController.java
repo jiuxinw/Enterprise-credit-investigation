@@ -1,6 +1,8 @@
 package com.cn.ecig.demo.personal.controller;
 
 
+import com.cn.ecig.demo.account.entity.Account;
+import com.cn.ecig.demo.account.service.IAccountService;
 import com.cn.ecig.demo.config.Result;
 import com.cn.ecig.demo.personal.service.IPersonalService;
 import com.cn.ecig.demo.region.entity.Region;
@@ -10,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
+import java.util.Map;
 
 /**
  * <p>
@@ -25,6 +28,8 @@ import java.util.HashMap;
 public class PersonalController {
 @Autowired
     private IPersonalService personalService;
+@Autowired
+private IAccountService accountService;
     @ApiOperation("更新用户信息")
     @ApiImplicitParams(
             {  @ApiImplicitParam(name = "userName",required = false,dataType = "String"),
@@ -88,7 +93,10 @@ public class PersonalController {
         result.setCode(0);
         result.setMsg("获取用户个人信息失败");
         try {
-            result.setData(personalService.getperonalByPhone(phone));
+            Map<String,Object>map=new HashMap<>();
+            map.put("登录信息",accountService.getAccountByPhone(phone));
+            map.put("个人信息",personalService.getperonalByPhone(phone));
+            result.setData(map);
             result.setCode(1);
             result.setMsg("获取用户个人信息成功");
             if(personalService.getperonalByPhone(phone)==null){

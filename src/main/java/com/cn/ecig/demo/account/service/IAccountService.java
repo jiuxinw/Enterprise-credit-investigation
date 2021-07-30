@@ -56,6 +56,8 @@ public interface IAccountService extends IService<Account> {
      *      * @return Result
      */
     Result login(String phoneNumber,String password);
-
+    Account getAccountByPhone(String phoneNumber);
+    //获取用户名
+    String getUserNameByPhone(String phoneNumber);
     Account getAccountById(int id);
 }
