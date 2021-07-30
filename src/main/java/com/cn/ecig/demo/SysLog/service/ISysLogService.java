@@ -4,6 +4,7 @@ import com.cn.ecig.demo.SysLog.entity.SysLog;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * <p>
@@ -16,4 +17,5 @@ import java.util.List;
 public interface ISysLogService extends IService<SysLog> {
     void saveLog(SysLog sysLog);
     List<String> getParmsList(String name);
+    Map<String,Integer> getHot();
 }

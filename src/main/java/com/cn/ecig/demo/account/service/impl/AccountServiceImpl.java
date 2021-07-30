@@ -54,7 +54,6 @@ public class AccountServiceImpl extends ServiceImpl<AccountMapper, Account> impl
                 personalService.insertPersonByPhone(phoneNumber);
                 result.setMsg("注册成功");
                 result.setSuccess("200");
-                N=userName;
                 result.setData(account);
                 result.setCode(0);
             }
@@ -97,7 +96,8 @@ public class AccountServiceImpl extends ServiceImpl<AccountMapper, Account> impl
                 String url=personalService.getUrlByphone(phoneNumber);
                 map.put("登录信息",targetaccount);
                 map.put("个人信息",personalService.getperonalByPhone(phoneNumber));
-                result.setMsg("登录成功");
+                N=phoneNumber;
+                result.setMsg("登录成功"+N);
                 result.setData(map);
                 result.setCode(200);
             }else {

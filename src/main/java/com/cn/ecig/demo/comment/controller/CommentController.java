@@ -103,6 +103,38 @@ public class CommentController {
         return result;
 
     }
+    @ApiOperation("获取对应公司用户反馈")
+    @ApiImplicitParams(
+            {@ApiImplicitParam(name = "companyCode",required = true,dataType = "String")
+//                    @ApiImplicitParam(name = "rate",required = false,dataType = "String"),
+//                    @ApiImplicitParam(name = "context",required = false,dataType = "String")
+            }
+    )
+    @ApiResponses({
+            @ApiResponse(code = 0,message = "获取对应公司用户反馈成功"),
+            @ApiResponse(code = 200001,message = "获取对应公司用户反馈失败")
+    })
+    @ResponseBody
+    @RequestMapping(value = "/getCompanyComment",method = RequestMethod.POST)
+    public Result getCompanyComment(
+            @RequestParam(value = "companyCode",required = true)String code
+    ){
+        Result result=new Result();
+        result.setData(null);
+        result.setCode(0);
+        result.setMsg("获取对应公司用户反馈失败");
+        try {
+            result.setData(commentService.getCommentByCode(code));
+            result.setSuccess("200");
+            result.setCode(1);
+            result.setMsg("获取对应公司用户反馈成功");
+        }catch (Exception e){
+            result.setMsg(e.getMessage());
+            e.printStackTrace();
+        }
+        return result;
+
+    }
 
     @ApiOperation("获取用户对应具体公司的反馈")
     @ApiImplicitParams(

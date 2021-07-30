@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 /**
  * <p>
@@ -46,5 +47,10 @@ public class SysLogServiceImpl extends ServiceImpl<SysLogMapper, SysLog> impleme
         return list;
 
 
+    }
+
+    @Override
+    public Map<String, Integer> getHot() {
+        return null;
     }
 }

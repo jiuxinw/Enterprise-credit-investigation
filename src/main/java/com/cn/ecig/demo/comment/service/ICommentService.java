@@ -22,7 +22,8 @@ public interface ICommentService extends IService<Comment> {
    List<Comment> getUserComment(String phoneNumber);
    //获取对应公司的反馈数镆
     int getCountByCode(String code);
-
+    //获取对应公司的反馈
+    List<Comment>getCommentByCode(String code);
    //根据companycode获取对应的用户反馈列表
     List<Comment> getUserCommnetByCode(String phoneNumber,String code);
     //删除反馈

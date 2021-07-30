@@ -62,6 +62,15 @@ public class CommentServiceImpl extends ServiceImpl<CommentMapper, Comment> impl
     }
 
     @Override
+    public List<Comment> getCommentByCode(String code) {
+        List<Comment>comments=new ArrayList<>();
+        QueryWrapper wrapper=new QueryWrapper();
+        wrapper.eq("companyCode",code);
+        comments=commentMapper.selectList(wrapper);
+        return comments;
+    }
+
+    @Override
     public List<Comment> getUserCommnetByCode(String phoneNumber, String code) {
         List<Comment> comments=new ArrayList<>();
         QueryWrapper<Comment> Uwrapper=new QueryWrapper();
