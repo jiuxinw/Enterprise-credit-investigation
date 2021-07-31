@@ -65,6 +65,8 @@ public class NewsInfo implements Serializable {
      * 图片链接
      */
     private String pic;
-
-
+@TableField("regionName")
+private String regionName;
+    @TableField("keyword")
+private String keyword;
 }
