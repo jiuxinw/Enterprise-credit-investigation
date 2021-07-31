@@ -17,4 +17,6 @@ public interface IAnnouncmenetInfoService extends IService<AnnouncmenetInfo> {
 
     //13.获取企业详细信息
     List<AnnouncmenetInfo> getAnnounceByCode(String code);
+    //获取一段时间内企业公告信息
+    List<AnnouncmenetInfo>getANNounceBycODEaN(String code,String from,String to);
 }

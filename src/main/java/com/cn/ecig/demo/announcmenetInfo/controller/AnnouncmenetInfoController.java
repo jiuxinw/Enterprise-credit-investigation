@@ -135,4 +135,51 @@ public class AnnouncmenetInfoController {
         }
         return  result;
     }
+
+    //获取企业详细信息
+    @ApiOperation("获取一段时间内企业公告信息")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "code",value = "企业代码",required = true,dataType = "String"),
+            @ApiImplicitParam(name = "from",value = "开始日期",required = true,dataType = "String"),
+            @ApiImplicitParam(name = "to",value = "截止日期",required = true,dataType = "String"),
+    })
+    @ApiResponses({
+            @ApiResponse(code = -1, message = "企业代码不能为空"),
+            @ApiResponse(code = -2, message = "企业代码应为6位"),
+            @ApiResponse(code = 1, message = "获取一段时间内企业公告信息成功"),
+            @ApiResponse(code = 400, message = "获取一段时间内企业公告信息,数据库无数据"),
+            @ApiResponse(code = 0, message = "获取一段时间内企业公告信息失败")
+    })
+    @ResponseBody
+    @RequestMapping(value = "/essentialInfoDuring",method = RequestMethod.POST)
+    public Result getessentialInfoDuring(String code,String from,String to){
+        Result result=new Result();
+        result.setData(null);
+        result.setCode(0);
+        result.setMsg("获取一段时间内企业公告信息失败");
+        try {
+            if(code.isEmpty()){
+                result.setCode(-1);
+                result.setMsg("企业代码不能为空");
+            }
+            else {
+                if(code.length()!=6){
+                    result.setCode(-2);
+                    result.setMsg("企业代码应为6位");
+                }else{
+                    if (announcmenetInfoService.getANNounceBycODEaN(code, from, to)==null){
+                        result.setCode(400);
+                        result.setMsg("获取一段时间内企业公告信息,数据库无数据");
+                    }
+                    result.setData(announcmenetInfoService.getANNounceBycODEaN(code, from, to));
+                    result.setSuccess("200");
+                    result.setCode(1);
+                    result.setMsg("获取一段时间内企业公告信息成功");
+                }}
+        }catch (Exception e){
+            result.setMsg(e.getMessage());
+            e.printStackTrace();
+        }
+        return result;
+    }
 }

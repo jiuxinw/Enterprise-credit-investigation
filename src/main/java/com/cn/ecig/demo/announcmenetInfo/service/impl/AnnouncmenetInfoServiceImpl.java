@@ -33,4 +33,14 @@ public class AnnouncmenetInfoServiceImpl extends ServiceImpl<AnnouncmenetInfoMap
         result=announcmenetInfoMapper.selectList(wrapper);
         return result;
     }
+
+    @Override
+    public List<AnnouncmenetInfo> getANNounceBycODEaN(String code, String from, String to) {
+        List<AnnouncmenetInfo>list=new ArrayList<>();
+        QueryWrapper wrapper=new QueryWrapper();
+        wrapper.eq("code",code);
+        wrapper.between("idate",from,to);
+        list=announcmenetInfoMapper.selectList(wrapper);
+        return list;
+    }
 }
