@@ -55,9 +55,11 @@ public interface IAccountService extends IService<Account> {
      *      * @param user 用户名和密码
      *      * @return Result
      */
+
     Result login(String phoneNumber,String password);
     Account getAccountByPhone(String phoneNumber);
     //获取用户名
     String getUserNameByPhone(String phoneNumber);
     Account getAccountById(int id);
+//    String  getNameByPhone(String phoneNumber);
 }

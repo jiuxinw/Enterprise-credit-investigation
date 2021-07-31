@@ -1,18 +1,25 @@
 package com.cn.ecig.demo.comment.controller;
 
 
+import com.cn.ecig.demo.account.service.IAccountService;
 import com.cn.ecig.demo.comment.entity.Comment;
+import com.cn.ecig.demo.comment.entity.Commentfina;
+import com.cn.ecig.demo.comment.entity.Cth;
 import com.cn.ecig.demo.comment.service.ICommentService;
+import com.cn.ecig.demo.companyBasicInfo.service.ICompanyBasicInfoService;
 import com.cn.ecig.demo.config.Result;
 import io.swagger.annotations.*;
+import org.apache.catalina.LifecycleState;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 /**
  * <p>
@@ -28,7 +35,10 @@ import java.util.Date;
 public class CommentController {
     @Autowired
     private ICommentService commentService;
-
+    @Autowired
+    private IAccountService accountService;
+@Autowired
+private ICompanyBasicInfoService companyBasicInfoService;
     @ApiOperation("用户反馈")
     @ApiImplicitParams(
             {@ApiImplicitParam(name = "phoneNumber",required = true,dataType = "String"),
@@ -92,7 +102,13 @@ public class CommentController {
         result.setCode(0);
         result.setMsg("获取用户反馈失败");
         try {
-            result.setData(commentService.getUserComment(phoneNumber));
+            List<Comment> comments=commentService.getUserComment(phoneNumber);
+            List<Cth> commentfinas=new ArrayList<>();
+            for (Comment c:comments
+            ) {
+                commentfinas.add(new Cth(c, companyBasicInfoService.getNameByCODE(c.getCompanyCode())));
+            }
+            result.setData(commentfinas);
             result.setSuccess("200");
             result.setCode(1);
             result.setMsg("获取用户反馈成功");
@@ -124,7 +140,13 @@ public class CommentController {
         result.setCode(0);
         result.setMsg("获取对应公司用户反馈失败");
         try {
-            result.setData(commentService.getCommentByCode(code));
+            List<Comment> comments=commentService.getCommentByCode(code);
+            List<Commentfina> commentfinas=new ArrayList<>();
+            for (Comment c:comments
+                 ) {
+                commentfinas.add(new Commentfina(c, accountService.getUserNameByPhone(c.getPhoneNumber()) ));
+            }
+            result.setData(commentfinas);
             result.setSuccess("200");
             result.setCode(1);
             result.setMsg("获取对应公司用户反馈成功");

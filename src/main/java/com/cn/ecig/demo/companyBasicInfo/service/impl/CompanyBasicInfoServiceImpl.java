@@ -107,6 +107,14 @@ return result;
     }
 
     @Override
+    public String getNameByCODE(String code) {
+        QueryWrapper queryWrapper=new QueryWrapper<>();
+        queryWrapper.eq("code",code);
+        String res=companyBasicInfoMapper.selectOne(queryWrapper).getName();
+        return res;
+    }
+
+    @Override
     public List<CompanyBasicInfo> gethotEnterprise(int num) {
         List<CompanyBasicInfo> companyBasicInfoList=new ArrayList<>();
      companyBasicInfoList=companyBasicInfoMapper.gethotEnterprise(num);

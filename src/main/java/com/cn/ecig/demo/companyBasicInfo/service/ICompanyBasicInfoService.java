@@ -32,7 +32,8 @@ public interface ICompanyBasicInfoService extends IService<CompanyBasicInfo> {
 
     //获取某企业基本信息
     CompanyBasicInfo getessentialInfoByCode(String code);
-
+//获取企业名字
+    String getNameByCODE(String code);
     //获取热搜企业信息
     List<CompanyBasicInfo> gethotEnterprise(int num);
     //获取具体省份的企业数量

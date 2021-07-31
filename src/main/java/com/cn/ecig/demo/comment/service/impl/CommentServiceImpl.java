@@ -2,6 +2,7 @@ package com.cn.ecig.demo.comment.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.cn.ecig.demo.comment.entity.Comment;
+import com.cn.ecig.demo.comment.entity.Commentfina;
 import com.cn.ecig.demo.comment.mapper.CommentMapper;
 import com.cn.ecig.demo.comment.service.ICommentService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;

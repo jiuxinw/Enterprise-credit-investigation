@@ -141,6 +141,15 @@ public class AccountServiceImpl extends ServiceImpl<AccountMapper, Account> impl
         account=accountMapper.selectOne(wrapper);
         return account;
     }
+//
+//    @Override
+//    public String getNameByPhone(String phoneNumber) {
+//        QueryWrapper wrapper=new QueryWrapper();
+//        wrapper.select("userName");
+//        wrapper.eq("phoneNumber",phoneNumber);
+//        String s=accountMapper.selectOne(wrapper).getUserName();
+//        return s;
+//    }
 
 //    @Override
 //    public Account getAccountByName(String name) {
