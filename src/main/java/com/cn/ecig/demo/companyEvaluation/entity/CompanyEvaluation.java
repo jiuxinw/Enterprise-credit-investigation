@@ -101,6 +101,24 @@ private String adviceRatio;
 
     @TableField("marketCommend")
     private Double marketCommend;
+    @TableField("feedbackNum")
+    private int feedbackNum;
+//    @TableField("followNum")
+//    private int followNum;
 
+    public int getFeedbackNum() {
+        return feedbackNum;
+    }
 
+    public void setFeedbackNum(int feedbackNum) {
+        this.feedbackNum = feedbackNum;
+    }
+//
+//    public int getFollowNum() {
+//        return followNum;
+//    }
+//
+//    public void setFollowNum(int followNum) {
+//        this.followNum = followNum;
+//    }
 }

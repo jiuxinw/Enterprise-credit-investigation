@@ -8,9 +8,8 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * <p>
@@ -51,6 +50,37 @@ public class SysLogServiceImpl extends ServiceImpl<SysLogMapper, SysLog> impleme
 
     @Override
     public Map<String, Integer> getHot() {
-        return null;
+      Map<String,Integer>map=new HashMap<>();
+      QueryWrapper wrapper=new QueryWrapper();
+//      wrapper.groupBy("params");
+      List<SysLog> sysLogs=sysLogMapper.selectList(wrapper);
+        for (SysLog s : sysLogs) {
+            if (s.getParams().length()==10){
+                String c=s.getParams().substring(2,8);
+                QueryWrapper qwrapper=new QueryWrapper();
+                qwrapper.eq("params",s.getParams());
+                map.put(c,sysLogMapper.selectCount(qwrapper));
+            }
+        }
+        return sortMapByValues(map);
     }
+
+    @Override
+    public int getCount(String code) {
+        QueryWrapper wrapper=new QueryWrapper();
+        String sc="["+"\""+code+"\""+"]";
+        wrapper.eq("params",sc);
+        int res=sysLogMapper.selectCount(wrapper);
+        return res;
+    }
+
+    public static <K extends Comparable, V extends Comparable> Map<K, V> sortMapByValues(Map<K, V> aMap) {
+        HashMap<K, V> finalOut = new LinkedHashMap<>();
+        aMap.entrySet()
+                .stream()
+                .sorted((p1, p2) -> p2.getValue().compareTo(p1.getValue()))
+                .collect(Collectors.toList()).forEach(ele -> finalOut.put(ele.getKey(), ele.getValue()));
+        return finalOut;
+    }
+
 }

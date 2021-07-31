@@ -29,7 +29,9 @@ public interface ICompanyEvaluationService extends IService<CompanyEvaluation> {
     List<Comp_three> getFollows(String userNumber);
     //获取关注企业简析
     Comp_three getCommnetByCode(String code);
-
+    //
+    int getFeedNumBYcode(String code);
+    double getScore(String code);
     //获取失信企业排名信息
     List<Comp_four> getBadRankByNum(int num);
 }

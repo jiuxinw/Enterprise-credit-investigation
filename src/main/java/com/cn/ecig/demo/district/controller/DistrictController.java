@@ -2,11 +2,14 @@ package com.cn.ecig.demo.district.controller;
 
 
 import com.alibaba.fastjson.JSON;
+import com.cn.ecig.demo.SysLog.service.ISysLogService;
 import com.cn.ecig.demo.comment.service.ICommentService;
 import com.cn.ecig.demo.companyBasicInfo.entity.C7;
+import com.cn.ecig.demo.companyBasicInfo.entity.Cfinal;
 import com.cn.ecig.demo.companyBasicInfo.entity.Company;
 import com.cn.ecig.demo.companyBasicInfo.entity.CompanyBasicInfo;
 import com.cn.ecig.demo.companyBasicInfo.service.ICompanyBasicInfoService;
+import com.cn.ecig.demo.companyEvaluation.service.ICompanyEvaluationService;
 import com.cn.ecig.demo.config.Result;
 import com.cn.ecig.demo.district.entity.District;
 import com.cn.ecig.demo.district.service.IDistrictService;
@@ -17,10 +20,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * <p>
@@ -41,8 +41,12 @@ public class DistrictController {
     private IFollowsService followsService;
      @Autowired
 private  ICompanyBasicInfoService companyBasicInfoService;
+     @Autowired
+     private ICompanyEvaluationService companyEvaluationService;
     @Autowired
     private IDistrictService districtService;
+    @Autowired
+    private ISysLogService sysLogService;
 
     @ApiOperation("获取地区平均资产情况信息")
     @ApiResponses({
@@ -112,16 +116,25 @@ private  ICompanyBasicInfoService companyBasicInfoService;
         result.setMsg("获取热搜企业信息失败");
 
         List<CompanyBasicInfo> companyBasicInfoList=companyBasicInfoService.gethotEnterprise(num);
+        List<Cfinal> cfinals=new ArrayList<>();
         List<C7> companyist=new ArrayList<>();
+        List<Cfinal > cist=new ArrayList<>();
         try {
             for (int i = 0; i <num ; i++) {
-                C7 s=new C7(companyBasicInfoList.get(i));
+//                C7 s=new C7(companyBasicInfoList.get(i));
+                Cfinal s=new Cfinal(companyBasicInfoList.get(i) );
                 s.setCommentNum(commentService.getCountByCode(s.getCode()));
                 s.setFollowsNum(followsService.getCountByCOD(s.getCode()));
-                companyist.add(s);
+//                s.setFeedbackNum(companyEvaluationService.getFeedNumBYcode(s.getCode()));
+                s.setHotPo(new Random().nextInt(1000));
+                s.setScore(companyEvaluationService.getScore(s.getCode()));
+                s.setSearchedNum(sysLogService.getCount(s.getCode()));
+                cist.add(s);
+//                companyist.add(s);
             }
             result.setMsg("获取热搜企业信息成功");
-            result.setData(companyist);
+//            result.setData(companyist);
+            result.setData(cist);
             result.setCode(1);
 
         }catch (Exception e){

@@ -90,6 +90,25 @@ return comp_three;
     }
 
     @Override
+    public int getFeedNumBYcode(String code) {
+        QueryWrapper wrapper=new QueryWrapper();
+        wrapper.select("feedbackNum");
+        wrapper.eq("code",code);
+        int res=companyEvaluationMapper.selectOne(wrapper).getFeedbackNum();
+        return res;
+
+    }
+
+    @Override
+    public double getScore(String code) {
+        QueryWrapper wrapper=new QueryWrapper();
+        wrapper.select("score");
+        wrapper.eq("code",code);
+        double res=companyEvaluationMapper.selectOne(wrapper).getScore();
+        return res;
+    }
+
+    @Override
     public List<Comp_four> getBadRankByNum(int num) {
         List<Comp_four> list=companyEvaluationMapper.getBadRankByNum(num);
 //        List<Comp_four> list2=new ArrayList<>(list.subList(0, num));
