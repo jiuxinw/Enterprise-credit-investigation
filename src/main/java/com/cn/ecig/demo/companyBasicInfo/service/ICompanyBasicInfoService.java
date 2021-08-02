@@ -29,9 +29,13 @@ public interface ICompanyBasicInfoService extends IService<CompanyBasicInfo> {
 //
     List<CompanyBasicInfo> getInfoByLabel2(String[] industry,String[] area,String[] transferMode);
     //按区域查找
-
+//通过code 获取 区域
+    String getRegionByCode(String code);
     //获取某企业基本信息
     CompanyBasicInfo getessentialInfoByCode(String code);
+
+    //
+    List<CompanyBasicInfo> getListByArea(String region);
 //获取企业名字
     String getNameByCODE(String code);
     //获取热搜企业信息

@@ -79,6 +79,14 @@ public class CompanyEvaluationServiceImpl extends ServiceImpl<CompanyEvaluationM
     }
 
     @Override
+    public List<Comp_four> getGoodRankByNumInd2(int num, String industry) {
+        List<Comp_four> list=companyEvaluationMapper.getGoodRankByNumInd2(num, industry);
+//        List<Comp_four> list2=new ArrayList<>(list.subList(0, num));
+//        return  list2;
+        return  list;
+    }
+
+    @Override
     public List<Comp_three> getFollows(String userNumber) {
         return null;
     }

@@ -94,7 +94,14 @@ return result;
 //        return companyBasicInfoMapper.getInfoByLabel2(industry);
     }
 
-
+    @Override
+    public String getRegionByCode(String code) {
+        QueryWrapper wrapper=new QueryWrapper();
+        wrapper.select("area");
+        wrapper.eq("code",code);
+        String res=companyBasicInfoMapper.selectOne(wrapper).getArea();
+        return res;
+    }
 
 
     @Override
@@ -104,6 +111,15 @@ return result;
         queryWrapper.eq("code",code);
         companyBasicInfo=companyBasicInfoMapper.selectOne(queryWrapper);
         return companyBasicInfo;
+    }
+
+    @Override
+    public List<CompanyBasicInfo> getListByArea(String region) {
+        List<CompanyBasicInfo> result=new ArrayList<>();
+        QueryWrapper wrapper=new QueryWrapper();
+        wrapper.like("industry",region);
+        result= companyBasicInfoMapper.selectList(wrapper);
+        return result;
     }
 
     @Override

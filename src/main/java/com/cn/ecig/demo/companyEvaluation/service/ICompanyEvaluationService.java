@@ -25,6 +25,7 @@ public interface ICompanyEvaluationService extends IService<CompanyEvaluation> {
     List<Comp_four> getGoodRankByNum(int num);
     List<Comp_four> getGoodRankByNumArea(int num,String area);
     List<Comp_four> getGoodRankByNumInd(int num,String industry);
+    List<Comp_four> getGoodRankByNumInd2(int num,String industry);
     //通过用户名获取对应的关注列表
     List<Comp_three> getFollows(String userNumber);
     //获取关注企业简析

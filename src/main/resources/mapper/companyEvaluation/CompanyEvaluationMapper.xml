@@ -46,4 +46,13 @@ where industry =#{industry}
 ORDER BY score DESC
 limit #{num};
     </select>
+    <select id="getGoodRankByNumInd2" resultType="com.cn.ecig.demo.companyEvaluation.entity.Comp_four">
+               SELECT `name`,shortName,companyEvaluation.`code`,score
+FROM `companyEvaluation`
+left join companyBasicInfo
+on companyBasicInfo.`code`=companyEvaluation.`code`
+where industry like #{industry}
+ORDER BY score DESC
+limit #{num};
+    </select>
 </mapper>

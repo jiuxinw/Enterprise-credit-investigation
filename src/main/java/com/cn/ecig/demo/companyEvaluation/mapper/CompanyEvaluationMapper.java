@@ -22,4 +22,5 @@ public interface CompanyEvaluationMapper extends BaseMapper<CompanyEvaluation> {
     List<Comp_three> getFollows(String userName);
     List<Comp_four> getGoodRankByNumArea(int num,String area);
     List<Comp_four> getGoodRankByNumInd(int num,String industry);
+    List<Comp_four> getGoodRankByNumInd2(int num,String industry);
 }
