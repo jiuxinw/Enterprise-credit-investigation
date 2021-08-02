@@ -118,6 +118,7 @@ return result;
         List<CompanyBasicInfo> result=new ArrayList<>();
         QueryWrapper wrapper=new QueryWrapper();
         wrapper.like("industry",region);
+        wrapper.last("limit 10");
         result= companyBasicInfoMapper.selectList(wrapper);
         return result;
     }

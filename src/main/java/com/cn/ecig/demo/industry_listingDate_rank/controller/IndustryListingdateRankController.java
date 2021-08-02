@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -80,6 +81,8 @@ public class IndustryListingdateRankController {
 
             String area = companyBasicInfoService.getRegionByCode(code);
             String ind = industryListingdateRankService.getIndustry(code);
+            String ar=String.valueOf(regionListingdateRankService.getAmmount(area));
+            String ins=String.valueOf(industryListingdateRankService.getAmmount(ind));
             List<CompanyBasicInfo>list=companyBasicInfoService.getListByArea(ind);
             List<Company> list1=new ArrayList<>();
             for (CompanyBasicInfo c:list
@@ -90,21 +93,35 @@ public class IndustryListingdateRankController {
             Map<String, Object> map = new HashMap<>();
             List<String> in = new ArrayList<>();
             List<String> re = new ArrayList<>();
-            in.add(0, regionTotalstockequityRankService.getRank(code));
-            in.add(1, regionListingdateRankService.getRank(code));
-            in.add(2, regionTotalassetsRankService.getRank(code));
-if(regionNetprofitRankService.getRank(code)==null){
-    in.add(3,"#");
-}else
-{
-    in.add(3,regionNetprofitRankService.getRank(code));
-}
+//            in.add(0, regionTotalstockequityRankService.getRank(code));
+//            in.add(1, regionListingdateRankService.getRank(code));
+//            in.add(2, regionTotalassetsRankService.getRank(code));
+//if(regionNetprofitRankService.getRank(code)==null){
+//    in.add(3,"#");
+//}else
+//{
+//    in.add(3,regionNetprofitRankService.getRank(code));
+//}
+//
+//            re.add(0, industryTotalstockequityRankService.getRank(code));
+//            re.add(1, industryListingdateRankService.getRank(code));
+//            re.add(2, iIndustryTotalassetsRankService.getRank(code));
+//            re.add(3, iIndustryNetprofitRankService.getRank(code));
 
-            re.add(0, industryTotalstockequityRankService.getRank(code));
-            re.add(1, industryListingdateRankService.getRank(code));
-            re.add(2, iIndustryTotalassetsRankService.getRank(code));
-            re.add(3, iIndustryNetprofitRankService.getRank(code));
+            in.add(0,chuyi( regionTotalstockequityRankService.getRank(code),ins));
+            in.add(1, chuyi(regionListingdateRankService.getRank(code),ins));
+            in.add(2,  chuyi(regionTotalassetsRankService.getRank(code),ins));
+            if(regionNetprofitRankService.getRank(code)==null){
+                in.add(3,"#");
+            }else
+            {
+                in.add(3, chuyi(regionNetprofitRankService.getRank(code),ins));
+            }
 
+            re.add(0,  chuyi(industryTotalstockequityRankService.getRank(code),ar));
+            re.add(1,  chuyi(industryListingdateRankService.getRank(code),ar));
+            re.add(2, chuyi(iIndustryTotalassetsRankService.getRank(code),ar));
+            re.add(3,chuyi( iIndustryNetprofitRankService.getRank(code),ar));
             map.put("provincerank", re);
             map.put("industryrank", in);
             map.put("provincecompany", companyEvaluationService.getGoodRankByNumArea(10, area));
@@ -133,5 +150,12 @@ if(regionNetprofitRankService.getRank(code)==null){
             e.printStackTrace();
         }
         return result;
+    }
+
+    public  static String chuyi(String n1,String n2){
+        BigDecimal n3=new BigDecimal(n1);
+        BigDecimal n4=new BigDecimal(n2);
+        BigDecimal ns=n3.divide(n4,2, BigDecimal.ROUND_HALF_UP);
+        return ns.toString();
     }
 }

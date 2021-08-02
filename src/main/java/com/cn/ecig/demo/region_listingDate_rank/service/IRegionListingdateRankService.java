@@ -13,4 +13,5 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface IRegionListingdateRankService extends IService<RegionListingdateRank> {
     String getRank(String code);
+    int getAmmount(String region);
 }

@@ -18,5 +18,5 @@ public interface IIndustryListingdateRankService extends IService<IndustryListin
 String getRank(String code);
 String getIndustry(String code);
 //List<IndustryListingdateRank> getIndL(String industry);
-
+int getAmmount(String industry);
 }

@@ -41,6 +41,14 @@ private IndustryListingdateRankMapper industryListingdateRankMapper;
         return res;
     }
 
+    @Override
+    public int getAmmount(String industry) {
+        QueryWrapper wrapper=new QueryWrapper();
+        wrapper.eq("industryName",industry);
+        int res=industryListingdateRankMapper.selectCount(wrapper);
+        return res;
+    }
+
 //    @Override
 //    public List<IndustryListingdateRank> getIndL(String industry) {
 //QueryWrapper wrapper=new QueryWrapper();

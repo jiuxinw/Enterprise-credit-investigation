@@ -28,4 +28,12 @@ private RegionListingdateRankMapper regionListingdateRankMapper;
         String  res=regionListingdateRankMapper.selectOne(wrapper).getRank();
         return  res;
     }
+
+    @Override
+    public int getAmmount(String region) {
+        QueryWrapper wrapper=new QueryWrapper();
+        wrapper.eq("regionName",region);
+        int res=regionListingdateRankMapper.selectCount(wrapper);
+        return res;
+    }
 }
